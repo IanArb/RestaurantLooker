@@ -50,7 +50,7 @@ before_script:
 - pip install --user codecov
 
 script:
-- ./gradlew clean build test
+- ./gradlew clean test
 
 after_success:
   - codecov
