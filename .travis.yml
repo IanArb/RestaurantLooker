@@ -18,19 +18,6 @@ env:
  - ANDROID_BUILD_TOOLS=27.0.3
  - ADB_INSTALL_TIMEOUT=5 # minutes
 
-android:
- components:
-   - tools
-   - platform-tools
-   - build-tools-$ANDROID_BUILD_TOOLS
-   - android-$ANDROID_API
-   - android-$EMULATOR_API_LEVEL
-   - extra-google-m2repository
-   - extra-android-m2repository # for design library
-   - addon-google_apis-google-19 # google play services
-   - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-   - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-
  licenses:
  - android-sdk-preview-license-.+
  - android-sdk-license-.+
@@ -41,18 +28,23 @@ notifications:
   - ian.arbuckle18@gmail.com
 
 before_install:
+  # Install SDK license so Android Gradle plugin can install deps.
   - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" >"$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-  - chmod +x gradlew
-  - ./gradlew dependencies || true
+  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  # Install the rest of tools (e.g., avdmanager)
+  - sdkmanager tools
+  # Install the system image
+  - sdkmanager "system-images;android-18;default;armeabi-v7a"
+  # Create and start emulator for the script. Meant to race the install task.
+  - echo no | avdmanager create avd --force -n test -k "system-images;android-18;default;armeabi-v7a"
+  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+
+install: ./gradlew clean assemble assembleAndroidTest --stacktrace
 
 before_script:
   - pip install --user codecov
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+  - adb shell input keyevent 82
 
 script:
 - ./gradlew clean test
