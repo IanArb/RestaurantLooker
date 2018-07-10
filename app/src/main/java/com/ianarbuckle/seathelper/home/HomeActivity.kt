@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val component: HomeComponent by lazy {
         DaggerHomeComponent.builder().seatHelperAppComponent(SeatHelperApplication.component)
-                .homeModule(HomeModule(this))
+                .homeModule(HomeModule(this, this))
                 .build()
     }
 
@@ -37,11 +37,6 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(view.getView())
 
-        presenter.onCreate()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
+        presenter.addLifecycleObserver()
     }
 }

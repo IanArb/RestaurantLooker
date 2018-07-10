@@ -9,7 +9,6 @@ import dagger.Provides
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-@SeatHelperScope
 @Module
 class SeatHelperAppModule constructor(private val application: Application) {
 
