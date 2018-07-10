@@ -1,26 +1,47 @@
 package com.ianarbuckle.seathelper.home.core.presenter
 
-import com.ianarbuckle.seathelper.home.core.interactor.HomeInteractor
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.OnLifecycleEvent
+import com.ianarbuckle.seathelper.home.core.helper.BottomNavigationPosition
+import com.ianarbuckle.seathelper.home.core.helper.findNavigationById
 import com.ianarbuckle.seathelper.home.core.view.HomeView
 import com.ianarbuckle.seathelper.home.router.HomeRouter
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 /**
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-class DefaultHomePresenter(private var view: HomeView, private var interactor: HomeInteractor,
-                           private var router: HomeRouter) : HomePresenter {
+class DefaultHomePresenter(private val view: HomeView, private val router: HomeRouter, private val lifecycleOwner: LifecycleOwner) : HomePresenter, LifecycleObserver {
 
-    val subscriptions: CompositeDisposable by lazy {
+    private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
+
+    private val subscriptions: CompositeDisposable by lazy {
         CompositeDisposable()
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-
+        subscriptions.addAll(subscribeOnBottomNavigationItemSelections())
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onDestroy() {
         subscriptions.clear()
+        lifecycleOwner.lifecycle.removeObserver(this)
     }
+
+    private fun subscribeOnBottomNavigationItemSelections(): Disposable {
+        return view.observeNavigationItemSelected()
+                .subscribe({
+                    navPosition = findNavigationById(it.itemId)
+                    router.switchFragment(navPosition)
+                })
+    }
+
+    override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)
+
 }

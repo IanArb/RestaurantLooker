@@ -9,6 +9,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.ianarbuckle.seathelper"
         minSdkVersion 19
@@ -16,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -33,6 +35,8 @@ dependencies {
 
     //Android support
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-vector-drawable:27.1.1'
 
     //Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -45,8 +49,8 @@ dependencies {
 
     //Test
     testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
@@ -76,4 +80,12 @@ dependencies {
     //WorkManager
     implementation "android.arch.work:work-runtime:$workManagerVersion" // use -ktx for Kotlin
     androidTestImplementation "android.arch.work:work-testing:$workManagerVersion"
+
+    //Constraint layout
+    implementation "com.android.support.constraint:constraint-layout:$contraintLayoutVersion"
+
+    //RxBinding
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
 }
