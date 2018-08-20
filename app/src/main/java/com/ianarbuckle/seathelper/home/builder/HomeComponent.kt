@@ -1,6 +1,6 @@
 package com.ianarbuckle.seathelper.home.builder
 
-import com.ianarbuckle.seathelper.app.builder.SeatHelperAppComponent
+import com.ianarbuckle.seathelper.app.builder.RestaurantBuddyAppComponent
 import com.ianarbuckle.seathelper.home.HomeActivity
 import dagger.Component
 
@@ -9,7 +9,7 @@ import dagger.Component
  *
  */
 @HomeScope
-@Component(modules = ([HomeModule::class]), dependencies = [(SeatHelperAppComponent::class)])
+@Component(modules = ([HomeModule::class]), dependencies = [(RestaurantBuddyAppComponent::class)])
 interface HomeComponent {
     fun inject(homeActivity: HomeActivity)
 }

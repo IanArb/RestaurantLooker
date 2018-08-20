@@ -6,10 +6,10 @@ import android.support.constraint.ConstraintLayout
 import android.view.MenuItem
 import android.view.View
 import com.ianarbuckle.seathelper.R
-import com.ianarbuckle.seathelper.home.core.helper.BottomNavigationPosition
+import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import kotlinx.android.synthetic.main.home_view.view.*
-import com.ianarbuckle.seathelper.home.core.extension.active
-import com.ianarbuckle.seathelper.home.core.extension.disableShiftMode
+import com.ianarbuckle.seathelper.extension.active
+import com.ianarbuckle.seathelper.extension.disableShiftMode
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import io.reactivex.Observable
 

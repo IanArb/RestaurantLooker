@@ -1,6 +1,6 @@
 package com.ianarbuckle.seathelper.home.router
 
-import com.ianarbuckle.seathelper.home.core.helper.BottomNavigationPosition
+import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 
 /**
  * Created by Ian Arbuckle on 18/05/2018.

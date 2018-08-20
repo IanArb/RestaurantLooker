@@ -4,8 +4,8 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
-import com.ianarbuckle.seathelper.home.core.helper.BottomNavigationPosition
-import com.ianarbuckle.seathelper.home.core.helper.findNavigationById
+import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
+import com.ianarbuckle.seathelper.utils.findNavigationById
 import com.ianarbuckle.seathelper.home.core.view.HomeView
 import com.ianarbuckle.seathelper.home.router.HomeRouter
 import io.reactivex.disposables.CompositeDisposable
@@ -36,10 +36,10 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
 
     private fun subscribeOnBottomNavigationItemSelections(): Disposable {
         return view.observeNavigationItemSelected()
-                .subscribe({
+                .subscribe {
                     navPosition = findNavigationById(it.itemId)
                     router.switchFragment(navPosition)
-                })
+                }
     }
 
     override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)

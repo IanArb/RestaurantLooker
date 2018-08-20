@@ -3,7 +3,7 @@ package com.ianarbuckle.seathelper.home.builder
 import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.seathelper.home.HomeActivity
-import com.ianarbuckle.seathelper.home.core.adapter.ViewPagerAdapter
+import com.ianarbuckle.seathelper.home.core.view.adapter.ViewPagerAdapter
 import com.ianarbuckle.seathelper.home.core.presenter.DefaultHomePresenter
 import com.ianarbuckle.seathelper.home.core.presenter.HomePresenter
 import com.ianarbuckle.seathelper.home.core.view.DefaultHomeView

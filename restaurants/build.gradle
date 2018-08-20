@@ -1,0 +1,132 @@
+apply plugin: 'com.android.feature'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+
+
+    baseFeature true
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+
+}
+
+kapt {
+    generateStubs = true
+    correctErrorTypes = true
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/source/kapt/main"
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+
+    application project(':app')
+
+    api project(':retrofitclient')
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api 'com.android.support:appcompat-v7:28.0.0-alpha3'
+
+    api 'com.android.support:cardview-v7:28.0.0-alpha3'
+    api 'com.android.support:recyclerview-v7:28.0.0-alpha3'
+
+    implementation 'com.android.support:design:28.0.0-alpha1'
+
+    //Dagger
+    api "com.google.dagger:dagger:$daggerVersion"
+    api "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //Paging
+    api "android.arch.paging:runtime:$pagingVersion"
+    testImplementation "android.arch.paging:common:$pagingVersion"
+
+    //Network
+    api "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
+
+    //Json converter
+    api "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
+    api "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    //Coroutines
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$coroutinesAdapterVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    //Timber
+    api "com.jakewharton.timber:timber:$timberVersion"
+
+    //Constraint layout
+    api "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+
+    //glide
+    api "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //RxBinding
+    api "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
+
+    //Test
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+
+
+}
+repositories {
+    mavenCentral()
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

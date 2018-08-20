@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import com.ianarbuckle.seathelper.R
-import com.ianarbuckle.seathelper.home.core.helper.BottomNavigationPosition
-import com.ianarbuckle.seathelper.home.core.helper.createFragment
-import com.ianarbuckle.seathelper.home.core.helper.getTag
+import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
+import com.ianarbuckle.seathelper.utils.createFragment
+import com.ianarbuckle.seathelper.utils.getTag
 
 /**
  * Created by Ian Arbuckle on 18/05/2018.
@@ -39,7 +39,7 @@ class DefaultHomeRouter(private val supportFragmentManager: FragmentManager) : H
         } else {
             supportFragmentManager.beginTransaction().add(R.id.container, fragment, tag).commit()
         }
-        // Set a transition animation for this transaction.
+
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
