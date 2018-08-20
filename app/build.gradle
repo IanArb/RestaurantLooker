@@ -6,23 +6,51 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'jacoco-android'
+
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.ianarbuckle.seathelper"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    }
+}
+
+kapt {
+    generateStubs = true
+    correctErrorTypes = true
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/source/kapt/main"
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
         }
     }
 }
@@ -30,13 +58,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':restaurants')
+
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
     //Android support
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-vector-drawable:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+
+    implementation 'com.android.support:design:28.0.0-alpha1'
 
     //Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -54,11 +87,11 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     //Room
     implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     //Rx Room support
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
@@ -75,17 +108,31 @@ dependencies {
     testImplementation "android.arch.paging:common:$pagingVersion"
 
     //Rx Paging support
-    implementation "android.arch.paging:rxjava2:1.0.0-rc1"
+    implementation "android.arch.paging:rxjava2:$pagingVersion"
 
     //WorkManager
-    implementation "android.arch.work:work-runtime:$workManagerVersion" // use -ktx for Kotlin
+    implementation "android.arch.work:work-runtime-ktx:$workManagerVersion" // use -ktx for Kotlin
     androidTestImplementation "android.arch.work:work-testing:$workManagerVersion"
 
+    //Network
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    //Json converter
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
     //Constraint layout
-    implementation "com.android.support.constraint:constraint-layout:$contraintLayoutVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     //RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 }
