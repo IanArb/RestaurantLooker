@@ -111,9 +111,9 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     //RxBinding
-    api "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
-    api "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
-    api "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingVersion"
 
     //Test
     testImplementation "junit:junit:$junitVersion"
