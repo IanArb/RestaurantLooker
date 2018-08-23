@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import com.ianarbuckle.restaurants.R
 import com.ianarbuckle.restaurants.home.core.view.adapter.HomeAdapter
 import com.ianarbuckle.restaurants.home.model.Restaurants
-import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
-import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.support.v4.widget.refreshes
+import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.home_restaurants_view.view.*
 
@@ -56,21 +56,11 @@ class DefaultRestaurantsView(context: Context?) : RestaurantsView, LinearLayout(
     }
 
     override fun terminatePullToRefresh() {
-        if(swipeRefresh.isRefreshing) {
-            swipeRefresh.isEnabled = false
-        }
+        swipeRefresh.isRefreshing = false
     }
 
-    override fun showPullToRefresh() {
-        swipeRefresh.post {
-            if(!swipeRefresh.isRefreshing) {
-                swipeRefresh.isEnabled = true
-            }
-        }
-    }
+    override fun observeOnTryAgainClick(): Observable<Unit> = tryAgainButton.clicks()
 
-    override fun observeOnTryAgainClick(): Observable<Any> = RxView.clicks(this)
-
-    override fun observeOnPullToRefresh(): Observable<Any> = RxSwipeRefreshLayout.refreshes(swipeRefresh)
+    override fun observeOnPullToRefresh(): Observable<Unit> = swipeRefresh.refreshes()
 
 }

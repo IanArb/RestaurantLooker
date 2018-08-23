@@ -15,8 +15,7 @@ interface RestaurantsView {
     fun showEmptyState()
     fun showLoading()
     fun hideLoading()
-    fun showPullToRefresh()
-    fun observeOnPullToRefresh(): Observable<Any>
+    fun observeOnPullToRefresh(): Observable<Unit>
     fun terminatePullToRefresh()
-    fun observeOnTryAgainClick(): Observable<Any>
+    fun observeOnTryAgainClick(): Observable<Unit>
 }

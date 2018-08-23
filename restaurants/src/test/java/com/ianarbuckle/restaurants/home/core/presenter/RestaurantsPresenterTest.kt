@@ -75,20 +75,19 @@ class RestaurantsPresenterTest {
 
     @Test
     fun `test that onCreate triggers pull to refresh`() = runBlocking(context) {
-        given(view.observeOnPullToRefresh()).thenReturn(Observable.just(Any()))
+        given(view.observeOnPullToRefresh()).thenReturn(Observable.just(Unit))
         given(view.observeOnTryAgainClick()).thenReturn(Observable.never())
         given(interactor.fetchRestaurants()).thenReturn(buildRestaurantMock())
 
         presenter.onCreate()
 
         verify(view, times(2)).showRestaurants(any())
-        verify(view, times(1)).showPullToRefresh()
         verify(view, times(3)).hideLoading()
     }
 
     @Test
     fun `test that onCreate triggers retry when clicked`() = runBlocking(context) {
-        given(view.observeOnTryAgainClick()).thenReturn(Observable.just(Any()))
+        given(view.observeOnTryAgainClick()).thenReturn(Observable.just(Unit))
         given(view.observeOnPullToRefresh()).thenReturn(Observable.never())
         given(interactor.fetchRestaurants()).thenReturn(buildRestaurantMock())
 

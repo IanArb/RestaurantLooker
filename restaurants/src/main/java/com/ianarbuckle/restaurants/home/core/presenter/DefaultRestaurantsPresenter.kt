@@ -49,7 +49,6 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
     private fun subscribeOnSwipeRefresh(): Disposable {
         return view.observeOnPullToRefresh()
                 .doOnNext { view.hideLoading() }
-                .doOnNext { view.showPullToRefresh() }
                 .subscribe {
                     fetchRestaurants()
                     view.terminatePullToRefresh()
