@@ -56,17 +56,7 @@ class DefaultRestaurantsView(context: Context?) : RestaurantsView, LinearLayout(
     }
 
     override fun terminatePullToRefresh() {
-        if(swipeRefresh.isRefreshing) {
-            swipeRefresh.isEnabled = false
-        }
-    }
-
-    override fun showPullToRefresh() {
-        swipeRefresh.post {
-            if(!swipeRefresh.isRefreshing) {
-                swipeRefresh.isEnabled = true
-            }
-        }
+        swipeRefresh.isRefreshing = false
     }
 
     override fun observeOnTryAgainClick(): Observable<Any> = RxView.clicks(this)

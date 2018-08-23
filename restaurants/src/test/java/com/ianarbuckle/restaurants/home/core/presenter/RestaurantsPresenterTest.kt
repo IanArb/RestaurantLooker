@@ -82,7 +82,6 @@ class RestaurantsPresenterTest {
         presenter.onCreate()
 
         verify(view, times(2)).showRestaurants(any())
-        verify(view, times(1)).showPullToRefresh()
         verify(view, times(3)).hideLoading()
     }
 
