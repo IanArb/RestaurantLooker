@@ -41,8 +41,9 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
                 view.showRestaurants(results)
             } catch (exception: Exception) {
                 view.showEmptyState()
+            } finally {
+                view.hideLoading()
             }
-            view.hideLoading()
         }
     }
 
