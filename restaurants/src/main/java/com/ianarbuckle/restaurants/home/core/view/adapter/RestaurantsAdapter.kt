@@ -34,11 +34,6 @@ class HomeAdapter(private val restaurants: MutableList<Restaurants>)
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val items = restaurants[position]
         holder.binding.restaurants = items
-
-        //FIXME Replace with url from API (dependency on API)
-        val url = "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-
-        provideImage(holder.itemView.context, url, holder.itemView.bannerImageView)
     }
 }
 
