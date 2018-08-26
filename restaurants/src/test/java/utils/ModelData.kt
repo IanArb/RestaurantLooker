@@ -21,21 +21,21 @@ private fun getDataList(): MutableList<Restaurants> {
 
     restaurants.apply {
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()),"https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
         add(Restaurants("Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu())))
+                Location(0.5f, 0.10f), "OPEN", Menu(createLunchMenu(), createDinnerMenu()), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg"))
     }
 
     return restaurants

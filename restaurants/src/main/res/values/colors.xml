@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorSnow">#e8eeeb</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorGreen">#008000</color>
+    <color name="colorRed">#FF0000</color>
 </resources>
