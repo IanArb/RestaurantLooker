@@ -1,9 +1,9 @@
 package com.ianarbuckle.seathelper.home.builder
 
+import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.seathelper.home.HomeActivity
-import com.ianarbuckle.seathelper.home.core.interactor.DefaultHomeInteractor
-import com.ianarbuckle.seathelper.home.core.interactor.HomeInteractor
+import com.ianarbuckle.seathelper.home.core.view.adapter.ViewPagerAdapter
 import com.ianarbuckle.seathelper.home.core.presenter.DefaultHomePresenter
 import com.ianarbuckle.seathelper.home.core.presenter.HomePresenter
 import com.ianarbuckle.seathelper.home.core.view.DefaultHomeView
@@ -17,9 +17,8 @@ import dagger.Provides
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-@HomeScope
 @Module
-class HomeModule(private val activity: HomeActivity) {
+class HomeModule(private val activity: HomeActivity, private val lifecycleOwner: LifecycleOwner) {
 
     @HomeScope
     @Provides
@@ -31,15 +30,15 @@ class HomeModule(private val activity: HomeActivity) {
 
     @HomeScope
     @Provides
-    fun provideInteractor(): HomeInteractor = DefaultHomeInteractor()
+    fun providePresenter(view: HomeView, router: HomeRouter): HomePresenter
+            = DefaultHomePresenter(view, router, lifecycleOwner)
 
     @HomeScope
     @Provides
-    fun providePresenter(view: HomeView, interactor: HomeInteractor, router: HomeRouter): HomePresenter
-            = DefaultHomePresenter(view, interactor, router)
+    fun provideRouter(): HomeRouter = DefaultHomeRouter(activity.supportFragmentManager)
 
     @HomeScope
     @Provides
-    fun provideRouter(): HomeRouter = DefaultHomeRouter(activity)
+    fun provideAdapter(): ViewPagerAdapter = ViewPagerAdapter(activity.supportFragmentManager)
 
 }

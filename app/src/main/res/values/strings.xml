@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Seat Helper</string>
+    <string name="restaurants_menu_title">Restaurants</string>
+    <string name="bookings_menu_title">Bookings</string>
+    <string name="profile_menu_title">Profile</string>
+    <string name="messages_menu_title">Messages</string>
 </resources>
