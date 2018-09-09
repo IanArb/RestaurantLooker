@@ -41,10 +41,21 @@ class DefaultRestaurantsView(context: Context?) : RestaurantsView, LinearLayout(
     }
 
     override fun showEmptyState() {
+        errorMessage.text = resources.getString(R.string.error_message_empty)
+        recyclerView.visibility = View.GONE
+        errorMessage.visibility = View.VISIBLE
+        errorImageView.visibility = View.VISIBLE
+        tryAgainButton.visibility = View.GONE
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showErrorState() {
+        errorMessage.text = resources.getString(R.string.error_message)
         recyclerView.visibility = View.GONE
         errorMessage.visibility = View.VISIBLE
         errorImageView.visibility = View.VISIBLE
         tryAgainButton.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
     }
 
     override fun showLoading() {

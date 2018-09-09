@@ -9,6 +9,6 @@ import kotlin.coroutines.experimental.CoroutineContext
  *
  */
 open class CoroutineContextProvider() {
-    open val Main: CoroutineContext by lazy { UI }
-    open val IO: CoroutineContext by lazy { CommonPool }
+    open val main: CoroutineContext by lazy { UI }
+    open val io: CoroutineContext by lazy { CommonPool }
 }

@@ -9,6 +9,6 @@ import kotlin.coroutines.experimental.CoroutineContext
  *
  */
 class TestContextProvider : CoroutineContextProvider() {
-    override val Main: CoroutineContext = Unconfined
-    override val IO: CoroutineContext = Unconfined
+    override val main: CoroutineContext = Unconfined
+    override val io: CoroutineContext = Unconfined
 }

@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
+import retrofit2.HttpException
 
 /**
  * Created by Ian Arbuckle on 20/07/2018.
@@ -34,16 +35,25 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
 
     private fun fetchRestaurants() {
         view.showLoading()
-        job = launch(contextPool.Main) {
+        job = launch(contextPool.main) {
             try {
                 val response = interactor.fetchRestaurants()
                 val results = response[0].results
                 view.showRestaurants(results)
-            } catch (exception: Exception) {
-                view.showEmptyState()
+            } catch (exception: HttpException) {
+                handleHttpErrors(exception)
+            } catch(throwable: Throwable) {
+                view.showErrorState()
             } finally {
                 view.hideLoading()
             }
+        }
+    }
+
+    private fun handleHttpErrors(exception: HttpException) {
+        when (exception.code()) {
+            500, 501, 502, 503, 504 -> view.showErrorState()
+            400, 404 -> view.showEmptyState()
         }
     }
 
