@@ -8,6 +8,7 @@ import com.ianarbuckle.restaurants.network.manager.DefaultRestaurantsServiceMana
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
 
 /**
@@ -15,7 +16,7 @@ import retrofit2.Retrofit
  *
  */
 @Module
-class NetworkModule constructor(private val okHttpClient: OkHttpClient, private val baseUrl: String) {
+class NetworkModule constructor(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory) {
 
     @HomeScope
     @Provides
@@ -27,9 +28,9 @@ class NetworkModule constructor(private val okHttpClient: OkHttpClient, private 
 
     @HomeScope
     @Provides
-    fun provideRestaurantsRepository(serviceDefault: DefaultRestaurantsServiceManager): RestaurantsRepository = DefaultRestaurantsRepository(serviceDefault)
+    fun provideRestaurantsRepository(serviceManager: DefaultRestaurantsServiceManager): RestaurantsRepository = DefaultRestaurantsRepository(serviceManager)
 
     @HomeScope
     @Provides
-    fun provideRestaurantsServiceManager(): DefaultRestaurantsServiceManager = DefaultRestaurantsServiceManager(okHttpClient, baseUrl)
+    fun provideRestaurantsServiceManager(): DefaultRestaurantsServiceManager = DefaultRestaurantsServiceManager(okHttpClient, baseUrl, converterFactory)
 }
