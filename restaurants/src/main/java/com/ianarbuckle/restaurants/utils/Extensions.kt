@@ -35,3 +35,5 @@ fun TextView.setStatusColor(status: String) {
         "CLOSED" -> setTextColor(ContextCompat.getColor(context, R.color.colorRed))
     }
 }
+
+

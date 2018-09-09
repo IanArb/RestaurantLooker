@@ -13,6 +13,7 @@ interface RestaurantsView {
     fun getView(): View
     fun showRestaurants(restaurants: MutableList<Restaurants>?)
     fun showEmptyState()
+    fun showErrorState()
     fun showLoading()
     fun hideLoading()
     fun observeOnPullToRefresh(): Observable<Unit>
