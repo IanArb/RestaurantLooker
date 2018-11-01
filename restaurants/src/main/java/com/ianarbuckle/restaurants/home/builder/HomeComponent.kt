@@ -13,5 +13,4 @@ import dagger.Component
 @Component(modules = [NetworkModule::class, HomeModule::class])
 interface HomeComponent {
     fun inject(restaurantsFragment: RestaurantsFragment)
-    fun restaurantsRepository(): RestaurantsRepository
 }

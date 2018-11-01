@@ -1,6 +1,6 @@
 package com.ianarbuckle.seathelper.home.core.presenter
 
-import android.arch.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleOwner
 import android.view.MenuItem
 import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition

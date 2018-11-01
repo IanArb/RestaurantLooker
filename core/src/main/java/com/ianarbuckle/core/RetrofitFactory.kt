@@ -1,4 +1,4 @@
-package com.ianarbuckle.retrofitclient
+package com.ianarbuckle.core
 
 import retrofit2.Retrofit
 

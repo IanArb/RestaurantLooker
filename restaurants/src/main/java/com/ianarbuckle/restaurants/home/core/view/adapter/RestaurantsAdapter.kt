@@ -1,21 +1,24 @@
 package com.ianarbuckle.restaurants.home.core.view.adapter
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ianarbuckle.restaurants.R
 import com.ianarbuckle.restaurants.databinding.HomeRestaurantsCardItemBinding
 import com.ianarbuckle.restaurants.home.model.Restaurants
-import com.ianarbuckle.restaurants.utils.provideImage
-import kotlinx.android.synthetic.main.home_restaurants_card_item.view.*
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.experimental.channels.Channel
+import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.experimental.rx2.awaitFirst
 
 /**
  * Created by Ian Arbuckle on 30/07/2018.
  *
  */
 class HomeAdapter(private val restaurants: MutableList<Restaurants>)
-    : RecyclerView.Adapter<HomeViewHolder>() {
+    : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -35,6 +38,6 @@ class HomeAdapter(private val restaurants: MutableList<Restaurants>)
         val items = restaurants[position]
         holder.binding.restaurants = items
     }
-}
 
-class HomeViewHolder(val binding: HomeRestaurantsCardItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class HomeViewHolder(val binding: HomeRestaurantsCardItemBinding) : RecyclerView.ViewHolder(binding.root)
+}

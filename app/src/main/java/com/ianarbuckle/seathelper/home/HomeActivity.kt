@@ -1,7 +1,7 @@
 package com.ianarbuckle.seathelper.home
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.ianarbuckle.seathelper.app.RestaurantBuddyApplication
 import com.ianarbuckle.seathelper.home.builder.DaggerHomeComponent
 
@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val component: HomeComponent by lazy {
         DaggerHomeComponent.builder().restaurantBuddyAppComponent(RestaurantBuddyApplication.component)
-                .homeModule(HomeModule(activity = this, lifecycleOwner = this))
+                .homeModule(HomeModule(activity = this))
                 .build()
     }
 

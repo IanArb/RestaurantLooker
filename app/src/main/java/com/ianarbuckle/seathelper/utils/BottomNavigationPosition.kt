@@ -1,6 +1,6 @@
 package com.ianarbuckle.seathelper.utils
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.ianarbuckle.restaurants.home.RestaurantsFragment
 import com.ianarbuckle.seathelper.R
 import com.ianarbuckle.seathelper.home.fragment.BookingsFragment

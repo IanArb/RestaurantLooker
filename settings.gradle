@@ -1,1 +1,1 @@
-include ':app', ':restaurants', ':restaurants', ':instantapp', ':retrofitclient'
+include ':app', ':restaurants', ':restaurants', ':instantapp', ':core'

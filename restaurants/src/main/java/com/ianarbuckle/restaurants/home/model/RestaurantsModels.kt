@@ -1,5 +1,10 @@
 package com.ianarbuckle.restaurants.home.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+
 /**
  * Created by Ian Arbuckle on 11/07/2018.
  *
@@ -7,8 +12,10 @@ package com.ianarbuckle.restaurants.home.model
 
 data class Restaurant(val id: String, val results: MutableList<Restaurants>)
 
+@Parcelize
 data class Restaurants(val restaurantName: String, val description: String, val county: String, val street: String,
-                       val address: String, val location: Location, val status: String, val menu: Menu, val imageUrl: String)
+                       val address: String, val location: @RawValue Location, val status: String, val menu: @RawValue Menu, val imageUrl: String)
+    : Parcelable
 
 data class Location(val latitude: Float, val longitude: Float)
 

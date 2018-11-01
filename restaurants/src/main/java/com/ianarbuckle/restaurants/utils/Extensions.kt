@@ -1,8 +1,8 @@
 package com.ianarbuckle.restaurants.utils
 
 import android.content.Context
-import android.databinding.BindingAdapter
-import android.support.v4.content.ContextCompat
+import androidx.databinding.BindingAdapter
+import androidx.core.content.ContextCompat
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide

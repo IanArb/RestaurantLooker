@@ -10,13 +10,13 @@ apply plugin: 'jacoco-android'
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion Versions.compileSDKVersion
     defaultConfig {
         applicationId "com.ianarbuckle.seathelper"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.minSDKVersion
+        targetSdkVersion Versions.targetSDKVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -61,78 +61,75 @@ dependencies {
     implementation project(':restaurants')
 
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation Deps.kotlin_stdlib
 
     //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation Deps.couroutines_library
 
     //Android support
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    implementation Deps.appCompat_library
 
-    implementation 'com.android.support:design:28.0.0-alpha1'
+    implementation Deps.material_components_library
 
     //Dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation Deps.dagger_library
+    implementation Deps.dagger_support_library
+    kapt Deps.dagger_compiler_library
 
     //RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation Deps.rxAndroid_library
+    implementation Deps.rxJava_library
 
     //Test
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "com.google.truth:truth:$truthVersion"
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation Deps.junit_library
+    testImplementation Deps.google_truth_library
+    testImplementation Deps.mockito_library
 
     // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    implementation Deps.lifecycle_library
+    kapt Deps.lifecycle_compiler_library
 
     //Room
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    implementation Deps.room_library
+    kapt Deps.room_compiler_library
 
     //Rx Room support
-    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    implementation Deps.rxRoom_library
 
     //Room test support
-    testImplementation "android.arch.persistence.room:testing:$roomVersion"
+    testImplementation Deps.room_test_library
 
     // Navigation
-    implementation "android.arch.navigation:navigation-fragment:$navVersion"
-    implementation "android.arch.navigation:navigation-ui:$navVersion"
+    implementation Deps.navigation_fragment_library
+    implementation Deps.navigation_ui_library
 
     //Paging
-    implementation "android.arch.paging:runtime:$pagingVersion"
-    testImplementation "android.arch.paging:common:$pagingVersion"
+    implementation Deps.paging_library
+    testImplementation Deps.paging_test_library
 
     //Rx Paging support
-    implementation "android.arch.paging:rxjava2:$pagingVersion"
+    implementation Deps.rxPaging_library
 
     //WorkManager
-    implementation "android.arch.work:work-runtime-ktx:$workManagerVersion" // use -ktx for Kotlin
-    androidTestImplementation "android.arch.work:work-testing:$workManagerVersion"
+    implementation Deps.work_manager_kts_library
+    androidTestImplementation Deps.work_manager_test_library
 
     //Network
-    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation Deps.okHttp3_library
+    implementation Deps.retrofit2_library
+    implementation Deps.okHttp3_logging_interceptor_library
 
     //Json converter
-    implementation "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
+    implementation Deps.moshi_kotlin_library
 
     //Timber
-    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation Deps.timber_library
 
     //Constraint layout
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation Deps.constraint_layout_library
 
     //RxBinding
-    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
-
-    //Timber
-    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation Deps.rxBinding2_library
+    implementation Deps.rxBinding2_design_library
+    implementation Deps.rxBinding2_support_library
 }

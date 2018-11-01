@@ -1,10 +1,8 @@
-package com.ianarbuckle.retrofitclient
+package com.ianarbuckle.core
 
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * Created by Ian Arbuckle on 16/07/2018.
