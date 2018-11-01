@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.builder
 
-import android.arch.lifecycle.LifecycleOwner
+
 import com.ianarbuckle.restaurants.home.RestaurantsFragment
 import com.ianarbuckle.restaurants.home.builder.DaggerHomeComponent
 import com.ianarbuckle.restaurants.home.builder.HomeModule
@@ -14,9 +14,9 @@ import retrofit2.Converter
  */
 class DefaultRestaurantsInjector(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory) : RestaurantsInjector {
 
-    override fun inject(fragment: RestaurantsFragment, lifecycleOwner: LifecycleOwner) {
+    override fun inject(fragment: RestaurantsFragment) {
         DaggerHomeComponent.builder()
-                .homeModule(HomeModule(fragment, lifecycleOwner))
+                .homeModule(HomeModule(fragment))
                 .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory))
                 .build()
                 .inject(fragment)

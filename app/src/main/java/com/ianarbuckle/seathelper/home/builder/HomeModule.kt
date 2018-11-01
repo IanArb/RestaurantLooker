@@ -1,6 +1,6 @@
 package com.ianarbuckle.seathelper.home.builder
 
-import android.arch.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.seathelper.home.HomeActivity
 import com.ianarbuckle.seathelper.home.core.view.adapter.ViewPagerAdapter
@@ -18,7 +18,7 @@ import dagger.Provides
  *
  */
 @Module
-class HomeModule(private val activity: HomeActivity, private val lifecycleOwner: LifecycleOwner) {
+class HomeModule(private val activity: HomeActivity) {
 
     @HomeScope
     @Provides
@@ -31,7 +31,7 @@ class HomeModule(private val activity: HomeActivity, private val lifecycleOwner:
     @HomeScope
     @Provides
     fun providePresenter(view: HomeView, router: HomeRouter): HomePresenter
-            = DefaultHomePresenter(view, router, lifecycleOwner)
+            = DefaultHomePresenter(view, router, activity)
 
     @HomeScope
     @Provides

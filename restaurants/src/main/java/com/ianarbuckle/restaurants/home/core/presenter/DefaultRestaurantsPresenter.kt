@@ -1,25 +1,26 @@
 package com.ianarbuckle.restaurants.home.core.presenter
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 import com.ianarbuckle.restaurants.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.home.router.RestaurantsRouter
-import com.ianarbuckle.restaurants.utils.CoroutineContextProvider
+import com.ianarbuckle.restaurants.utils.RestaurantsBuddyDispatchers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.android.Main
 import retrofit2.HttpException
+import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * Created by Ian Arbuckle on 20/07/2018.
  *
  */
 class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val interactor: RestaurantsInteractor, private val router: RestaurantsRouter,
-                                  private val lifecycleOwner: LifecycleOwner, private val contextPool: CoroutineContextProvider) : RestaurantsPresenter, LifecycleObserver {
+                                  private val dispatchers: RestaurantsBuddyDispatchers, private val lifecycleOwner: LifecycleOwner) : RestaurantsPresenter, LifecycleObserver, CoroutineScope {
 
     private val subscriptions: CompositeDisposable by lazy {
         CompositeDisposable()
@@ -27,19 +28,21 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
 
     private lateinit var job: Job
 
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-        fetchRestaurants()
+        job = Job()
+        listenForDataFromNetwork()
         subscriptions.addAll(subscribeOnSwipeRefresh(), subscribeOnTryAgainClick())
     }
 
-    private fun fetchRestaurants() {
+    private fun listenForDataFromNetwork() {
         view.showLoading()
-        job = launch(contextPool.main) {
+        job = launch {
             try {
-                val response = interactor.fetchRestaurants()
-                val results = response[0].results
-                view.showRestaurants(results)
+                fetchRestaurants()
             } catch (exception: HttpException) {
                 handleHttpErrors(exception)
             } catch(throwable: Throwable) {
@@ -47,6 +50,15 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
             } finally {
                 view.hideLoading()
             }
+        }
+    }
+
+    private suspend fun fetchRestaurants() {
+        withContext(dispatchers.ui) {
+            val results = interactor.fetchRestaurants()
+                    .filter { it.results.isNotEmpty() }
+                    .flatMap { it.results }.toMutableList()
+            view.showRestaurants(results)
         }
     }
 
@@ -61,7 +73,7 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
         return view.observeOnPullToRefresh()
                 .doOnNext { view.hideLoading() }
                 .subscribe {
-                    fetchRestaurants()
+                    this.listenForDataFromNetwork()
                     view.terminatePullToRefresh()
                 }
     }
@@ -70,7 +82,7 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
         return view.observeOnTryAgainClick()
                 .doOnNext { view.showLoading() }
                 .subscribe {
-                    fetchRestaurants()
+                    this.listenForDataFromNetwork()
                 }
     }
 

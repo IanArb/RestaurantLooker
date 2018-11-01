@@ -1,6 +1,5 @@
 package com.ianarbuckle.restaurants.home.builder
 
-import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.restaurants.home.RestaurantsFragment
 import com.ianarbuckle.restaurants.home.core.interactor.DefaultRestaurantsInteractor
@@ -12,7 +11,7 @@ import com.ianarbuckle.restaurants.home.core.view.DefaultRestaurantsView
 import com.ianarbuckle.restaurants.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.home.router.DefaultRestaurantsRouter
 import com.ianarbuckle.restaurants.home.router.RestaurantsRouter
-import com.ianarbuckle.restaurants.utils.CoroutineContextProvider
+import com.ianarbuckle.restaurants.utils.RestaurantsBuddyDispatchers
 import dagger.Module
 import dagger.Provides
 
@@ -21,7 +20,7 @@ import dagger.Provides
  *
  */
 @Module
-class HomeModule(private val fragment: RestaurantsFragment, private val lifecycleOwner: LifecycleOwner) {
+class HomeModule(private val fragment: RestaurantsFragment) {
 
     @HomeScope
     @Provides
@@ -37,14 +36,14 @@ class HomeModule(private val fragment: RestaurantsFragment, private val lifecycl
 
     @HomeScope
     @Provides
-    fun providePresenter(view: RestaurantsView, interactor: RestaurantsInteractor, router: RestaurantsRouter, coroutineContextProvider: CoroutineContextProvider): RestaurantsPresenter
-            = DefaultRestaurantsPresenter(view, interactor, router, lifecycleOwner, coroutineContextProvider)
+    fun providePresenter(view: RestaurantsView, interactor: RestaurantsInteractor, router: RestaurantsRouter, dispatchers: RestaurantsBuddyDispatchers): RestaurantsPresenter
+            = DefaultRestaurantsPresenter(view, interactor, router, dispatchers, fragment)
 
     @HomeScope
     @Provides
-    fun provideRouter(): RestaurantsRouter = DefaultRestaurantsRouter()
+    fun provideRouter(context: Context?): RestaurantsRouter = DefaultRestaurantsRouter(context)
 
     @HomeScope
     @Provides
-    fun provideCoroutineContextProvider(): CoroutineContextProvider = CoroutineContextProvider()
+    fun provideDispatchers(): RestaurantsBuddyDispatchers = RestaurantsBuddyDispatchers()
 }

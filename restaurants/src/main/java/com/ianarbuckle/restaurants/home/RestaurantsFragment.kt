@@ -1,8 +1,8 @@
 package com.ianarbuckle.restaurants.home
 
-import android.arch.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleObserver
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +28,7 @@ class RestaurantsFragment : Fragment(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RestaurantsProvider.get().inject(fragment = this, lifecycleOwner = this)
+        RestaurantsProvider.get().inject(fragment = this)
         presenter.addLifecycleObserver()
     }
 

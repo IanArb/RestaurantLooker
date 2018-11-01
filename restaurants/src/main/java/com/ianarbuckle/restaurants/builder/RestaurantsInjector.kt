@@ -1,6 +1,5 @@
 package com.ianarbuckle.restaurants.builder
 
-import android.arch.lifecycle.LifecycleOwner
 import com.ianarbuckle.restaurants.home.RestaurantsFragment
 
 /**
@@ -8,5 +7,5 @@ import com.ianarbuckle.restaurants.home.RestaurantsFragment
  *
  */
 interface RestaurantsInjector {
-    fun inject(fragment: RestaurantsFragment, lifecycleOwner: LifecycleOwner)
+    fun inject(fragment: RestaurantsFragment)
 }

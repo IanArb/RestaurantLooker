@@ -7,5 +7,5 @@ import com.ianarbuckle.restaurants.home.model.Restaurants
  *
  */
 interface RestaurantsRouter {
-    fun onNavigateToBookingScreen(results: List<Restaurants>)
+    fun onNavigateToBookingScreen(restaurants: Restaurants?)
 }

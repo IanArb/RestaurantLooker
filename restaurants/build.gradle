@@ -7,18 +7,18 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion Versions.compileSDKVersion
 
 
     baseFeature true
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.minSDKVersion
+        targetSdkVersion Versions.targetSDKVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -35,6 +35,10 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    androidExtensions {
+        experimental = true
     }
 
 
@@ -65,60 +69,61 @@ dependencies {
 
     application project(':app')
 
-    api project(':retrofitclient')
+    api project(':core')
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api Deps.kotlin_stdlib
 
-    api 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    api Deps.appCompat_library
 
-    api 'com.android.support:cardview-v7:28.0.0-alpha3'
-    api 'com.android.support:recyclerview-v7:28.0.0-alpha3'
+    api Deps.cardView_library
+    api Deps.recyclerView_library
 
-    implementation 'com.android.support:design:28.0.0-alpha1'
+    implementation Deps.material_components_library
 
     //Dagger
-    api "com.google.dagger:dagger:$daggerVersion"
-    api "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    api Deps.dagger_library
+    api Deps.dagger_support_library
+    kapt Deps.dagger_compiler_library
 
     //Paging
-    api "android.arch.paging:runtime:$pagingVersion"
-    testImplementation "android.arch.paging:common:$pagingVersion"
+    api Deps.paging_library
+    testImplementation Deps.paging_test_library
 
     //Network
-    api "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    api "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-    testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
+    api Deps.okHttp3_library
+    api Deps.retrofit2_library
+    api Deps.okHttp3_logging_interceptor_library
 
     //Json converter
-    api "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
-    api "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    api Deps.moshi_kotlin_library
+    api Deps.retrofit2_moshi_converter_library
 
     //Coroutines
-    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$coroutinesAdapterVersion"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    api Deps.retrofit2_coroutines_adapter_library
+    api Deps.coroutines_android_library
+    api Deps.coroutines_core_library
+    api Deps.coroutines_rx_library
 
     //Timber
-    api "com.jakewharton.timber:timber:$timberVersion"
+    api Deps.timber_library
 
     //Constraint layout
-    api "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    api Deps.constraint_layout_library
 
     //glide
-    api "com.github.bumptech.glide:glide:$glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    api Deps.glide_library
+    kapt Deps.glide_compiler_library
 
     //RxBinding
-    api "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
-    api "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
-    api "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingVersion"
+    api Deps.rxBinding2_kotlin_library
+    api Deps.rxBinding2_kotlin_design_library
+    api Deps.rxBinding2_kotlin_support_library
 
     //Test
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "com.google.truth:truth:$truthVersion"
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation Deps.junit_library
+    testImplementation Deps.google_truth_library
+    testImplementation Deps.mockito_library
+    testImplementation Deps.mockito_inline_library
 
 
 }

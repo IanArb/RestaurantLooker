@@ -1,20 +1,17 @@
 package com.ianarbuckle.seathelper.home.core.view
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import android.view.MenuItem
 import android.view.View
 import com.ianarbuckle.seathelper.R
+import com.ianarbuckle.seathelper.extensions.active
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
-import kotlinx.android.synthetic.main.home_view.view.*
-import com.ianarbuckle.seathelper.extension.active
-import com.ianarbuckle.seathelper.extension.disableShiftMode
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.home_view.view.*
 
 
-@SuppressLint("ViewConstructor")
 /**
  * Created by Ian Arbuckle on 18/05/2018.
  *
@@ -29,7 +26,6 @@ class DefaultHomeView(context: Context?) : HomeView, ConstraintLayout(context) {
     }
 
     private fun initBottomNavigation() {
-        bottomNavigation.disableShiftMode()
         bottomNavigation.active(navPosition.position)
     }
 
