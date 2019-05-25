@@ -7,16 +7,15 @@
     <data>
         <import type="android.view.View" />
         <variable
-            name="restaurants"
-            type="com.ianarbuckle.restaurants.home.model.Restaurants"/>
+            name="restaurant"
+            type="com.ianarbuckle.restaurants.data.Restaurant"/>
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:cardUseCompatPadding="true"
         app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,13 +23,13 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/bannerImageView"
+                android:id="@+id/imageBanner"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                bind:imageUrl="@{restaurants.imageUrl}"
+                bind:imageUrl="@{restaurant.imageUrl}"
                 app:layout_constraintBottom_toTopOf="@id/primaryText"
-                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintDimensionRatio="H,16:6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,11 +45,11 @@
                 android:lineSpacingExtra="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="#DE000000"
-                android:text="@{restaurants.restaurantName}"
+                android:text="@{restaurant.restaurantName}"
                 app:layout_constraintBottom_toTopOf="@id/subText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bannerImageView"
+                app:layout_constraintTop_toBottomOf="@id/imageBanner"
                 tools:text="Cirillo's"/>
 
             <TextView
@@ -61,7 +60,7 @@
                 android:layout_marginStart="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#8A000000"
-                android:text="@{restaurants.street}"
+                android:text="@{restaurant.street}"
                 app:layout_constraintBottom_toTopOf="@+id/actionBook"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,8 +103,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:minWidth="0dp"
-                android:text="@{restaurants.status}"
-                bind:statusColor="@{restaurants.status}"
+                android:text="@{restaurant.status}"
+                bind:statusColor="@{restaurant.status}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/actionMenu"
                 tools:text="OPEN"/>

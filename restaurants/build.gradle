@@ -1,4 +1,4 @@
-apply plugin: 'com.android.feature'
+apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
@@ -9,8 +9,6 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion Versions.compileSDKVersion
 
-
-    baseFeature true
 
     defaultConfig {
         minSdkVersion Versions.minSDKVersion
@@ -41,6 +39,11 @@ android {
         experimental = true
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 
 }
 
@@ -55,11 +58,6 @@ sourceSets {
             srcDir "${buildDir}/generated/source/kapt/main"
         }
     }
-    test {
-        java {
-            srcDir 'src/test/java'
-        }
-    }
 }
 
 dependencies {
@@ -67,9 +65,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    application project(':app')
-
-    api project(':core')
+    implementation project(':core')
 
     api Deps.kotlin_stdlib
 
@@ -90,25 +86,26 @@ dependencies {
     testImplementation Deps.paging_test_library
 
     //Network
-    api Deps.okHttp3_library
-    api Deps.retrofit2_library
     api Deps.okHttp3_logging_interceptor_library
+    api Deps.retrofit2_library
+    api Deps.okHttp3_library
 
     //Json converter
     api Deps.moshi_kotlin_library
     api Deps.retrofit2_moshi_converter_library
+    api Deps.retrofit2_gson_converter
 
     //Coroutines
-    api Deps.retrofit2_coroutines_adapter_library
+    implementation Deps.retrofit2_coroutines_adapter_library
     api Deps.coroutines_android_library
     api Deps.coroutines_core_library
-    api Deps.coroutines_rx_library
 
     //Timber
     api Deps.timber_library
 
     //Constraint layout
     api Deps.constraint_layout_library
+    api Deps.mockito_kotlin_library
 
     //glide
     api Deps.glide_library
@@ -123,15 +120,5 @@ dependencies {
     testImplementation Deps.junit_library
     testImplementation Deps.google_truth_library
     testImplementation Deps.mockito_library
-    testImplementation Deps.mockito_inline_library
-
-
-}
-repositories {
-    mavenCentral()
-}
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
+    testImplementation Deps.coroutines_test_library
 }

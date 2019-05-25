@@ -1,8 +1,7 @@
 package com.ianarbuckle.restaurants.network.repository
 
-import com.ianarbuckle.restaurants.home.model.Restaurant
-import kotlinx.coroutines.experimental.Deferred
-import retrofit2.Response
+import com.ianarbuckle.restaurants.data.Restaurant
+import kotlinx.coroutines.Deferred
 
 /**
  * Created by Ian Arbuckle on 28/07/2018.

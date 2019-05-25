@@ -1,0 +1,30 @@
+package com.ianarbuckle.restaurants.ui.menu.core.interactor
+
+import android.app.Activity
+import com.ianarbuckle.restaurants.data.Dish
+import com.ianarbuckle.restaurants.data.Menu
+import com.ianarbuckle.restaurants.data.Restaurant
+import com.ianarbuckle.restaurants.utils.Constants
+
+/**
+ * Created by Ian Arbuckle on 2019-04-23.
+ *
+ */
+interface MenuInteractor {
+    fun getMenu(): MutableList<Dish>
+    fun getRestaurantName(): String
+    fun getImageBannerUrl(): String
+}
+
+class DefaultMenuInteractor(private val activity: Activity) : MenuInteractor {
+
+    override fun getRestaurantName(): String =
+            activity.intent.getParcelableExtra<Restaurant>(Constants.RESTAURANT_KEY).restaurantName
+
+    override fun getImageBannerUrl(): String =
+            activity.intent.getParcelableExtra<Restaurant>(Constants.RESTAURANT_KEY).imageUrl
+
+    override fun getMenu(): MutableList<Dish> =
+            activity.intent.getParcelableExtra<Menu>(Constants.MENU_KEY).dishes
+
+}

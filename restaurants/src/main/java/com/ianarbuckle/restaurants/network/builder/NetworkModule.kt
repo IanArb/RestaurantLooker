@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.network.builder
 
-import com.ianarbuckle.restaurants.home.builder.HomeScope
+import com.ianarbuckle.restaurants.ui.home.builder.HomeScope
 import com.ianarbuckle.restaurants.network.repository.DefaultRestaurantsRepository
 import com.ianarbuckle.restaurants.network.repository.RestaurantsRepository
 import com.ianarbuckle.restaurants.network.RestaurantsService

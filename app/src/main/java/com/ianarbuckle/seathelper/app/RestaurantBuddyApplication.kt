@@ -24,6 +24,7 @@ class RestaurantBuddyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         component = DaggerRestaurantBuddyAppComponent.builder()
                 .restaurantBuddyModule(RestaurantBuddyModule(this))
                 .networkModule(NetworkModule(this))
@@ -32,4 +33,5 @@ class RestaurantBuddyApplication : Application() {
 
         RestaurantsInitialiser("https://restaurant-buddy-server.herokuapp.com", okHttpClient).init()
     }
+
 }
