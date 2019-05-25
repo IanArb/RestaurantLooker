@@ -29,11 +29,10 @@ android {
     dataBinding {
         enabled = true
     }
-}
 
-configurations.all {
-    resolutionStrategy {
-        force 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -58,7 +57,7 @@ sourceSets {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':restaurants')
+//    implementation project(':restaurants')
 
     //Kotlin
     implementation Deps.kotlin_stdlib
@@ -115,8 +114,6 @@ dependencies {
     androidTestImplementation Deps.work_manager_test_library
 
     //Network
-    implementation Deps.okHttp3_library
-    implementation Deps.retrofit2_library
     implementation Deps.okHttp3_logging_interceptor_library
 
     //Json converter
@@ -132,4 +129,6 @@ dependencies {
     implementation Deps.rxBinding2_library
     implementation Deps.rxBinding2_design_library
     implementation Deps.rxBinding2_support_library
+
+    implementation project(path: ':restaurants')
 }

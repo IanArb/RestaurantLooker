@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.ianarbuckle.restaurants.R
+import com.ianarbuckle.restaurant.R
 
 /**
  * Created by Ian Arbuckle on 25/08/2018.

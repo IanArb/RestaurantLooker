@@ -1,1 +1,1 @@
-include ':app', ':restaurants', ':restaurants', ':instantapp', ':core'
+include ':app', ':restaurants', ':restaurants', ':core'

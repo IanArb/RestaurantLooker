@@ -9,6 +9,7 @@ import Versions.googleTruthVersion
 import Versions.gradleToolsVersion
 import Versions.jacocoVersion
 import Versions.junitVersion
+import Versions.kotlinMockitoVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
 import Versions.materialComponentsVersion
@@ -35,13 +36,13 @@ object Versions {
     val versionName = "1.0"
 
     //Kotlin
-    const val kotlinVersion = "1.2.71"
-    const val coroutinesVersion = "0.26.1"
+    const val kotlinVersion = "1.3.31"
+    const val coroutinesVersion = "1.2.1"
 
     //Android
     const val appCompatVersion = "1.0.0"
     const val materialComponentsVersion = "1.0.0"
-    const val constraintLayoutVersion = "1.1.0"
+    const val constraintLayoutVersion = "2.0.0-beta1"
     const val cardviewVersion = "1.0.0"
     const val recyclerviewVersion = "1.0.0"
 
@@ -63,13 +64,14 @@ object Versions {
     //Test
     const val junitVersion = "4.12"
     const val googleTruthVersion = "0.27"
-    const val mockitoVersion = "2.15.0"
+    const val mockitoVersion = "2.23.0"
+    const val kotlinMockitoVersion = "2.1.0"
 
     //Network
-    const val okHttpVersion = "3.10.0"
-    const val retrofitVersion = "2.4.0"
+    const val okHttpVersion = "3.13.1"
+    const val retrofitVersion = "2.5.0"
     const val moshiKotlinVersion = "1.6.0"
-    const val coroutinesAdapterVersion = "1.0.0"
+    const val coroutinesAdapterVersion = "0.9.2"
 
     //Logging
     const val timberVersion = "4.7.1"
@@ -78,8 +80,8 @@ object Versions {
     const val glideVersion = "4.7.1"
 
     //Gradle
-    const val gradleToolsVersion = "3.2.0"
-    const val jacocoVersion = "0.1.2"
+    const val gradleToolsVersion = "3.3.1"
+    const val jacocoVersion = "0.1.4"
 }
 
 object Deps {
@@ -115,6 +117,7 @@ object Deps {
     val google_truth_library =  "com.google.truth:truth:$googleTruthVersion"
     val mockito_library = "org.mockito:mockito-core:$mockitoVersion"
     val mockito_inline_library = "org.mockito:mockito-inline:$mockitoVersion"
+    val mockito_kotlin_library = "com.nhaarman.mockitokotlin2:mockito-kotlin:$kotlinMockitoVersion"
 
     //Architecture components
     val lifecycle_library = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
@@ -136,13 +139,15 @@ object Deps {
     val okHttp3_logging_interceptor_library = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     val retrofit2_library = "com.squareup.retrofit2:retrofit:$retrofitVersion"
     val retrofit2_moshi_converter_library = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
-    val retrofit2_coroutines_adapter_library = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$coroutinesAdapterVersion"
+    val retrofit2_gson_converter = "com.squareup.retrofit2:converter-gson:2.5.0"
+    val retrofit2_coroutines_adapter_library = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutinesAdapterVersion"
     val moshi_kotlin_library = "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
 
     //Coroutines
     val coroutines_android_library = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     val coroutines_core_library = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     val coroutines_rx_library = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion"
+    val coroutines_test_library = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     //Logging
     val timber_library = "com.jakewharton.timber:timber:$timberVersion"

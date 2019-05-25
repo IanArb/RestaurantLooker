@@ -1,9 +1,9 @@
 package com.ianarbuckle.restaurants.builder
 
 
-import com.ianarbuckle.restaurants.home.RestaurantsFragment
-import com.ianarbuckle.restaurants.home.builder.DaggerHomeComponent
-import com.ianarbuckle.restaurants.home.builder.HomeModule
+import com.ianarbuckle.restaurants.ui.home.RestaurantsFragment
+import com.ianarbuckle.restaurants.ui.home.builder.DaggerHomeComponent
+import com.ianarbuckle.restaurants.ui.home.builder.HomeModule
 import com.ianarbuckle.restaurants.network.builder.NetworkModule
 import okhttp3.OkHttpClient
 import retrofit2.Converter
