@@ -40,7 +40,7 @@ object Versions {
     val versionName = "1.0"
 
     //Kotlin
-    const val kotlinVersion = "1.3.31"
+    const val kotlinVersion = "1.3.41"
     const val coroutinesVersion = "1.2.1"
     const val kotlinExtensionsVersion = "1.0.1"
     const val kotlinMockito = "2.1.0"
