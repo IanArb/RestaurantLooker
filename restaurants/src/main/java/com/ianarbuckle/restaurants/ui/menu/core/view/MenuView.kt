@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.menu_restaurants_view.view.*
  */
 interface MenuView {
     fun getView(): View
-    fun showMenu(dish: MutableList<Dish>)
+    fun showMenu(dish: List<Dish>)
     fun showImageBanner(url: String)
     fun showToolbarTitle(title: String)
     fun toolbarClickListener(clickListener: () -> Unit)
@@ -30,11 +30,11 @@ class DefaultMenuView(context: Context) : MenuView, FrameLayout(context) {
 
     override fun getView(): View = this
 
-    override fun showMenu(dish: MutableList<Dish>) {
+    override fun showMenu(dishes: List<Dish>) {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = MenuAdapter(dish)
+            adapter = MenuAdapter(dishes)
         }
     }
 

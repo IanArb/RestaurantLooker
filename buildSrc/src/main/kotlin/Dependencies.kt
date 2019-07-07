@@ -8,7 +8,11 @@ import Versions.glideVersion
 import Versions.googleTruthVersion
 import Versions.gradleToolsVersion
 import Versions.jacocoVersion
+import Versions.jodaTimeAndroidVersion
+import Versions.jodaTimeVersion
 import Versions.junitVersion
+import Versions.kotlinExtensionsVersion
+import Versions.kotlinMockito
 import Versions.kotlinMockitoVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
@@ -38,6 +42,8 @@ object Versions {
     //Kotlin
     const val kotlinVersion = "1.3.31"
     const val coroutinesVersion = "1.2.1"
+    const val kotlinExtensionsVersion = "1.0.1"
+    const val kotlinMockito = "2.1.0"
 
     //Android
     const val appCompatVersion = "1.0.0"
@@ -56,7 +62,7 @@ object Versions {
 
     //Architecture components
     const val lifecycleVersion = "2.0.0"
-    const val roomVersion = "2.0.0-rc01"
+    const val roomVersion = "2.1.0-beta01"
     const val navigationVersion = "1.0.0-alpha02"
     const val pagingVersion = "2.0.0-rc01"
     const val workManagerVersion = "1.0.0-alpha01"
@@ -69,7 +75,7 @@ object Versions {
 
     //Network
     const val okHttpVersion = "3.13.1"
-    const val retrofitVersion = "2.5.0"
+    const val retrofitVersion = "2.6.0"
     const val moshiKotlinVersion = "1.6.0"
     const val coroutinesAdapterVersion = "0.9.2"
 
@@ -82,6 +88,11 @@ object Versions {
     //Gradle
     const val gradleToolsVersion = "3.3.1"
     const val jacocoVersion = "0.1.4"
+
+    //Joda
+    const val jodaTimeAndroidVersion = "2.10.1.2"
+    const val jodaTimeVersion = "2.3"
+
 }
 
 object Deps {
@@ -89,6 +100,8 @@ object Deps {
     //Kotlin
     val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     val couroutines_library = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    val kotlin_extensions_library = "androidx.core:core-ktx:$kotlinExtensionsVersion"
+    val kotlin_mockito_library = "com.nhaarman.mockitokotlin2:mockito-kotlin:$kotlinMockito"
 
     //Android
     val appCompat_library = "androidx.appcompat:appcompat:$appCompatVersion"
@@ -124,7 +137,8 @@ object Deps {
     val lifecycle_compiler_library = "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
     val room_library = "androidx.room:room-runtime:$roomVersion"
     val room_compiler_library = "androidx.room:room-compiler:$roomVersion"
-    val rxRoom_library = "androidx.room:room-rxjava2:$roomVersion"
+    val room_kotlin_library = "androidx.room:room-ktx:$roomVersion"
+    val room_coroutines_library = "androidx.room:room-coroutines:$roomVersion"
     val room_test_library = "androidx.room:room-testing:$roomVersion"
     val navigation_fragment_library = "android.arch.navigation:navigation-fragment:$navigationVersion"
     val navigation_ui_library =  "android.arch.navigation:navigation-ui:$navigationVersion"
@@ -155,6 +169,10 @@ object Deps {
     //Glide
     val glide_library = "com.github.bumptech.glide:glide:$glideVersion"
     val glide_compiler_library = "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //Joda
+    val joda_time_android_library = "net.danlew:android.joda:$jodaTimeAndroidVersion"
+    val joda_time_library = "joda-time:joda-time:$jodaTimeVersion"
 
     //Gradle
     val gradle_tools_library = "com.android.tools.build:gradle:$gradleToolsVersion"

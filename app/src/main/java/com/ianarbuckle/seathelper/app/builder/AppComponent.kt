@@ -11,9 +11,9 @@ import okhttp3.OkHttpClient
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-@RestaurantBuddyAppScope
-@Component(modules = [RestaurantBuddyModule::class, NetworkModule::class])
-interface RestaurantBuddyAppComponent {
+@AppScope
+@Component(modules = [AppModule::class, NetworkModule::class])
+interface AppComponent {
     fun inject(restaurantBuddyApplication: RestaurantBuddyApplication)
     fun okHttpClient(): OkHttpClient
     fun interceptor(): Interceptor

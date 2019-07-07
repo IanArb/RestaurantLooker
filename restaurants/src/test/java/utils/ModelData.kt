@@ -1,6 +1,7 @@
 package utils
 
 import com.ianarbuckle.restaurants.data.*
+import org.joda.time.DateTime
 
 /**
  * Created by Ian Arbuckle on 19/08/2018.
@@ -17,14 +18,12 @@ fun buildRestaurantMock() : MutableList<Restaurant> {
 }
 
 fun createRestaurant(): Restaurant {
-    val menu = createMenu()
-    return Restaurant("1", "Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-            Location(0.5f, 0.10f), "OPEN", menu, "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg")
+    return Restaurant("1","Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
+            Location(0.5f, 0.10f), "OPEN", createLunchMenu(), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg")
 }
 
-fun createMenu() = Menu(createLunchMenu())
 
-private fun createLunchMenu(): MutableList<Dish> {
+fun createLunchMenu(): MutableList<Dish> {
     val lunch = mutableListOf<Dish>()
 
     lunch.apply {

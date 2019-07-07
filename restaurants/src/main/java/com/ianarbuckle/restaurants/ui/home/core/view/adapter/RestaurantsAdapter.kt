@@ -3,7 +3,6 @@ package com.ianarbuckle.restaurants.ui.home.core.view.adapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurant.databinding.HomeRestaurantsCardItemBinding

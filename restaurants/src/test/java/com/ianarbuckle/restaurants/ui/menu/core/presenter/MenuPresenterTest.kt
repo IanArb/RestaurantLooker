@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations.initMocks
-import utils.createMenu
+import utils.createLunchMenu
 
 /**
  * Created by Ian Arbuckle on 2019-05-11.
@@ -61,7 +61,7 @@ class MenuPresenterTest {
 
     @Test
     fun `verify that menu is populated and displayed`() {
-        whenever(interactor.getMenu()).thenReturn(createMenu().dishes)
+        whenever(interactor.getMenu()).thenReturn(createLunchMenu())
 
         presenter.onCreate()
 

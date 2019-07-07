@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="menu"
+            name="dish"
             type="com.ianarbuckle.restaurants.data.Dish"/>
     </data>
 
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{menu.dishName}"
+            android:text="@{dish.dishName}"
             tools:text="Pineapple Pizza"
             android:layout_margin="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
@@ -34,7 +34,7 @@
             app:layout_constraintTop_toBottomOf="@+id/name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{menu.description}"
+            android:text="@{dish.description}"
             tools:text="This is a very long description about why pineapples don't belong on pizza....."
             android:layout_margin="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{String.format(@string/price_format, menu.price.currency, menu.price.amount)}"
+            android:text="@{String.format(@string/price_format, dish.price.currency, dish.price.amount)}"
             tools:text="€10.50"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textStyle="bold"

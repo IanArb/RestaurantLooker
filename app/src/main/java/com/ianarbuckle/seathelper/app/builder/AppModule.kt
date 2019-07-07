@@ -10,13 +10,13 @@ import dagger.Provides
  *
  */
 @Module
-class RestaurantBuddyModule constructor(private val application: Application) {
+class AppModule constructor(private val application: Application) {
 
-    @RestaurantBuddyAppScope
+    @AppScope
     @Provides
     fun provideApplication(): Application = application
 
-    @RestaurantBuddyAppScope
+    @AppScope
     @Provides
     fun provideApplicationContext(): Context = application.applicationContext
 

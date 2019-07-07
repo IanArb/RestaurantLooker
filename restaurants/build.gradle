@@ -67,14 +67,14 @@ dependencies {
 
     implementation project(':core')
 
-    api Deps.kotlin_stdlib
+    api Deps.kotlin_extensions_library
 
     api Deps.appCompat_library
 
     api Deps.cardView_library
     api Deps.recyclerView_library
 
-    implementation Deps.material_components_library
+    api Deps.material_components_library
 
     //Dagger
     api Deps.dagger_library
@@ -116,9 +116,20 @@ dependencies {
     api Deps.rxBinding2_kotlin_design_library
     api Deps.rxBinding2_kotlin_support_library
 
+    //Room
+    api Deps.room_library
+    kapt Deps.room_compiler_library
+    api Deps.room_kotlin_library
+
+    //Joda
+    api Deps.joda_time_android_library
+
     //Test
     testImplementation Deps.junit_library
     testImplementation Deps.google_truth_library
     testImplementation Deps.mockito_library
     testImplementation Deps.coroutines_test_library
+    testImplementation Deps.room_test_library
+    testImplementation Deps.mockito_kotlin_library
+    testImplementation Deps.joda_time_library
 }

@@ -8,4 +8,8 @@ import com.ianarbuckle.restaurants.data.Restaurant
  */
 interface RestaurantsInteractor {
     suspend fun fetchRestaurants(): MutableList<Restaurant>
+    fun isConnected(): Boolean
+    suspend fun getSavedRestaurants(): MutableList<Restaurant>
+    suspend fun saveRestaurants(restaurants: MutableList<Restaurant>)
+    suspend fun isContentSame(restaurants: MutableList<Restaurant>): Boolean
 }

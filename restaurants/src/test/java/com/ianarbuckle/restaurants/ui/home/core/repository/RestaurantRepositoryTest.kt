@@ -1,9 +1,8 @@
-package com.ianarbuckle.restaurants.network.repository
+package com.ianarbuckle.restaurants.ui.home.core.repository
 
+import com.ianarbuckle.restaurants.db.dao.RestaurantDAO
 import com.ianarbuckle.restaurants.network.RestaurantsService
 import com.ianarbuckle.restaurants.network.manager.RestaurantsServiceManager
-import com.ianarbuckle.restaurants.network.repository.DefaultRestaurantsRepository
-import com.ianarbuckle.restaurants.network.repository.RestaurantsRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -27,10 +26,13 @@ class RestaurantRepositoryTest {
     @Mock
     private lateinit var service: RestaurantsService
 
+    @Mock
+    private lateinit var dao: RestaurantDAO
+
     @Before
     fun setup() {
         initMocks(this)
-        repository = DefaultRestaurantsRepository(manager)
+        repository = DefaultRestaurantsRepository(manager, dao)
     }
 
     @Test

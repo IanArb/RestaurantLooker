@@ -26,6 +26,7 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
         subscriptions.addAll(subscribeOnBottomNavigationItemSelections())
+//        navigateToNavBarItemSelected()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -40,6 +41,13 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
                     navPosition = findNavigationById(it.itemId)
                     router.switchFragment(navPosition)
                 }
+    }
+
+    private fun navigateToNavBarItemSelected() {
+        view.menuItemClickListener {
+            navPosition = findNavigationById(it.itemId)
+            router.switchFragment(navPosition)
+        }
     }
 
     override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)
