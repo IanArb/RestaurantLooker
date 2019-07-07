@@ -31,7 +31,7 @@ class HomeModule(private val fragment: RestaurantsFragment) {
 
     @HomeScope
     @Provides
-    fun provideInteractor(repository: RestaurantsRepository, context: Context): RestaurantsInteractor = DefaultRestaurantsInteractor(context, repository)
+    fun provideInteractor(repository: RestaurantsRepository): RestaurantsInteractor = DefaultRestaurantsInteractor(repository)
 
     @HomeScope
     @Provides

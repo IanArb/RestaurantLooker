@@ -3,8 +3,8 @@ package com.ianarbuckle.restaurants.ui.menu.core.interactor
 import android.app.Activity
 import android.content.Intent
 import android.os.Parcelable
-import android.view.Menu
 import com.google.common.truth.Truth.assertThat
+import com.ianarbuckle.restaurants.data.Dish
 import com.ianarbuckle.restaurants.data.Price
 import org.junit.Before
 import org.junit.Test
@@ -36,14 +36,14 @@ class MenuInteractorTest {
         whenever(activity.intent).thenReturn(intent)
     }
 
-//    @Test
-//    fun `verify that when retrieving menu via intent should not be empty or null`() {
-//        val dish = Dish("lunch", "Codfish", "lunch", Price("EUR", 0f))
-//
-//        whenever(intent.getParcelableExtra<Parcelable>("menu")).thenReturn(menu)
-//
-//        assertThat(interactor.getMenu()).isNotNull()
-//    }
+    @Test
+    fun `verify that when retrieving menu via intent should not be empty or null`() {
+        val dish = Dish("lunch", "Codfish", "lunch", Price("EUR", 0f))
+
+        whenever(intent.getParcelableExtra<Parcelable>("menu")).thenReturn(dish)
+
+        assertThat(interactor.getMenu()).isNotNull()
+    }
 
     @Test
     fun `verify that when retrieving restaurant name via intent should not be empty or null`() {

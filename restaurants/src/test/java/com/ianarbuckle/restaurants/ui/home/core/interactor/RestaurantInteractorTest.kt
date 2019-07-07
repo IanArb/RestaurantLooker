@@ -35,13 +35,10 @@ class RestaurantInteractorTest {
     @Mock
     private lateinit var repository: RestaurantsRepository
 
-    @Mock
-    private lateinit var context: Context
-
     @Before
     fun setup() {
         initMocks(this)
-        interactor = DefaultRestaurantsInteractor(context, repository)
+        interactor = DefaultRestaurantsInteractor(repository)
     }
 
     @Test
