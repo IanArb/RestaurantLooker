@@ -1,7 +1,10 @@
 package com.ianarbuckle.restaurants.ui.home.core.interactor
 
+import android.content.Context
+import android.content.res.Resources
 import com.ianarbuckle.restaurants.data.Restaurant
-import com.ianarbuckle.restaurants.network.repository.RestaurantsRepository
+import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
+import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -13,6 +16,12 @@ import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as given
 import org.mockito.MockitoAnnotations.initMocks
 import org.mockito.junit.MockitoJUnitRunner
+import utils.buildRestaurantMock
+import net.danlew.android.joda.JodaTimeAndroid
+import org.mockito.Mockito.`when`
+import org.mockito.ArgumentMatchers.anyInt
+import java.io.InputStream
+
 
 /**
  * Created by Ian Arbuckle on 13/08/2018.
@@ -27,18 +36,18 @@ class RestaurantInteractorTest {
     private lateinit var repository: RestaurantsRepository
 
     @Mock
-    private lateinit var deferred: Deferred<MutableList<Restaurant>>
+    private lateinit var context: Context
 
     @Before
     fun setup() {
         initMocks(this)
-        interactor = DefaultRestaurantsInteractor(repository)
+        interactor = DefaultRestaurantsInteractor(context, repository)
     }
 
     @Test
     fun `test that repository with restaurants gets called`() {
         runBlocking {
-            given(repository.fetchRestaurants()).thenReturn(deferred)
+            given(repository.fetchRestaurants()).thenReturn(buildRestaurantMock())
 
             interactor.fetchRestaurants()
 

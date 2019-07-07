@@ -4,17 +4,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
+import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.ui.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
+import com.ianarbuckle.restaurants.ui.home.router.RestaurantsRouter
 import kotlinx.coroutines.*
-import retrofit2.HttpException
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Ian Arbuckle on 20/07/2018.
  *
  */
-class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val interactor: RestaurantsInteractor,
+class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val interactor: RestaurantsInteractor, private val router: RestaurantsRouter,
                                   private val lifecycleOwner: LifecycleOwner) : RestaurantsPresenter, LifecycleObserver, CoroutineScope {
 
     private lateinit var job: Job
@@ -26,19 +27,31 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
     override fun onCreate() {
         job = Job()
         fetchRestuarants()
-        handleOnTryAgainClick()
+        view.executeTryAgainClick {
+            fetchRestuarants()
+        }
     }
 
     private fun fetchRestuarants() {
         view.showLoading()
         job = launch {
             try {
-                val results = interactor.fetchRestaurants()
-                withContext(Dispatchers.Main) {
-                    view.showRestaurants(results)
+                val localResults = interactor.getSavedRestaurants()
+                if (localResults.isNullOrEmpty()) {
+                    val results = interactor.fetchRestaurants()
+                    interactor.saveRestaurants(results)
+                    withContext(Dispatchers.Main) {
+                        showResults(results)
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        showResults(localResults)
+                    }
                 }
-            } catch (exception: HttpException) {
-                handleHttpErrors(exception)
+            } catch (exception: Throwable) {
+                withContext(Dispatchers.Main) {
+                    view.showErrorState()
+                }
             } finally {
                 withContext(Dispatchers.Main) {
                     view.hideLoading()
@@ -47,16 +60,11 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
         }
     }
 
-    private fun handleHttpErrors(exception: HttpException) {
-        when (exception.code()) {
-            500, 501, 502, 503, 504 -> view.showErrorState()
-            400, 404 -> view.showEmptyState()
-        }
-    }
-
-    private fun handleOnTryAgainClick() {
-        view.executeTryAgainClick {
-            fetchRestuarants()
+    private fun showResults(results: MutableList<Restaurant>) {
+        if (results.isNullOrEmpty()) {
+            view.showEmptyState()
+        } else {
+            view.showRestaurants(results)
         }
     }
 
@@ -67,4 +75,5 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
     }
 
     override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)
+
 }

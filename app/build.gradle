@@ -56,11 +56,10 @@ sourceSets {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-//    implementation project(':restaurants')
+    implementation project(path: ':restaurants')
 
     //Kotlin
-    implementation Deps.kotlin_stdlib
+    implementation Deps.kotlin_extensions_library
 
     //Coroutines
     implementation Deps.couroutines_library
@@ -91,9 +90,6 @@ dependencies {
     //Room
     implementation Deps.room_library
     kapt Deps.room_compiler_library
-
-    //Rx Room support
-    implementation Deps.rxRoom_library
 
     //Room test support
     testImplementation Deps.room_test_library
@@ -130,5 +126,5 @@ dependencies {
     implementation Deps.rxBinding2_design_library
     implementation Deps.rxBinding2_support_library
 
-    implementation project(path: ':restaurants')
+
 }

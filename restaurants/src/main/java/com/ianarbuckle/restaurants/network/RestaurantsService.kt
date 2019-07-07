@@ -11,5 +11,5 @@ import retrofit2.http.GET
 interface RestaurantsService {
 
     @GET("/restaurants")
-    fun fetchRestaurants(): Deferred<MutableList<Restaurant>>
+    suspend fun fetchRestaurants(): MutableList<Restaurant>
 }

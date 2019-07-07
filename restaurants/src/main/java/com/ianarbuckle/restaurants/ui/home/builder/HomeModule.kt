@@ -6,7 +6,7 @@ import com.ianarbuckle.restaurants.ui.home.core.interactor.DefaultRestaurantsInt
 import com.ianarbuckle.restaurants.ui.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.ui.home.core.presenter.DefaultRestaurantsPresenter
 import com.ianarbuckle.restaurants.ui.home.core.presenter.RestaurantsPresenter
-import com.ianarbuckle.restaurants.network.repository.RestaurantsRepository
+import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
 import com.ianarbuckle.restaurants.ui.home.core.view.DefaultRestaurantsView
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.ui.home.router.DefaultRestaurantsRouter
@@ -23,22 +23,22 @@ class HomeModule(private val fragment: RestaurantsFragment) {
 
     @HomeScope
     @Provides
-    fun provideContext(): Context? = fragment.context
+    fun provideContext(): Context = fragment.requireContext()
 
     @HomeScope
     @Provides
-    fun provideView(context: Context?): RestaurantsView = DefaultRestaurantsView(context)
+    fun provideView(context: Context): RestaurantsView = DefaultRestaurantsView(context)
 
     @HomeScope
     @Provides
-    fun provideInteractor(repository: RestaurantsRepository): RestaurantsInteractor = DefaultRestaurantsInteractor(repository)
+    fun provideInteractor(repository: RestaurantsRepository, context: Context): RestaurantsInteractor = DefaultRestaurantsInteractor(context, repository)
 
     @HomeScope
     @Provides
-    fun providePresenter(view: RestaurantsView, interactor: RestaurantsInteractor): RestaurantsPresenter
-            = DefaultRestaurantsPresenter(view, interactor, fragment)
+    fun providePresenter(view: RestaurantsView, interactor: RestaurantsInteractor, router: RestaurantsRouter): RestaurantsPresenter
+            = DefaultRestaurantsPresenter(view, interactor, router, fragment)
 
     @HomeScope
     @Provides
-    fun provideRouter(context: Context?): RestaurantsRouter = DefaultRestaurantsRouter(context)
+    fun provideRouter(context: Context): RestaurantsRouter = DefaultRestaurantsRouter(context)
 }

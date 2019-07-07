@@ -1,7 +1,7 @@
 package com.ianarbuckle.seathelper.network
 
 import android.content.Context
-import com.ianarbuckle.seathelper.app.builder.RestaurantBuddyAppScope
+import com.ianarbuckle.seathelper.app.builder.AppScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -23,7 +23,7 @@ class NetworkModule constructor(val context: Context) {
         const val TIMEOUT: Long = 10
     }
 
-    @RestaurantBuddyAppScope
+    @AppScope
     @Provides
     fun provideOkHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient =
             OkHttpClient.Builder()
@@ -34,12 +34,12 @@ class NetworkModule constructor(val context: Context) {
                     .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                     .build()
 
-    @RestaurantBuddyAppScope
+    @AppScope
     @Provides
     fun provideInterceptor(): Interceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Timber.d(it) })
             .apply { level = HttpLoggingInterceptor.Level.BASIC }
 
-    @RestaurantBuddyAppScope
+    @AppScope
     @Provides
     fun provideCache(): Cache {
         return Cache(context.cacheDir, CACHE_SIZE)

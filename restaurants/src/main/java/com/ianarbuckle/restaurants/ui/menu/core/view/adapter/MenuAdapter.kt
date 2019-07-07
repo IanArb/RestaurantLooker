@@ -12,7 +12,7 @@ import com.ianarbuckle.restaurants.data.Dish
  * Created by Ian Arbuckle on 2019-05-11.
  *
  */
-class MenuAdapter(private val results: MutableList<Dish>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter(private val results: List<Dish>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class MenuAdapter(private val results: MutableList<Dish>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val items = results[position]
-        holder.binding.menu = items
+        holder.binding.dish = items
     }
 
     inner class MenuViewHolder(val binding: MenuItemBinding): RecyclerView.ViewHolder(binding.root)

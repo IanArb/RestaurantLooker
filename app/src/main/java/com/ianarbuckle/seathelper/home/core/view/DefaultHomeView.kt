@@ -8,6 +8,7 @@ import com.ianarbuckle.seathelper.R
 import com.ianarbuckle.seathelper.extensions.active
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
+import com.jakewharton.rxbinding2.support.design.widget.itemSelections
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.home_view.view.*
 
@@ -34,5 +35,11 @@ class DefaultHomeView(context: Context?) : HomeView, ConstraintLayout(context) {
     }
 
     override fun observeNavigationItemSelected(): Observable<MenuItem> = RxBottomNavigationView.itemSelections(bottomNavigation)
+
+    override fun menuItemClickListener(clickListener: (MenuItem) -> Boolean) {
+        bottomNavigation.setOnNavigationItemSelectedListener {
+            clickListener(it)
+        }
+    }
 
 }

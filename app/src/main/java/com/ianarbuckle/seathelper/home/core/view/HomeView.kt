@@ -12,4 +12,5 @@ import io.reactivex.Observable
 interface HomeView {
     fun getView(): View
     fun observeNavigationItemSelected(): Observable<MenuItem>
+    fun menuItemClickListener(clickListener: (MenuItem) -> Boolean)
 }

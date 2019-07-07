@@ -7,4 +7,4 @@ import javax.inject.Scope
  */
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-internal annotation class RestaurantBuddyAppScope
+internal annotation class AppScope

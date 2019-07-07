@@ -2,6 +2,7 @@ package com.ianarbuckle.restaurants.ui.home.core.view
 
 import android.content.Context
 import android.content.Intent
+import android.os.Parcelable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
@@ -11,13 +12,15 @@ import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurants.ui.home.core.view.adapter.RestaurantsAdapter
 import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.ui.menu.MenuActivity
+import com.ianarbuckle.restaurants.utils.Constants
 import kotlinx.android.synthetic.main.home_restaurants_view.view.*
+import java.util.ArrayList
 
 /**
  * Created by Ian Arbuckle on 20/07/2018.
  *
  */
-class DefaultRestaurantsView(context: Context?) : RestaurantsView, ConstraintLayout(context) {
+class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayout(context) {
 
     private val clickListener = {
         restaurant: Restaurant -> handleMenuClickEvent(restaurant)
@@ -77,11 +80,10 @@ class DefaultRestaurantsView(context: Context?) : RestaurantsView, ConstraintLay
     }
 
     private fun handleMenuClickEvent(restaurant: Restaurant) {
-        val intent = Intent(this.context, MenuActivity::class.java)
-        intent.putExtra("menu", restaurant.menu)
-        intent.putExtra("restaurant", restaurant)
+        val intent = Intent(context, MenuActivity::class.java)
+        intent.putParcelableArrayListExtra(Constants.DISHES_KEY, restaurant.dishes as ArrayList<out Parcelable>)
+        intent.putExtra(Constants.RESTAURANT_KEY, restaurant)
         context.startActivity(intent)
     }
-
 
 }

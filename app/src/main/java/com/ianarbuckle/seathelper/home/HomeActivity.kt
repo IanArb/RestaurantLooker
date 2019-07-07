@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var presenter: HomePresenter
 
     private val component: HomeComponent by lazy {
-        DaggerHomeComponent.builder().restaurantBuddyAppComponent(RestaurantBuddyApplication.component)
+        DaggerHomeComponent.builder().appComponent(RestaurantBuddyApplication.component)
                 .homeModule(HomeModule(activity = this))
                 .build()
     }

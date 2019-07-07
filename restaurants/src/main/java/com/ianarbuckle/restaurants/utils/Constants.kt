@@ -5,6 +5,6 @@ package com.ianarbuckle.restaurants.utils
  *
  */
 object Constants {
-    const val MENU_KEY = "menu"
+    const val DISHES_KEY = "dishes"
     const val RESTAURANT_KEY = "restaurant"
 }

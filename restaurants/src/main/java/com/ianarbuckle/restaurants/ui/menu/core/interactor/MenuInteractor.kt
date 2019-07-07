@@ -2,7 +2,6 @@ package com.ianarbuckle.restaurants.ui.menu.core.interactor
 
 import android.app.Activity
 import com.ianarbuckle.restaurants.data.Dish
-import com.ianarbuckle.restaurants.data.Menu
 import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.utils.Constants
 
@@ -11,7 +10,7 @@ import com.ianarbuckle.restaurants.utils.Constants
  *
  */
 interface MenuInteractor {
-    fun getMenu(): MutableList<Dish>
+    fun getMenu(): List<Dish>
     fun getRestaurantName(): String
     fun getImageBannerUrl(): String
 }
@@ -24,7 +23,7 @@ class DefaultMenuInteractor(private val activity: Activity) : MenuInteractor {
     override fun getImageBannerUrl(): String =
             activity.intent.getParcelableExtra<Restaurant>(Constants.RESTAURANT_KEY).imageUrl
 
-    override fun getMenu(): MutableList<Dish> =
-            activity.intent.getParcelableExtra<Menu>(Constants.MENU_KEY).dishes
+    override fun getMenu(): List<Dish> =
+            activity.intent.getParcelableArrayListExtra(Constants.DISHES_KEY)
 
 }

@@ -2,6 +2,7 @@ package com.ianarbuckle.restaurants.ui.home.core.view
 
 import android.view.View
 import com.ianarbuckle.restaurants.data.Restaurant
+import com.ianarbuckle.restaurants.ui.home.core.view.adapter.RestaurantsAdapter
 
 /**
  * Created by Ian Arbuckle on 11/07/2018.
