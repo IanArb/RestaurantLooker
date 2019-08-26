@@ -4,11 +4,14 @@ import android.app.Application
 import com.ianarbuckle.seathelper.app.builder.DaggerAppComponent
 import com.ianarbuckle.seathelper.app.builder.AppComponent
 import com.ianarbuckle.seathelper.app.builder.AppModule
+import com.ianarbuckle.seathelper.components.BookingInitialiser
 import com.ianarbuckle.seathelper.components.RestaurantsInitialiser
+import com.ianarbuckle.seathelper.components.TablesMapInitializer
 import com.ianarbuckle.seathelper.network.NetworkModule
 import net.danlew.android.joda.JodaTimeAndroid
 import okhttp3.OkHttpClient
 import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Created by Ian Arbuckle on 18/05/2018.
@@ -16,7 +19,11 @@ import javax.inject.Inject
  */
 class RestaurantBuddyApplication : Application() {
 
-    @Inject lateinit var okHttpClient: OkHttpClient
+    @Inject
+    lateinit var okHttpClient: OkHttpClient
+
+    @set:[Inject Named("baseUrl")]
+    lateinit var baseUrl: String
 
     companion object {
         lateinit var component: AppComponent
@@ -33,7 +40,9 @@ class RestaurantBuddyApplication : Application() {
 
         JodaTimeAndroid.init(this)
 
-        RestaurantsInitialiser("https://restaurant-buddy-server.herokuapp.com", okHttpClient).init()
+        RestaurantsInitialiser(baseUrl, okHttpClient).init()
+        TablesMapInitializer(baseUrl, okHttpClient).init()
+        BookingInitialiser(baseUrl, okHttpClient).init()
     }
 
 }

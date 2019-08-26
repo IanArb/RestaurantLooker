@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.network
 
-import com.ianarbuckle.core.DefaultRetrofitFactory
+import com.ianarbuckle.core.retrofit.DefaultRetrofitFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Converter

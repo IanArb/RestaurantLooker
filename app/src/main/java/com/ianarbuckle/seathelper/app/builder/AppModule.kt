@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /**
  * Created by Ian Arbuckle on 18/05/2018.
@@ -19,5 +20,10 @@ class AppModule constructor(private val application: Application) {
     @AppScope
     @Provides
     fun provideApplicationContext(): Context = application.applicationContext
+
+    @AppScope
+    @Provides
+    @Named("baseUrl")
+    fun provideBaseUrl(): String = "https://restaurant-buddy-server.herokuapp.com"
 
 }

@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.network.builder
 
-import com.ianarbuckle.restaurants.db.dao.RestaurantDAO
+import com.ianarbuckle.restaurants.database.dao.RestaurantDAO
 import com.ianarbuckle.restaurants.ui.home.builder.HomeScope
 import com.ianarbuckle.restaurants.ui.home.core.repository.DefaultRestaurantsRepository
 import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
@@ -17,7 +17,7 @@ import retrofit2.Retrofit
  *
  */
 @Module
-class NetworkModule (private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory) {
+class NetworkModule(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory) {
 
     @HomeScope
     @Provides

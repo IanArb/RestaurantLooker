@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.ui.home.builder
 
-import com.ianarbuckle.restaurants.db.builder.DatabaseModule
+import com.ianarbuckle.restaurants.database.builder.DatabaseModule
 import com.ianarbuckle.restaurants.ui.home.RestaurantsFragment
 import com.ianarbuckle.restaurants.network.builder.NetworkModule
 import dagger.Component

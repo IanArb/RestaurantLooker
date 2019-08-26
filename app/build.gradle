@@ -57,6 +57,8 @@ sourceSets {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':restaurants')
+    implementation project(path: ':tablemap')
+    implementation project(path: ':booking')
 
     //Kotlin
     implementation Deps.kotlin_extensions_library

@@ -28,7 +28,7 @@ class RestaurantsFragment : Fragment(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RestaurantsProvider.get().inject(fragment = this)
+        RestaurantsProvider.get().inject(this)
         presenter.addLifecycleObserver()
     }
 

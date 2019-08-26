@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ianarbuckle.core.extensions.provideImage
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurants.data.Dish
 import com.ianarbuckle.restaurants.ui.menu.core.view.adapter.MenuAdapter
-import com.ianarbuckle.restaurants.utils.provideImage
 import kotlinx.android.synthetic.main.menu_restaurants_view.view.*
 
 /**
