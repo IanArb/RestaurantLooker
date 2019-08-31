@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     app:cardUseCompatPadding="true"
@@ -27,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Cirillo's"/>
+            tools:text="Cirillo's"/>
 
         <TextView
             android:id="@+id/subText"
@@ -41,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/primaryText"
-            android:text="Lower Baggot Street"
+            tools:text="Lower Baggot Street"
             />
 
         <Button
@@ -53,7 +52,7 @@
             android:layout_marginTop="16dp"
             android:minWidth="0dp"
             android:padding="10dp"
-            android:text="Cancel"
+            tools:text="Cancel"
             android:textColor="#DE000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subText"/>
@@ -66,7 +65,7 @@
             android:layout_marginStart="8dp"
             android:minWidth="0dp"
             android:padding="10dp"
-            android:text="Directions"
+            tools:text="Directions"
             android:textColor="#DE000000"
             app:layout_constraintStart_toEndOf="@+id/actionBook"
             app:layout_constraintTop_toTopOf="@+id/actionBook"/>

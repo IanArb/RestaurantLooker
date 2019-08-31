@@ -22,7 +22,7 @@ class RestaurantBuddyApplication : Application() {
     @Inject
     lateinit var okHttpClient: OkHttpClient
 
-    @set:[Inject Named("baseUrl")]
+    @field:[Inject Named("baseUrl")]
     lateinit var baseUrl: String
 
     companion object {

@@ -1,4 +1,4 @@
-package com.ianarbuckle.booking.ui.bookings.router
+package com.ianarbuckle.booking.ui.bookings.core.router
 
 import com.ianarbuckle.booking.ui.bookings.BookingFragment
 

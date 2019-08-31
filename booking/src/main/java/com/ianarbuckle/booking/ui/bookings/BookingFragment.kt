@@ -27,8 +27,8 @@ class BookingFragment: Fragment() {
         fun newInstance() = BookingFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         BookingProvider.get().inject(this)
         presenter.onCreate()
     }

@@ -3,7 +3,9 @@ package com.ianarbuckle.core.extensions
 import android.Manifest
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.TypedValue
 import android.widget.ImageView
+import androidx.annotation.AttrRes
 import androidx.annotation.RequiresPermission
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -35,4 +37,13 @@ fun Context.isConnected(): Boolean {
         }
     }
     return false
+}
+
+fun Context.getColorFromAttr(
+        @AttrRes attrColor: Int,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

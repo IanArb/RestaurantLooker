@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">@color/colorSnow</item>
+        <item name="colorSuccess">@color/colorGreen</item>
+        <item name="colorError">@color/colorRed</item>
+        <item name="toolbarTextColor">@color/colorWhite</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">

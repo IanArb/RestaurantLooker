@@ -3,11 +3,10 @@ package com.ianarbuckle.restaurants.ui.home.core.view
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
+import com.ianarbuckle.core.extensions.getColorFromAttr
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurants.ui.home.core.view.adapter.RestaurantsAdapter
 import com.ianarbuckle.restaurants.data.Restaurant
@@ -29,7 +28,8 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
         inflate(context, R.layout.home_restaurants_view, this)
         toolbar.apply {
             title = resources.getString(R.string.title_restaurants)
-            setTitleTextColor(ContextCompat.getColor(this.context, R.color.colorWhite))
+            val toolbarAttributeColor = context.getColorFromAttr(R.attr.toolbarTextColor)
+            setTitleTextColor(toolbarAttributeColor)
         }
     }
 
