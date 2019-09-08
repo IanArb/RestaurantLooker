@@ -1,4 +1,5 @@
 import Versions.appCompatVersion
+import Versions.calendarSquareTimesVersion
 import Versions.cardviewVersion
 import Versions.constraintLayoutVersion
 import Versions.coroutinesAdapterVersion
@@ -7,6 +8,7 @@ import Versions.daggerVersion
 import Versions.glideVersion
 import Versions.googleTruthVersion
 import Versions.gradleToolsVersion
+import Versions.gsonVersion
 import Versions.jacocoVersion
 import Versions.jodaTimeAndroidVersion
 import Versions.jodaTimeVersion
@@ -48,12 +50,12 @@ object Versions {
     //Android
     const val appCompatVersion = "1.0.0"
     const val materialComponentsVersion = "1.0.0"
-    const val constraintLayoutVersion = "2.0.0-beta1"
+    const val constraintLayoutVersion = "2.0.0-beta2"
     const val cardviewVersion = "1.0.0"
     const val recyclerviewVersion = "1.0.0"
 
     //Dagger
-    const val daggerVersion = "2.16"
+    const val daggerVersion = "2.23"
 
     //Rx
     const val rxJavaVersion = "2.1.14"
@@ -92,6 +94,12 @@ object Versions {
     //Joda
     const val jodaTimeAndroidVersion = "2.10.1.2"
     const val jodaTimeVersion = "2.3"
+
+    //Calendar
+    const val calendarSquareTimesVersion = "1.7.10@aar"
+
+    //Gson
+    const val gsonVersion = "2.8.5"
 
 }
 
@@ -173,6 +181,12 @@ object Deps {
     //Joda
     val joda_time_android_library = "net.danlew:android.joda:$jodaTimeAndroidVersion"
     val joda_time_library = "joda-time:joda-time:$jodaTimeVersion"
+
+    //Calendar
+    val square_times_calendar_library = "com.squareup:android-times-square:$calendarSquareTimesVersion"
+
+    //Gson
+    val gson_library = "com.google.code.gson:gson:$gsonVersion"
 
     //Gradle
     val gradle_tools_library = "com.android.tools.build:gradle:$gradleToolsVersion"

@@ -20,8 +20,15 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -59,6 +66,7 @@ dependencies {
     implementation project(path: ':restaurants')
     implementation project(path: ':tablemap')
     implementation project(path: ':booking')
+    implementation project(path: ':navigation')
 
     //Kotlin
     implementation Deps.kotlin_extensions_library
@@ -122,6 +130,9 @@ dependencies {
 
     //Constraint layout
     implementation Deps.constraint_layout_library
+
+    //Joda
+    implementation Deps.joda_time_android_library
 
     //RxBinding
     implementation Deps.rxBinding2_library

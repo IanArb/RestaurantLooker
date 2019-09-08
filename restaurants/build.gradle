@@ -63,7 +63,9 @@ sourceSets {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':core')
+    implementation project(path:  ':core')
+
+    api Deps.kotlin_extensions_library
 
     api Deps.kotlin_extensions_library
 

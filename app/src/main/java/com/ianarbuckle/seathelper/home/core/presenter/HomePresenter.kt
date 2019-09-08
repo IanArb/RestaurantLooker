@@ -7,5 +7,4 @@ package com.ianarbuckle.seathelper.home.core.presenter
 interface HomePresenter {
     fun onCreate()
     fun onDestroy()
-    fun addLifecycleObserver()
 }

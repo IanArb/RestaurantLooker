@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient
  *
  */
 @AppScope
-@Component(modules = [AppModule::class, NetworkModule::class])
+@Component(modules = [AppModule::class, NetworkModule::class, NavigationModule::class])
 interface AppComponent {
     fun inject(restaurantBuddyApplication: RestaurantBuddyApplication)
     fun okHttpClient(): OkHttpClient

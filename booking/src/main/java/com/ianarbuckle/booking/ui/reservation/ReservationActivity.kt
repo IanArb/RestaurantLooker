@@ -1,6 +1,7 @@
 package com.ianarbuckle.booking.ui.reservation
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ianarbuckle.booking.BookingProvider
 import com.ianarbuckle.booking.ui.reservation.core.presenter.ReservationPresenter
@@ -22,8 +23,18 @@ class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BookingProvider.get().inject(this)
-        view.getView()
+        setContentView(view.getView())
         presenter.onCreate()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.let { presenter.onSavedInstanceState(it) }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.let { presenter.onRestoreInstanceState(it) }
     }
 
     override fun onDestroy() {

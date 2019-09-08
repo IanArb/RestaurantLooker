@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.menu_restaurants_view.view.*
  */
 interface MenuView {
     fun getView(): View
-    fun showMenu(dish: List<Dish>)
+    fun showMenu(dishes: List<Dish>)
     fun showImageBanner(url: String)
     fun showToolbarTitle(title: String)
     fun toolbarClickListener(clickListener: () -> Unit)

@@ -13,9 +13,11 @@ import kotlinx.android.synthetic.main.home_restaurants_card_item.view.*
  * Created by Ian Arbuckle on 30/07/2018.
  *
  */
-class RestaurantsAdapter(private val restaurants: MutableList<Restaurant>,
-                         private val clickListener: (Restaurant) -> Unit)
+class RestaurantsAdapter(private val restaurants: MutableList<Restaurant>)
     : RecyclerView.Adapter<RestaurantsAdapter.HomeViewHolder>() {
+
+    var onMenuClickListener: ((Restaurant) -> Unit)? = null
+    var onBookingClickListener: ((Restaurant) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -29,10 +31,21 @@ class RestaurantsAdapter(private val restaurants: MutableList<Restaurant>,
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val items = restaurants[position]
         holder.binding.restaurant = items
-        holder.bindClickListener(items, clickListener)
+        holder.onMenuClickListener(items)
+        holder.onBookingClickListener(items)
     }
 
     inner class HomeViewHolder(val binding: HomeRestaurantsCardItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindClickListener(restaurant: Restaurant, clickListener: (Restaurant) -> Unit) = binding.root.actionMenu.setOnClickListener { clickListener(restaurant) }
+        fun onMenuClickListener(restaurant: Restaurant) {
+            binding.root.actionMenu.setOnClickListener {
+                onMenuClickListener?.invoke(restaurant)
+            }
+        }
+
+        fun onBookingClickListener(restaurant: Restaurant) {
+            binding.root.actionBook.setOnClickListener {
+                onBookingClickListener?.invoke(restaurant)
+            }
+        }
     }
 }

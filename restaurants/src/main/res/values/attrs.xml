@@ -3,7 +3,8 @@
     <attr name="colorPrimary" format="color"/>
     <attr name="colorPrimaryDark" format="color"/>
     <attr name="colorBackground" format="color"/>
-    <attr name="toolbarTextColor" format="color"/>
+    <attr name="titleTextColor" format="color"/>
     <attr name="colorError" format="color"/>
     <attr name="colorSuccess" format="color"/>
+    <attr name="backArrowDrawable" format="reference"/>
 </resources>

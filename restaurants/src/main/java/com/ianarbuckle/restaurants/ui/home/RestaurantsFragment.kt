@@ -29,11 +29,16 @@ class RestaurantsFragment : Fragment(), LifecycleObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         RestaurantsProvider.get().inject(this)
-        presenter.addLifecycleObserver()
+        presenter.onCreate()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return view.getView()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.onDestroy()
     }
 }
 

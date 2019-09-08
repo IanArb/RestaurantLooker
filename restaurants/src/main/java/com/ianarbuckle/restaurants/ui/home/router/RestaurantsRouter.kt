@@ -9,4 +9,5 @@ import com.ianarbuckle.restaurants.data.Restaurant
 interface RestaurantsRouter {
     fun onNavigateToBookingScreen(restaurant: Restaurant?)
     fun navigateMenu(restaurant: Restaurant)
+    fun navigateToBookingReservation(restaurant: Restaurant)
 }

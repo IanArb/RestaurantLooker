@@ -10,6 +10,7 @@ import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
 import com.ianarbuckle.restaurants.ui.home.core.view.DefaultRestaurantsView
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.ui.home.router.DefaultRestaurantsRouter
+import com.ianarbuckle.restaurants.RestaurantsNavigator
 import com.ianarbuckle.restaurants.ui.home.router.RestaurantsRouter
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,7 @@ import dagger.Provides
  *
  */
 @Module
-class HomeModule(private val fragment: RestaurantsFragment) {
+class HomeModule(private val fragment: RestaurantsFragment, private val navigator: RestaurantsNavigator) {
 
     @HomeScope
     @Provides
@@ -40,5 +41,5 @@ class HomeModule(private val fragment: RestaurantsFragment) {
 
     @HomeScope
     @Provides
-    fun provideRouter(context: Context): RestaurantsRouter = DefaultRestaurantsRouter(context)
+    fun provideRouter(context: Context): RestaurantsRouter = DefaultRestaurantsRouter(context, navigator)
 }

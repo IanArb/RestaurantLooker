@@ -3,13 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+
+        <!-- Color scheme -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorBackground">@color/colorSnow</item>
         <item name="colorSuccess">@color/colorGreen</item>
         <item name="colorError">@color/colorRed</item>
-        <item name="toolbarTextColor">@color/colorWhite</item>
+        <item name="titleTextColor">@color/colorWhite</item>
+        <item name="textColor">@color/colorBlack</item>
+
+        <!-- Drawables -->
+        <item name="backArrowDrawable">@drawable/ic_arrow_back</item>
+        <item name="backArrowBlackDrawable">@drawable/ic_arrow_back_black</item>
+        <item name="chevronDrawable">@drawable/ic_expand_more</item>
+        <item name="textColorHighlight">@color/colorBlack</item>
+        <item name="clearDrawable">@drawable/ic_clear</item>
+        <item name="searchDrawable">@drawable/ic_search</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">

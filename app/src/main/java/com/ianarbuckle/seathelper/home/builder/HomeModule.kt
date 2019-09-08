@@ -31,7 +31,7 @@ class HomeModule(private val activity: HomeActivity) {
     @HomeScope
     @Provides
     fun providePresenter(view: HomeView, router: HomeRouter): HomePresenter
-            = DefaultHomePresenter(view, router, activity)
+            = DefaultHomePresenter(view, router)
 
     @HomeScope
     @Provides

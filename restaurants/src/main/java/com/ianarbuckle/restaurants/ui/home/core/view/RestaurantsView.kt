@@ -16,4 +16,6 @@ interface RestaurantsView {
     fun showLoading()
     fun hideLoading()
     fun executeTryAgainClick(clickListener: () -> Unit)
+    fun onMenuClickListener(menuClickListener: (Restaurant) -> Unit)
+    fun onBookingClickListener(bookClickListener: (Restaurant) -> Unit)
 }

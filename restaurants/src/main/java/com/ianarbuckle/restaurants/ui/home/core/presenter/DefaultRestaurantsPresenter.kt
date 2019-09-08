@@ -26,13 +26,13 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
         job = Job()
-        fetchRestuarants()
+        fetchRestaurants()
         view.executeTryAgainClick {
-            fetchRestuarants()
+            fetchRestaurants()
         }
     }
 
-    private fun fetchRestuarants() {
+    private fun fetchRestaurants() {
         view.showLoading()
         job = launch {
             try {
@@ -42,10 +42,14 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
                     interactor.saveRestaurants(results)
                     withContext(Dispatchers.Main) {
                         showResults(results)
+                        onMenuClick()
+                        onBookClick()
                     }
                 } else {
                     withContext(Dispatchers.Main) {
                         showResults(localResults)
+                        onMenuClick()
+                        onBookClick()
                     }
                 }
             } catch (exception: Throwable) {
@@ -57,6 +61,18 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
                     view.hideLoading()
                 }
             }
+        }
+    }
+
+    private fun onMenuClick() {
+        view.onMenuClickListener {
+            router.navigateMenu(it)
+        }
+    }
+
+    private fun onBookClick() {
+        view.onBookingClickListener {
+            router.navigateToBookingReservation(it)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.ianarbuckle.booking.ui.reservation.builder
 
 import android.content.Context
+import com.ianarbuckle.booking.BookingNavigator
 import com.ianarbuckle.booking.network.builder.NetworkModule
 import com.ianarbuckle.booking.network.manager.BookingServiceManager
 import com.ianarbuckle.booking.ui.reservation.ReservationActivity
@@ -28,7 +29,7 @@ import javax.inject.Scope
 annotation class ReservationScope
 
 @Module
-class ReservationModule(private val activity: ReservationActivity) {
+class ReservationModule(private val activity: ReservationActivity, private val navigator: BookingNavigator, private val country: String) {
 
     @ReservationScope
     @Provides
@@ -40,7 +41,7 @@ class ReservationModule(private val activity: ReservationActivity) {
 
     @ReservationScope
     @Provides
-    fun provideInteractor(repository: ReservationRepository): ReservationInteractor = ReservationInteractorImpl(repository)
+    fun provideInteractor(repository: ReservationRepository): ReservationInteractor = ReservationInteractorImpl(activity, repository, country)
 
     @ReservationScope
     @Provides
@@ -49,7 +50,7 @@ class ReservationModule(private val activity: ReservationActivity) {
 
     @ReservationScope
     @Provides
-    fun provideRouter(): ReservationRouter = ReservationRouterImpl(activity)
+    fun provideRouter(): ReservationRouter = ReservationRouterImpl(activity, navigator)
 
     @ReservationScope
     @Provides

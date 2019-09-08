@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ianarbuckle.core.R
@@ -37,6 +38,14 @@ fun Context.isConnected(): Boolean {
         }
     }
     return false
+}
+
+fun Context.getDrawableFromAttr(
+        @AttrRes attrDrawable: Int, typedValue:
+        TypedValue = TypedValue(),
+        resolveRefs: Boolean = true): Int {
+    theme.resolveAttribute(attrDrawable, typedValue, resolveRefs)
+    return typedValue.resourceId
 }
 
 fun Context.getColorFromAttr(

@@ -63,6 +63,7 @@ sourceSets {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':core')
+    implementation project(':models')
 
     api Deps.kotlin_extensions_library
 
@@ -93,7 +94,7 @@ dependencies {
     api Deps.retrofit2_gson_converter
 
     //Coroutines
-    implementation Deps.retrofit2_coroutines_adapter_library
+    api Deps.retrofit2_coroutines_adapter_library
     api Deps.coroutines_android_library
     api Deps.coroutines_core_library
 
@@ -120,6 +121,12 @@ dependencies {
 
     //Joda
     api Deps.joda_time_android_library
+
+    //Calendar
+    api Deps.square_times_calendar_library
+
+    //Gson
+    api Deps.gson_library
 
     //Test
     testImplementation Deps.junit_library

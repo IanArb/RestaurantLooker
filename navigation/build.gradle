@@ -1,0 +1,81 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compileSDKVersion
+
+
+    defaultConfig {
+        minSdkVersion Versions.minSDKVersion
+        targetSdkVersion Versions.targetSDKVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+kapt {
+    generateStubs = true
+    correctErrorTypes = true
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/source/kapt/main"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':restaurants')
+    implementation project(path: ':booking')
+
+    api Deps.kotlin_extensions_library
+
+    api Deps.appCompat_library
+
+
+    //Test
+    testImplementation Deps.junit_library
+    testImplementation Deps.google_truth_library
+    testImplementation Deps.mockito_library
+    testImplementation Deps.coroutines_test_library
+    testImplementation Deps.room_test_library
+    testImplementation Deps.mockito_kotlin_library
+    testImplementation Deps.joda_time_library
+}

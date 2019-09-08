@@ -5,9 +5,9 @@ package com.ianarbuckle.booking.data
  *
  */
 
-data class Booking(val id: String? = null, val owner: Owner?, val restaurantName: String?, val table: Table?)
+data class Booking(val owner: Owner?, val restaurantName: String?, val table: Table?)
 
-data class Owner(val uuid: String, val name: String, val phoneNumber: Int, val dietaryRequirements: Boolean, val arrivalTime: String)
+data class Owner(val uuid: String?, val name: String?, val email: String?, val phoneNumber: Int?, val dietaryRequirements: Boolean?, val bookingDate: String?, val arrivalTime: String?)
 
 data class Table(val tableNumber: String, val status: String, val characteristics: TableCharacteristics)
 

@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -66,63 +66,64 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation project(':core')
+    implementation project(path: ':navigation')
 
-    api Deps.kotlin_extensions_library
+    implementation Deps.kotlin_extensions_library
 
-    api Deps.appCompat_library
+    implementation Deps.appCompat_library
 
-    api Deps.cardView_library
-    api Deps.recyclerView_library
+    implementation Deps.cardView_library
+    implementation Deps.recyclerView_library
 
-    api Deps.material_components_library
+    implementation Deps.material_components_library
 
     //Dagger
-    api Deps.dagger_library
-    api Deps.dagger_support_library
+    implementation Deps.dagger_library
+    implementation Deps.dagger_support_library
     kapt Deps.dagger_compiler_library
 
     //Paging
-    api Deps.paging_library
+    implementation Deps.paging_library
     testImplementation Deps.paging_test_library
 
     //Network
-    api Deps.okHttp3_logging_interceptor_library
-    api Deps.retrofit2_library
-    api Deps.okHttp3_library
+    implementation Deps.okHttp3_logging_interceptor_library
+    implementation Deps.retrofit2_library
+    implementation Deps.okHttp3_library
 
     //Json converter
-    api Deps.moshi_kotlin_library
-    api Deps.retrofit2_moshi_converter_library
-    api Deps.retrofit2_gson_converter
+    implementation Deps.moshi_kotlin_library
+    implementation Deps.retrofit2_moshi_converter_library
+    implementation Deps.retrofit2_gson_converter
 
     //Coroutines
     implementation Deps.retrofit2_coroutines_adapter_library
-    api Deps.coroutines_android_library
-    api Deps.coroutines_core_library
+    implementation Deps.coroutines_android_library
+    implementation Deps.coroutines_core_library
 
     //Timber
-    api Deps.timber_library
+    implementation Deps.timber_library
 
     //Constraint layout
-    api Deps.constraint_layout_library
-    api Deps.mockito_kotlin_library
+    implementation Deps.constraint_layout_library
+    implementation Deps.mockito_kotlin_library
 
     //glide
-    api Deps.glide_library
+    implementation Deps.glide_library
     kapt Deps.glide_compiler_library
 
     //RxBinding
-    api Deps.rxBinding2_kotlin_library
-    api Deps.rxBinding2_kotlin_design_library
-    api Deps.rxBinding2_kotlin_support_library
+    implementation Deps.rxBinding2_kotlin_library
+    implementation Deps.rxBinding2_kotlin_design_library
+    implementation Deps.rxBinding2_kotlin_support_library
 
     //Room
-    api Deps.room_library
+    implementation Deps.room_library
     kapt Deps.room_compiler_library
-    api Deps.room_kotlin_library
+    implementation Deps.room_kotlin_library
 
     //Joda
-    api Deps.joda_time_android_library
+    implementation Deps.joda_time_android_library
 
     //Test
     testImplementation Deps.junit_library

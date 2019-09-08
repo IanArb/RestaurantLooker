@@ -23,9 +23,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimary"
         android:text="@string/title_restaurants"
         tools:title="Title"
+        tools:background="#3F51B5"
+        app:titleTextColor="?titleTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

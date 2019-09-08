@@ -21,14 +21,13 @@ import java.util.ArrayList
  */
 class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayout(context) {
 
-    private val clickListener = {
-        restaurant: Restaurant -> handleMenuClickEvent(restaurant)
-    }
+    lateinit var restaurantsAdapter: RestaurantsAdapter
+
     init {
         inflate(context, R.layout.home_restaurants_view, this)
         toolbar.apply {
             title = resources.getString(R.string.title_restaurants)
-            val toolbarAttributeColor = context.getColorFromAttr(R.attr.toolbarTextColor)
+            val toolbarAttributeColor = context.getColorFromAttr(R.attr.titleTextColor)
             setTitleTextColor(toolbarAttributeColor)
         }
     }
@@ -38,12 +37,11 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
     }
 
     override fun showRestaurants(restaurants: MutableList<Restaurant>) {
-        recyclerView.apply {
-            visibility = View.VISIBLE
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = RestaurantsAdapter(restaurants, clickListener)
-        }
+        recyclerView.visibility = View.VISIBLE
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        restaurantsAdapter = RestaurantsAdapter(restaurants)
+        recyclerView.adapter = restaurantsAdapter
     }
 
     override fun showEmptyState() {
@@ -79,11 +77,12 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
         }
     }
 
-    private fun handleMenuClickEvent(restaurant: Restaurant) {
-        val intent = Intent(context, MenuActivity::class.java)
-        intent.putParcelableArrayListExtra(Constants.DISHES_KEY, restaurant.dishes as ArrayList<out Parcelable>)
-        intent.putExtra(Constants.RESTAURANT_KEY, restaurant)
-        context.startActivity(intent)
+    override fun onMenuClickListener(menuClickListener: (Restaurant) -> Unit) {
+        restaurantsAdapter.onMenuClickListener = menuClickListener
+    }
+
+    override fun onBookingClickListener(bookClickListener: (Restaurant) -> Unit) {
+        restaurantsAdapter.onBookingClickListener = bookClickListener
     }
 
 }
