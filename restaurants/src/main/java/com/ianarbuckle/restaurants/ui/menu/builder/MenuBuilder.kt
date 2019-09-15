@@ -1,6 +1,5 @@
 package com.ianarbuckle.restaurants.ui.menu.builder
 
-import android.app.Activity
 import android.content.Context
 import com.ianarbuckle.restaurants.ui.menu.MenuActivity
 import com.ianarbuckle.restaurants.ui.menu.core.interactor.DefaultMenuInteractor
@@ -38,7 +37,7 @@ class MenuModule(private val activity: MenuActivity) {
     @MenuScope
     @Provides
     fun providePresenter(interactor: MenuInteractor, view: MenuView, router: MenuRouter): MenuPresenter
-            = DefaultMenuPresenter(view, interactor, router, activity)
+            = DefaultMenuPresenter(view, interactor, router)
 
     @MenuScope
     @Provides

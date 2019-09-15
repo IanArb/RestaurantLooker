@@ -1,8 +1,8 @@
 package com.ianarbuckle.restaurants.ui.menu.core.interactor
 
 import android.app.Activity
-import com.ianarbuckle.restaurants.data.Dish
-import com.ianarbuckle.restaurants.data.Restaurant
+import com.ianarbuckle.models.restaurant.Dish
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurants.utils.Constants
 
 /**

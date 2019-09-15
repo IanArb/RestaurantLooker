@@ -1,7 +1,6 @@
 package com.ianarbuckle.restaurants.network
 
-import com.ianarbuckle.restaurants.data.Restaurant
-import kotlinx.coroutines.Deferred
+import com.ianarbuckle.models.restaurant.Restaurant
 import retrofit2.http.GET
 
 /**

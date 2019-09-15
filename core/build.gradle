@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Versions.compileSDKVersion
@@ -21,6 +23,10 @@ android {
         }
     }
 
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type"]
+    }
+
 }
 
 dependencies {
@@ -36,4 +42,10 @@ dependencies {
 
     //Json converter
     api Deps.moshi_kotlin_library
+
+    api Deps.androidThreeTenbp
+
+    //glide
+    api Deps.glide_library
+    kapt Deps.glide_compiler_library
 }

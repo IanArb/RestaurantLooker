@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Booking</string>
+    <string name="toolbar_name_format" translatable="false">%1$s Reservation</string>
+    <string name="arrival_date_time_format" translatable="false">%02d:%02d</string>
+    <string name="phone_prefix_format" translatable="false">(+%1$s))</string>
+</resources>

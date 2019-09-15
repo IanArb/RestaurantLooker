@@ -40,7 +40,7 @@ class RestaurantPresenterTest {
     @Before
     fun setup() {
         initMocks(this)
-        presenter = DefaultHomePresenter(view, router, lifecycleOwner)
+        presenter = DefaultHomePresenter(view, router)
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { _ -> Schedulers.trampoline() }
     }
 

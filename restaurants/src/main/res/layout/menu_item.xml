@@ -7,7 +7,7 @@
     <data>
         <variable
             name="dish"
-            type="com.ianarbuckle.restaurants.data.Dish"/>
+            type="com.ianarbuckle.models.restaurant.Dish"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,8 +1,8 @@
 package com.ianarbuckle.restaurants.ui.home.core.repository
 
 import androidx.annotation.WorkerThread
-import com.ianarbuckle.restaurants.data.Restaurant
-import com.ianarbuckle.restaurants.db.dao.RestaurantDAO
+import com.ianarbuckle.database.database.dao.RestaurantDAO
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurants.network.manager.RestaurantsServiceManager
 
 /**

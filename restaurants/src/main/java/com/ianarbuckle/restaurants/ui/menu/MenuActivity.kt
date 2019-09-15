@@ -3,6 +3,7 @@ package com.ianarbuckle.restaurants.ui.menu
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleObserver
+import com.ianarbuckle.restaurants.RestaurantsProvider
 import com.ianarbuckle.restaurants.ui.menu.builder.DaggerMenuComponent
 import com.ianarbuckle.restaurants.ui.menu.builder.MenuModule
 import com.ianarbuckle.restaurants.ui.menu.core.presenter.MenuPresenter
@@ -23,13 +24,8 @@ class MenuActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DaggerMenuComponent.builder()
-                .menuModule(MenuModule(this))
-                .build()
-                .inject(this)
-
-        presenter.addLifecycleObserver()
-
+        RestaurantsProvider.get().inject(this)
+        presenter.onCreate()
         setContentView(view.getView())
     }
 

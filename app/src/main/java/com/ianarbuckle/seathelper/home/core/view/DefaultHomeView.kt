@@ -30,6 +30,10 @@ class DefaultHomeView(context: Context?) : HomeView, ConstraintLayout(context) {
         bottomNavigation.active(navPosition.position)
     }
 
+    override fun showCurrentPosition(navigationPosition: BottomNavigationPosition) {
+        bottomNavigation.active(navigationPosition.position)
+    }
+
     override fun getView(): View {
         return this
     }

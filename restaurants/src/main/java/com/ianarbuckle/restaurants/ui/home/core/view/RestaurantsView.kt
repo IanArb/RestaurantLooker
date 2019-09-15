@@ -1,8 +1,7 @@
 package com.ianarbuckle.restaurants.ui.home.core.view
 
 import android.view.View
-import com.ianarbuckle.restaurants.data.Restaurant
-import com.ianarbuckle.restaurants.ui.home.core.view.adapter.RestaurantsAdapter
+import com.ianarbuckle.models.restaurant.Restaurant
 
 /**
  * Created by Ian Arbuckle on 11/07/2018.
@@ -16,4 +15,6 @@ interface RestaurantsView {
     fun showLoading()
     fun hideLoading()
     fun executeTryAgainClick(clickListener: () -> Unit)
+    fun onMenuClickListener(menuClickListener: (Restaurant) -> Unit)
+    fun onBookingClickListener(bookClickListener: (Restaurant) -> Unit)
 }

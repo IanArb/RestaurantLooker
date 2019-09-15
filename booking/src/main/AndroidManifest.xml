@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ianarbuckle.booking">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name="com.ianarbuckle.booking.ui.reservation.ReservationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.calendar.CalendarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.phonePrefix.PhonePrefixActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.confirmation.ConfirmationActivity"
+            android:screenOrientation="portrait"/>
+    </application>
+</manifest>

@@ -8,7 +8,7 @@
         <import type="android.view.View" />
         <variable
             name="restaurant"
-            type="com.ianarbuckle.restaurants.data.Restaurant"/>
+            type="com.ianarbuckle.models.restaurant.Restaurant"/>
     </data>
 
     <androidx.cardview.widget.CardView

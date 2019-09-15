@@ -36,7 +36,7 @@ class MenuPresenterTest {
     @Before
     fun setup() {
         initMocks(this)
-        presenter = DefaultMenuPresenter(view, interactor, router, activity)
+        presenter = DefaultMenuPresenter(view, interactor, router)
     }
 
     @Test

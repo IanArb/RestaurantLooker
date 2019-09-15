@@ -1,0 +1,145 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compileSDKVersion
+
+
+    defaultConfig {
+        minSdkVersion Versions.minSDKVersion
+        targetSdkVersion Versions.targetSDKVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+kapt {
+    generateStubs = true
+    correctErrorTypes = true
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/source/kapt/main"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+    implementation project(':models')
+    implementation project(path: ':database')
+
+    api Deps.kotlin_extensions_library
+
+    api Deps.appCompat_library
+
+    api Deps.cardView_library
+    api Deps.recyclerView_library
+
+    api Deps.material_components_library
+
+    //Dagger
+    api Deps.dagger_library
+    api Deps.dagger_support_library
+    kapt Deps.dagger_compiler_library
+
+    //Paging
+    api Deps.paging_library
+    testImplementation Deps.paging_test_library
+
+    //Network
+    api Deps.okHttp3_logging_interceptor_library
+    api Deps.retrofit2_library
+    api Deps.okHttp3_library
+
+    //Json converter
+    api Deps.moshi_kotlin_library
+    api Deps.retrofit2_moshi_converter_library
+    api Deps.retrofit2_gson_converter
+
+    //Coroutines
+    api Deps.retrofit2_coroutines_adapter_library
+    api Deps.coroutines_android_library
+    api Deps.coroutines_core_library
+
+    //Timber
+    api Deps.timber_library
+
+    //Constraint layout
+    api Deps.constraint_layout_library
+    api Deps.mockito_kotlin_library
+
+    //glide
+    api Deps.glide_library
+    kapt Deps.glide_compiler_library
+
+    //RxBinding
+    api Deps.rxBinding2_kotlin_library
+    api Deps.rxBinding2_kotlin_design_library
+    api Deps.rxBinding2_kotlin_support_library
+
+    //Room
+    api Deps.room_library
+    kapt Deps.room_compiler_library
+    api Deps.room_kotlin_library
+
+    //Joda
+    api Deps.joda_time_android_library
+
+    //Calendar
+    api Deps.square_times_calendar_library
+
+    //Gson
+    api Deps.gson_library
+
+    api Deps.androidThreeTenbp
+
+    kapt "com.android.databinding:compiler:3.1.4"
+
+    //Test
+    testImplementation Deps.junit_library
+    testImplementation Deps.google_truth_library
+    testImplementation Deps.mockito_library
+    testImplementation Deps.coroutines_test_library
+    testImplementation Deps.room_test_library
+    testImplementation Deps.mockito_kotlin_library
+    testImplementation Deps.joda_time_library
+    testImplementation Deps.mock_kotlin_library
+}

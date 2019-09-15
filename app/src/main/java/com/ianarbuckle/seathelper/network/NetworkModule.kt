@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
  *
  */
 @Module
-class NetworkModule constructor(val context: Context) {
+class NetworkModule constructor(private val context: Context) {
 
     companion object {
         const val CACHE_SIZE: Long = 5 * 1024 * 1024

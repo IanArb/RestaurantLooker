@@ -37,6 +37,6 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(view.getView())
 
-        presenter.addLifecycleObserver()
+        presenter.onCreate()
     }
 }

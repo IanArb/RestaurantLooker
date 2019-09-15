@@ -1,9 +1,6 @@
 package com.ianarbuckle.seathelper.home.core.presenter
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
+import com.ianarbuckle.seathelper.home.core.HomeInteractor
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.ianarbuckle.seathelper.utils.findNavigationById
 import com.ianarbuckle.seathelper.home.core.view.HomeView
@@ -15,7 +12,7 @@ import io.reactivex.disposables.Disposable
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-class DefaultHomePresenter(private val view: HomeView, private val router: HomeRouter, private val lifecycleOwner: LifecycleOwner) : HomePresenter, LifecycleObserver {
+class DefaultHomePresenter(private val view: HomeView, private val interactor: HomeInteractor, private val router: HomeRouter) : HomePresenter {
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 
@@ -23,15 +20,16 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
         CompositeDisposable()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
-        subscriptions.addAll(subscribeOnBottomNavigationItemSelections())
+        if (interactor.getConfirmationCallbackPosition() == 1) {
+            view.showCurrentPosition(BottomNavigationPosition.BOOKINGS)
+            router.switchFragment(BottomNavigationPosition.BOOKINGS)
+        }
+        subscriptions.add(subscribeOnBottomNavigationItemSelections())
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onDestroy() {
         subscriptions.clear()
-        lifecycleOwner.lifecycle.removeObserver(this)
     }
 
     private fun subscribeOnBottomNavigationItemSelections(): Disposable {
@@ -41,7 +39,5 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
                     router.switchFragment(navPosition)
                 }
     }
-
-    override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)
 
 }

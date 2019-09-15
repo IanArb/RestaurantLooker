@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorPrimary" format="color"/>
+    <attr name="colorPrimaryDark" format="color"/>
+    <attr name="colorBackground" format="color"/>
+    <attr name="titleTextColor" format="color"/>
+    <attr name="colorError" format="color"/>
+    <attr name="colorSuccess" format="color"/>
+    <attr name="backArrowDrawable" format="reference"/>
+    <attr name="chevronDrawable" format="reference"/>
+    <attr name="textColorHighlight" format="reference"/>
+    <attr name="textColor" format="color"/>
+    <attr name="clearDrawable" format="reference"/>
+    <attr name="backArrowBlackDrawable" format="reference"/>
+    <attr name="searchDrawable" format="reference"/>
+    <attr name="successIcon" format="reference"/>
+    <attr name="calendarIcon" format="reference"/>
+    <attr name="clockIcon" format="reference"/>
+</resources>

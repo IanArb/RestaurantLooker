@@ -2,6 +2,7 @@ package com.ianarbuckle.seathelper.home.core.view
 
 import android.view.MenuItem
 import android.view.View
+import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.jakewharton.rxbinding2.InitialValueObservable
 import io.reactivex.Observable
 
@@ -13,4 +14,5 @@ interface HomeView {
     fun getView(): View
     fun observeNavigationItemSelected(): Observable<MenuItem>
     fun menuItemClickListener(clickListener: (MenuItem) -> Boolean)
+    fun showCurrentPosition(navigationPosition: BottomNavigationPosition)
 }

@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.ui.home.core.interactor
 
-import com.ianarbuckle.restaurants.data.Restaurant
+import com.ianarbuckle.models.restaurant.Restaurant
 
 /**
  * Created by Ian Arbuckle on 11/07/2018.
