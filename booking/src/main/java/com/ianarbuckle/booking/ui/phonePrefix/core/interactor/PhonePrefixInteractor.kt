@@ -4,7 +4,7 @@ import android.app.Activity
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ianarbuckle.booking.R
-import com.ianarbuckle.models.Country
+import com.ianarbuckle.models.booking.Country
 
 
 /**

@@ -3,11 +3,14 @@ package com.ianarbuckle.booking.ui.calendar.core.view
 import android.content.Context
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ianarbuckle.booking.R
 import com.ianarbuckle.core.extensions.getDrawableFromAttr
+import com.ianarbuckle.core.extensions.parseDate
 import com.squareup.timessquare.CalendarPickerView
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import kotlinx.android.synthetic.main.calendar_view.view.*
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 /**
@@ -16,15 +19,17 @@ import java.util.*
  */
 interface CalendarView {
     fun getView(): View
-//    fun onCalendarClick(clickListener: (Date) -> Unit)
+    fun calendarDateClickListener(clickListener: (String?) -> Unit)
     fun toolbarClickListener(clickListener: () -> Unit)
 }
 
 class CalendarViewImpl(context: Context) : CalendarView, ConstraintLayout(context) {
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private var dateClickListener: ((String?) -> Unit)? = null
 
     private val calendarPickerView: CalendarPickerView
+
+    private var selectedDate: Date? = null
 
     init {
         inflate(context, R.layout.calendar_view, this)
@@ -41,8 +46,9 @@ class CalendarViewImpl(context: Context) : CalendarView, ConstraintLayout(contex
                 .withSelectedDate(today)
         toolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
         calendarPickerView.setOnDateSelectedListener(object : CalendarPickerView.OnDateSelectedListener {
-            override fun onDateSelected(date: Date) {
+            override fun onDateSelected(date: Date?) {
                 bottomSheet.visibility = View.VISIBLE
+                selectedDate = date
             }
 
             override fun onDateUnselected(date: Date?) {
@@ -53,20 +59,17 @@ class CalendarViewImpl(context: Context) : CalendarView, ConstraintLayout(contex
 
     override fun getView(): View = this
 
-//    override fun onCalendarClick(clickListener: (Date) -> Unit) {
-//        calendarPickerView.setOnDateSelectedListener(object : CalendarPickerView.OnDateSelectedListener {
-//            override fun onDateSelected(date: Date) {
-//
-//            }
-//
-//            override fun onDateUnselected(date: Date?) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//            }
-//        })
-//    }
+    override fun calendarDateClickListener(clickListener: (String?) -> Unit) {
+        button.setOnClickListener {
+            dateClickListener = clickListener
+            dateClickListener?.invoke(selectedDate?.parseDate())
+        }
+    }
 
     override fun toolbarClickListener(clickListener: () -> Unit) {
-        clickListener()
+        toolbar.setOnClickListener {
+            clickListener()
+        }
     }
 
 }

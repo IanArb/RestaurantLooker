@@ -1,15 +1,13 @@
 package com.ianarbuckle.booking.ui.phonePrefix.core.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ianarbuckle.booking.R
 import com.ianarbuckle.booking.databinding.PhonePrefixItemBinding
-import com.ianarbuckle.models.Country
+import com.ianarbuckle.models.booking.Country
 import java.util.*
 import kotlin.collections.ArrayList
 

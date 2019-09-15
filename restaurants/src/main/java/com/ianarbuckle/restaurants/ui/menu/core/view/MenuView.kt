@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ianarbuckle.core.extensions.provideImage
+import com.ianarbuckle.models.restaurant.Dish
 import com.ianarbuckle.restaurant.R
-import com.ianarbuckle.restaurants.data.Dish
 import com.ianarbuckle.restaurants.ui.menu.core.view.adapter.MenuAdapter
 import kotlinx.android.synthetic.main.menu_restaurants_view.view.*
 
@@ -31,7 +31,7 @@ class DefaultMenuView(context: Context) : MenuView, FrameLayout(context) {
     override fun getView(): View = this
 
     override fun showMenu(dishes: List<Dish>) {
-        recyclerView.apply {
+        recyclerViewRestaurants.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = MenuAdapter(dishes)

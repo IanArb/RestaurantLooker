@@ -14,6 +14,7 @@ import Versions.jodaTimeAndroidVersion
 import Versions.jodaTimeVersion
 import Versions.junitVersion
 import Versions.kotlinExtensionsVersion
+import Versions.kotlinMockVersion
 import Versions.kotlinMockito
 import Versions.kotlinMockitoVersion
 import Versions.kotlinVersion
@@ -30,6 +31,7 @@ import Versions.roomVersion
 import Versions.rxAndroidVersion
 import Versions.rxBindingVersion
 import Versions.rxJavaVersion
+import Versions.threetenadpVersion
 import Versions.timberVersion
 import Versions.workManagerVersion
 
@@ -64,7 +66,7 @@ object Versions {
 
     //Architecture components
     const val lifecycleVersion = "2.0.0"
-    const val roomVersion = "2.1.0-beta01"
+    const val roomVersion = "2.2.0-rc01"
     const val navigationVersion = "1.0.0-alpha02"
     const val pagingVersion = "2.0.0-rc01"
     const val workManagerVersion = "1.0.0-alpha01"
@@ -74,6 +76,7 @@ object Versions {
     const val googleTruthVersion = "0.27"
     const val mockitoVersion = "2.23.0"
     const val kotlinMockitoVersion = "2.1.0"
+    const val kotlinMockVersion = "1.9.3"
 
     //Network
     const val okHttpVersion = "3.13.1"
@@ -100,6 +103,9 @@ object Versions {
 
     //Gson
     const val gsonVersion = "2.8.5"
+
+    //Three ten Android backport
+    const val threetenadpVersion = "1.2.1"
 
 }
 
@@ -139,6 +145,7 @@ object Deps {
     val mockito_library = "org.mockito:mockito-core:$mockitoVersion"
     val mockito_inline_library = "org.mockito:mockito-inline:$mockitoVersion"
     val mockito_kotlin_library = "com.nhaarman.mockitokotlin2:mockito-kotlin:$kotlinMockitoVersion"
+    val mock_kotlin_library = "io.mockk:mockk:$kotlinMockVersion"
 
     //Architecture components
     val lifecycle_library = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
@@ -187,6 +194,9 @@ object Deps {
 
     //Gson
     val gson_library = "com.google.code.gson:gson:$gsonVersion"
+
+    //Threetenadbp
+    val androidThreeTenbp = "com.jakewharton.threetenabp:threetenabp:$threetenadpVersion"
 
     //Gradle
     val gradle_tools_library = "com.android.tools.build:gradle:$gradleToolsVersion"

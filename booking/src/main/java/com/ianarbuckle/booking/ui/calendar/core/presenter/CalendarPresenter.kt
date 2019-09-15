@@ -14,8 +14,13 @@ interface CalendarPresenter {
 class CalendarPresenterImpl(private val view: CalendarView, private val router: CalendarRouter) : CalendarPresenter {
 
     override fun onCreate() {
-//        view.onCalendarClick {
-//            router.navigateToReservationWithDate(it.toString())
-//        }
+        view.apply {
+            toolbarClickListener {
+                router.navigateBack()
+            }
+            calendarDateClickListener {
+                router.navigateToReservationWithDate(it)
+            }
+        }
     }
 }

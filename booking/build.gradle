@@ -64,6 +64,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':core')
     implementation project(':models')
+    implementation project(path: ':database')
 
     api Deps.kotlin_extensions_library
 
@@ -128,6 +129,10 @@ dependencies {
     //Gson
     api Deps.gson_library
 
+    api Deps.androidThreeTenbp
+
+    kapt "com.android.databinding:compiler:3.1.4"
+
     //Test
     testImplementation Deps.junit_library
     testImplementation Deps.google_truth_library
@@ -136,4 +141,5 @@ dependencies {
     testImplementation Deps.room_test_library
     testImplementation Deps.mockito_kotlin_library
     testImplementation Deps.joda_time_library
+    testImplementation Deps.mock_kotlin_library
 }

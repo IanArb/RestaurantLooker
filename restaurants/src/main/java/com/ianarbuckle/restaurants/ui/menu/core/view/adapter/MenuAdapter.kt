@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ianarbuckle.models.restaurant.Dish
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurant.databinding.MenuItemBinding
-import com.ianarbuckle.restaurants.data.Dish
 
 /**
  * Created by Ian Arbuckle on 2019-05-11.

@@ -3,6 +3,8 @@ package com.ianarbuckle.seathelper.home.builder
 import androidx.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.seathelper.home.HomeActivity
+import com.ianarbuckle.seathelper.home.core.HomeInteractor
+import com.ianarbuckle.seathelper.home.core.HomeInteractorImpl
 import com.ianarbuckle.seathelper.home.core.view.adapter.ViewPagerAdapter
 import com.ianarbuckle.seathelper.home.core.presenter.DefaultHomePresenter
 import com.ianarbuckle.seathelper.home.core.presenter.HomePresenter
@@ -30,8 +32,12 @@ class HomeModule(private val activity: HomeActivity) {
 
     @HomeScope
     @Provides
-    fun providePresenter(view: HomeView, router: HomeRouter): HomePresenter
-            = DefaultHomePresenter(view, router)
+    fun provideInteractor(): HomeInteractor = HomeInteractorImpl(activity)
+
+    @HomeScope
+    @Provides
+    fun providePresenter(view: HomeView, interactor: HomeInteractor, router: HomeRouter): HomePresenter
+            = DefaultHomePresenter(view, interactor, router)
 
     @HomeScope
     @Provides

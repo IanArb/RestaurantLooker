@@ -16,5 +16,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.phonePrefix.PhonePrefixActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.confirmation.ConfirmationActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

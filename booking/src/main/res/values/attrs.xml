@@ -13,4 +13,7 @@
     <attr name="clearDrawable" format="reference"/>
     <attr name="backArrowBlackDrawable" format="reference"/>
     <attr name="searchDrawable" format="reference"/>
+    <attr name="successIcon" format="reference"/>
+    <attr name="calendarIcon" format="reference"/>
+    <attr name="clockIcon" format="reference"/>
 </resources>

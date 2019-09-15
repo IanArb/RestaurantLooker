@@ -3,8 +3,8 @@ package com.ianarbuckle.restaurants.ui.home.router
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurants.RestaurantsNavigator
-import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.ui.menu.MenuActivity
 import com.ianarbuckle.restaurants.utils.Constants
 import java.util.ArrayList

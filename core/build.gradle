@@ -43,6 +43,8 @@ dependencies {
     //Json converter
     api Deps.moshi_kotlin_library
 
+    api Deps.androidThreeTenbp
+
     //glide
     api Deps.glide_library
     kapt Deps.glide_compiler_library

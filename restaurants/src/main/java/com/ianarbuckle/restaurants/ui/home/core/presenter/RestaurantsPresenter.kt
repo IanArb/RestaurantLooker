@@ -7,5 +7,4 @@ package com.ianarbuckle.restaurants.ui.home.core.presenter
 interface RestaurantsPresenter {
     fun onCreate()
     fun onDestroy()
-    fun addLifecycleObserver()
 }

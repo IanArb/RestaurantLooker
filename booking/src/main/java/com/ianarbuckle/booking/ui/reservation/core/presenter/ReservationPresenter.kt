@@ -1,6 +1,17 @@
 package com.ianarbuckle.booking.ui.reservation.core.presenter
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.ARRIVAL_TIME_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.BOOKING_DATE_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.DIET_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.EMAIL_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.NAME_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.PHONE_CODE_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.PHONE_KEY
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.REQUEST_CODE_CALENDAR
+import com.ianarbuckle.booking.ui.reservation.constants.Constants.REQUEST_CODE_PREFIX
 import com.ianarbuckle.booking.ui.reservation.core.interactor.ReservationInteractor
 import com.ianarbuckle.booking.ui.reservation.core.router.ReservationRouter
 import com.ianarbuckle.booking.ui.reservation.core.view.ReservationView
@@ -15,8 +26,9 @@ import kotlin.coroutines.CoroutineContext
 interface ReservationPresenter {
     fun onCreate()
     fun onDestroy()
-    fun onSavedInstanceState(bundle: Bundle)
-    fun onRestoreInstanceState(bundle: Bundle)
+    fun onSavedInstanceState(bundle: Bundle?)
+    fun onRestoreInstanceState(bundle: Bundle?)
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
 }
 
 class ReservationPresenterImpl(private val view: ReservationView, private val interactor: ReservationInteractor, private val router: ReservationRouter) : ReservationPresenter, CoroutineScope {
@@ -28,29 +40,55 @@ class ReservationPresenterImpl(private val view: ReservationView, private val in
 
     override fun onCreate() {
         view.apply {
-            attachClickListeners()
-            showRestaurantName(interactor.getRestaurantsName())
-            attachTextWatchers()
             setPrefixValue(interactor.getPhonePrefix())
+            attachClickListeners()
+            if(!interactor.getRestaurantsName().isNullOrEmpty()) {
+                showRestaurantName(interactor.getRestaurantsName())
+            }
+            attachTextWatchers()
         }
     }
 
-    override fun onSavedInstanceState(bundle: Bundle) {
-        bundle.putString("name", view.getFullNameValue())
-        bundle.putString("email", view.getEmailValue())
-        bundle.putString("phone", view.getPhoneNumberValue())
-        bundle.putString("bookingDate", view.getBookingDatesValue())
-        bundle.putString("arrivalTime", view.getArrivalTimeValue())
-        bundle.putBoolean("diet", view.getDietaryRequirementsValue())
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val value = interactor.getDataFromActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            REQUEST_CODE_CALENDAR -> {
+                if(!value.isNullOrEmpty()) {
+                    view.setBookingDatesValue(value)
+                }
+            }
+            REQUEST_CODE_PREFIX -> {
+                if(!value.isNullOrEmpty()) {
+                    view.setPrefixValue(value)
+                }
+            }
+        }
     }
 
-    override fun onRestoreInstanceState(bundle: Bundle) {
-        view.setFullNameValue(bundle.getString("name"))
-        view.setEmailValue(bundle.getString("email"))
-        view.setPhoneNumberValue(bundle.getString("phone"))
-        view.setArrivalTimeValue(bundle.getString("arrivalTime"))
-        view.setBookingDatesValue(bundle.getString("bookingDate"))
-        view.setDietaryRequirementValue(bundle.getBoolean("diet"))
+    override fun onSavedInstanceState(bundle: Bundle?) {
+        bundle?.apply {
+            view.apply {
+                putString(NAME_KEY, getFullNameValue())
+                putString(EMAIL_KEY, getEmailValue())
+                putString(PHONE_KEY, getPhoneNumberValue())
+                putString(BOOKING_DATE_KEY, getBookingDatesValue())
+                putString(ARRIVAL_TIME_KEY, getArrivalTimeValue())
+                putBoolean(DIET_KEY, getDietaryRequirementsValue())
+            }
+        }
+    }
+
+    override fun onRestoreInstanceState(bundle: Bundle?) {
+        bundle?.apply {
+            view.apply {
+                setFullNameValue(getString(NAME_KEY))
+                setEmailValue(getString(EMAIL_KEY))
+                setPhoneNumberValue(getString(PHONE_KEY))
+                setArrivalTimeValue(getString(ARRIVAL_TIME_KEY))
+                setBookingDatesValue(getString(BOOKING_DATE_KEY))
+                setDietaryRequirementValue(getBoolean(DIET_KEY))
+            }
+        }
     }
 
     private fun ReservationView.attachTextWatchers() {
@@ -77,7 +115,7 @@ class ReservationPresenterImpl(private val view: ReservationView, private val in
         onContinueButtonClick {
             validateFields()
             if (hasValidFields()) {
-//                createReservation()
+                createReservation()
             }
         }
     }
@@ -86,15 +124,25 @@ class ReservationPresenterImpl(private val view: ReservationView, private val in
         val properties = createBookingProperties()
 
         job = launch {
-            view.showLoading()
+            withContext(Dispatchers.Main) {
+                view.showLoading()
+            }
             try {
-                interactor.saveBooking(interactor.createBookingRequest(properties))
+                val booking = interactor.createBookingRequest(properties)
+                interactor.saveBooking(booking)
+                withContext(Dispatchers.Main) {
+                    router.navigateToConfirmation(booking)
+                }
             } catch (exception: Exception) {
                 withContext(Dispatchers.Main) {
-                    view.showErrorDialog()
+                    view.hideLoading()
+                    view.showErrorMessage()
+                    Toast.makeText(view.getView().context, "${exception.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             } finally {
-                router.navigateToConfirmation()
+                withContext(Dispatchers.Main) {
+                    view.hideLoading()
+                }
             }
         }
     }
@@ -102,19 +150,23 @@ class ReservationPresenterImpl(private val view: ReservationView, private val in
     private fun createBookingProperties(): HashMap<String, String> {
         val properties = HashMap<String, String>()
         properties.apply {
-            put("email", view.getEmailValue())
-            put("surname", view.getFullNameValue())
-            put("phoneNumber", view.getPhoneNumberValue())
-            put("bookingDate", view.getBookingDatesValue())
-            put("arrivalTime", view.getArrivalTimeValue())
-            put("dietaryRequirements", view.getDietaryRequirementsValue().toString())
+            put(EMAIL_KEY, view.getEmailValue())
+            put(NAME_KEY, view.getFullNameValue())
+            put(PHONE_KEY, view.getPhoneNumberValue())
+            put(PHONE_CODE_KEY, view.getPrefixValue())
+            put(BOOKING_DATE_KEY, view.getBookingDatesValue())
+            put(ARRIVAL_TIME_KEY, view.getArrivalTimeValue())
+            put(DIET_KEY, view.getDietaryRequirementsValue().toString())
         }
         return properties
     }
 
     private fun hasValidFields(): Boolean {
-        return interactor.isEmailValid(view.getEmailValue()) && interactor.isFullnameValid(view.getFullNameValue())
+        return interactor.isEmailValid(view.getEmailValue())
+                && interactor.isFullnameValid(view.getFullNameValue())
                 && interactor.isPhoneNumberValid(view.getPhoneNumberValue())
+                && interactor.isBookingDateValid(view.getBookingDatesValue())
+                && interactor.isArrivalTimeValid(view.getArrivalTimeValue())
     }
 
     private fun validateFields() {

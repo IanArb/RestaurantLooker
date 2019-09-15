@@ -2,6 +2,7 @@ package com.ianarbuckle.seathelper.app.builder
 
 import android.app.Application
 import android.content.Context
+import com.ianarbuckle.core.utils.DeviceUuidFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -20,6 +21,10 @@ class AppModule constructor(private val application: Application) {
     @AppScope
     @Provides
     fun provideApplicationContext(): Context = application.applicationContext
+
+    @AppScope
+    @Provides
+    fun provideDeviceUuidFactory(): DeviceUuidFactory = DeviceUuidFactory(application)
 
     @AppScope
     @Provides

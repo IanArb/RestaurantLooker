@@ -1,5 +1,6 @@
 package com.ianarbuckle.seathelper.home.core.presenter
 
+import com.ianarbuckle.seathelper.home.core.HomeInteractor
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.ianarbuckle.seathelper.utils.findNavigationById
 import com.ianarbuckle.seathelper.home.core.view.HomeView
@@ -11,7 +12,7 @@ import io.reactivex.disposables.Disposable
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-class DefaultHomePresenter(private val view: HomeView, private val router: HomeRouter) : HomePresenter {
+class DefaultHomePresenter(private val view: HomeView, private val interactor: HomeInteractor, private val router: HomeRouter) : HomePresenter {
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 
@@ -20,7 +21,11 @@ class DefaultHomePresenter(private val view: HomeView, private val router: HomeR
     }
 
     override fun onCreate() {
-        subscriptions.addAll(subscribeOnBottomNavigationItemSelections())
+        if (interactor.getConfirmationCallbackPosition() == 1) {
+            view.showCurrentPosition(BottomNavigationPosition.BOOKINGS)
+            router.switchFragment(BottomNavigationPosition.BOOKINGS)
+        }
+        subscriptions.add(subscribeOnBottomNavigationItemSelections())
     }
 
     override fun onDestroy() {

@@ -1,7 +1,7 @@
 package com.ianarbuckle.restaurants.ui.home.core.interactor
 
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
-import com.ianarbuckle.restaurants.data.Restaurant
 /**
  * Created by Ian Arbuckle on 20/07/2018.
  *

@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.ui.home.core.repository
 
-import com.ianarbuckle.restaurants.database.dao.RestaurantDAO
+import com.ianarbuckle.database.database.dao.RestaurantDAO
 import com.ianarbuckle.restaurants.network.RestaurantsService
 import com.ianarbuckle.restaurants.network.manager.RestaurantsServiceManager
 import kotlinx.coroutines.runBlocking

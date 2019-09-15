@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ianarbuckle.booking.R
 import com.ianarbuckle.booking.ui.phonePrefix.core.view.adapter.PhonePrefixAdapter
 import com.ianarbuckle.core.extensions.getDrawableFromAttr
-import com.ianarbuckle.models.Country
+import com.ianarbuckle.models.booking.Country
 import kotlinx.android.synthetic.main.phone_prefix_view.view.*
 
 /**

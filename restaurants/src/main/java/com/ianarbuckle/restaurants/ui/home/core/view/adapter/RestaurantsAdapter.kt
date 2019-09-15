@@ -4,9 +4,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurant.databinding.HomeRestaurantsCardItemBinding
-import com.ianarbuckle.restaurants.data.Restaurant
 import kotlinx.android.synthetic.main.home_restaurants_card_item.view.*
 
 /**

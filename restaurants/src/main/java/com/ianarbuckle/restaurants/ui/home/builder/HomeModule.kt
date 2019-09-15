@@ -37,7 +37,7 @@ class HomeModule(private val fragment: RestaurantsFragment, private val navigato
     @HomeScope
     @Provides
     fun providePresenter(view: RestaurantsView, interactor: RestaurantsInteractor, router: RestaurantsRouter): RestaurantsPresenter
-            = DefaultRestaurantsPresenter(view, interactor, router, fragment)
+            = DefaultRestaurantsPresenter(view, interactor, router)
 
     @HomeScope
     @Provides

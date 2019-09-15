@@ -67,6 +67,8 @@ dependencies {
     implementation project(path: ':tablemap')
     implementation project(path: ':booking')
     implementation project(path: ':navigation')
+    implementation project(path: ':database')
+    implementation project([path: ':core'])
 
     //Kotlin
     implementation Deps.kotlin_extensions_library
@@ -139,5 +141,6 @@ dependencies {
     implementation Deps.rxBinding2_design_library
     implementation Deps.rxBinding2_support_library
 
+    implementation Deps.androidThreeTenbp
 
 }

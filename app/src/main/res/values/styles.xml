@@ -21,6 +21,9 @@
         <item name="textColorHighlight">@color/colorBlack</item>
         <item name="clearDrawable">@drawable/ic_clear</item>
         <item name="searchDrawable">@drawable/ic_search</item>
+        <item name="successIcon">@drawable/ic_checked</item>
+        <item name="calendarIcon">@drawable/ic_perm_contact_calendar</item>
+        <item name="clockIcon">@drawable/ic_access_time</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">

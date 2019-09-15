@@ -1,19 +1,14 @@
 package com.ianarbuckle.restaurants.ui.home.core.view
 
 import android.content.Context
-import android.content.Intent
-import android.os.Parcelable
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ianarbuckle.core.extensions.getColorFromAttr
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurant.R
 import com.ianarbuckle.restaurants.ui.home.core.view.adapter.RestaurantsAdapter
-import com.ianarbuckle.restaurants.data.Restaurant
-import com.ianarbuckle.restaurants.ui.menu.MenuActivity
-import com.ianarbuckle.restaurants.utils.Constants
 import kotlinx.android.synthetic.main.home_restaurants_view.view.*
-import java.util.ArrayList
 
 /**
  * Created by Ian Arbuckle on 20/07/2018.
@@ -37,16 +32,16 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
     }
 
     override fun showRestaurants(restaurants: MutableList<Restaurant>) {
-        recyclerView.visibility = View.VISIBLE
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerViewRestaurants.visibility = View.VISIBLE
+        recyclerViewRestaurants.setHasFixedSize(true)
+        recyclerViewRestaurants.layoutManager = LinearLayoutManager(context)
         restaurantsAdapter = RestaurantsAdapter(restaurants)
-        recyclerView.adapter = restaurantsAdapter
+        recyclerViewRestaurants.adapter = restaurantsAdapter
     }
 
     override fun showEmptyState() {
         errorMessage.text = resources.getString(R.string.error_message_empty)
-        recyclerView.visibility = View.GONE
+        recyclerViewRestaurants.visibility = View.GONE
         errorMessage.visibility = View.VISIBLE
         errorImageView.visibility = View.VISIBLE
         tryAgainButton.visibility = View.GONE
@@ -55,7 +50,7 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
 
     override fun showErrorState() {
         errorMessage.text = resources.getString(R.string.error_message)
-        recyclerView.visibility = View.GONE
+        recyclerViewRestaurants.visibility = View.GONE
         errorMessage.visibility = View.VISIBLE
         errorImageView.visibility = View.VISIBLE
         tryAgainButton.visibility = View.VISIBLE

@@ -2,7 +2,6 @@ package com.ianarbuckle.restaurants.ui.home.core.presenter
 
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.truth.Truth.assertThat
-import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.ui.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.ui.home.router.RestaurantsRouter
@@ -45,12 +44,6 @@ class RestaurantPresenterTest {
 
     @Mock
     private lateinit var lifecycleOwner: LifecycleOwner
-
-    private val testDispatcher = TestCoroutineDispatcher()
-
-    private val testScope = TestCoroutineScope(testDispatcher)
-
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     @Before
     fun setup() {

@@ -11,7 +11,7 @@ import com.ianarbuckle.booking.BookingNavigator
 class BookingCoordinator : BookingNavigator {
 
     override fun navigateToBookings(activity: Activity) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        activity.finish()
     }
 
     override fun navigateBackToRestaurants(activity: Activity) {

@@ -15,6 +15,7 @@ import com.ianarbuckle.booking.ui.reservation.core.router.ReservationRouter
 import com.ianarbuckle.booking.ui.reservation.core.router.ReservationRouterImpl
 import com.ianarbuckle.booking.ui.reservation.core.view.ReservationView
 import com.ianarbuckle.booking.ui.reservation.core.view.ReservationViewImpl
+import com.ianarbuckle.core.utils.DeviceUuidFactory
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -29,7 +30,8 @@ import javax.inject.Scope
 annotation class ReservationScope
 
 @Module
-class ReservationModule(private val activity: ReservationActivity, private val navigator: BookingNavigator, private val country: String) {
+class ReservationModule(private val activity: ReservationActivity, private val navigator: BookingNavigator,
+                        private val country: String, private val uuidFactory: DeviceUuidFactory) {
 
     @ReservationScope
     @Provides
@@ -41,7 +43,8 @@ class ReservationModule(private val activity: ReservationActivity, private val n
 
     @ReservationScope
     @Provides
-    fun provideInteractor(repository: ReservationRepository): ReservationInteractor = ReservationInteractorImpl(activity, repository, country)
+    fun provideInteractor(repository: ReservationRepository): ReservationInteractor
+            = ReservationInteractorImpl(activity, repository, country, uuidFactory)
 
     @ReservationScope
     @Provides

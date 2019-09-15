@@ -1,6 +1,6 @@
 package com.ianarbuckle.restaurants.network.builder
 
-import com.ianarbuckle.restaurants.database.dao.RestaurantDAO
+import com.ianarbuckle.database.client.DatabaseClient
 import com.ianarbuckle.restaurants.ui.home.builder.HomeScope
 import com.ianarbuckle.restaurants.ui.home.core.repository.DefaultRestaurantsRepository
 import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
@@ -17,7 +17,8 @@ import retrofit2.Retrofit
  *
  */
 @Module
-class NetworkModule(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory) {
+class NetworkModule(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory,
+                    private val databaseClient: DatabaseClient) {
 
     @HomeScope
     @Provides
@@ -29,7 +30,8 @@ class NetworkModule(private val okHttpClient: OkHttpClient, private val baseUrl:
 
     @HomeScope
     @Provides
-    fun provideRestaurantsRepository(serviceManager: DefaultRestaurantsServiceManager, dao: RestaurantDAO): RestaurantsRepository = DefaultRestaurantsRepository(serviceManager, dao)
+    fun provideRestaurantsRepository(serviceManager: DefaultRestaurantsServiceManager): RestaurantsRepository
+            = DefaultRestaurantsRepository(serviceManager, databaseClient.getRestaurantsDAO())
 
     @HomeScope
     @Provides

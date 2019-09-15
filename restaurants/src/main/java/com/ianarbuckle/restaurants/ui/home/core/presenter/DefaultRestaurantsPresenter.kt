@@ -1,10 +1,6 @@
 package com.ianarbuckle.restaurants.ui.home.core.presenter
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
-import com.ianarbuckle.restaurants.data.Restaurant
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.ianarbuckle.restaurants.ui.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.ui.home.router.RestaurantsRouter
@@ -15,15 +11,13 @@ import kotlin.coroutines.CoroutineContext
  * Created by Ian Arbuckle on 20/07/2018.
  *
  */
-class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val interactor: RestaurantsInteractor, private val router: RestaurantsRouter,
-                                  private val lifecycleOwner: LifecycleOwner) : RestaurantsPresenter, LifecycleObserver, CoroutineScope {
+class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val interactor: RestaurantsInteractor, private val router: RestaurantsRouter) : RestaurantsPresenter, CoroutineScope {
 
     private lateinit var job: Job
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun onCreate() {
         job = Job()
         fetchRestaurants()
@@ -84,12 +78,8 @@ class DefaultRestaurantsPresenter(private val view: RestaurantsView, private val
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun onDestroy() {
-        lifecycleOwner.lifecycle.removeObserver(this)
         job.cancel()
     }
-
-    override fun addLifecycleObserver() = lifecycleOwner.lifecycle.addObserver(this)
 
 }

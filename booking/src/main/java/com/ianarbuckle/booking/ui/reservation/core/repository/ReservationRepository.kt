@@ -1,7 +1,7 @@
 package com.ianarbuckle.booking.ui.reservation.core.repository
 
-import com.ianarbuckle.booking.data.Booking
 import com.ianarbuckle.booking.network.manager.BookingServiceManager
+import com.ianarbuckle.models.booking.Booking
 
 /**
  * Created by Ian Arbuckle on 2019-08-31.

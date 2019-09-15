@@ -5,11 +5,8 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.TimePicker
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ianarbuckle.booking.R
-import com.ianarbuckle.core.extensions.getColorFromAttr
 import com.ianarbuckle.core.extensions.getDrawableFromAttr
 import kotlinx.android.synthetic.main.reservation_view.view.*
 
@@ -19,7 +16,7 @@ import kotlinx.android.synthetic.main.reservation_view.view.*
  */
 interface ReservationView {
     fun getView(): View
-    fun showRestaurantName(name: String)
+    fun showRestaurantName(name: String?)
     fun getEmailValue(): String
     fun getPhoneNumberValue(): String
     fun getFullNameValue(): String
@@ -38,20 +35,21 @@ interface ReservationView {
     fun fullnameTextWatcher()
     fun bookingDateTextWatcher()
     fun arrivalTimeDateTextWatcher()
-    fun showErrorDialog()
+    fun showErrorMessage()
     fun showLoading()
     fun onArrivalTimeClickListener(clickListener: () -> Unit)
     fun showDateTimePicker()
     fun onBookingDateClickListener(clickListener: () -> Unit)
     fun onToolbarBackClickListener(clickListener: () -> Unit)
     fun onPrefixClickListener(clickListener: () -> Unit)
-    fun setEmailValue(value: String): Unit?
-    fun setPhoneNumberValue(value: String): Unit?
-    fun setFullNameValue(value: String): Unit?
+    fun setEmailValue(value: String?): Unit?
+    fun setPhoneNumberValue(value: String?): Unit?
+    fun setFullNameValue(value: String?): Unit?
     fun setDietaryRequirementValue(value: Boolean)
-    fun setBookingDatesValue(value: String): Unit?
-    fun setArrivalTimeValue(value: String): Unit?
+    fun setBookingDatesValue(value: String?): Unit?
+    fun setArrivalTimeValue(value: String?): Unit?
     fun setPrefixValue(value: String?): Unit?
+    fun hideLoading()
 }
 
 class ReservationViewImpl(context: Context) : ReservationView, ConstraintLayout(context) {
@@ -69,21 +67,21 @@ class ReservationViewImpl(context: Context) : ReservationView, ConstraintLayout(
         }
     }
 
-    override fun showRestaurantName(name: String) {
+    override fun showRestaurantName(name: String?) {
         toolbar.title = context.getString(R.string.toolbar_name_format, name)
     }
 
     override fun getEmailValue(): String = emailTextInputLayout.editText?.text.toString()
 
-    override fun setEmailValue(value: String) = emailTextInputLayout.editText?.setText(value)
+    override fun setEmailValue(value: String?) = emailTextInputLayout.editText?.setText(value)
 
     override fun getPhoneNumberValue(): String = phoneNumberTextInputLayout.editText?.text.toString()
 
-    override fun setPhoneNumberValue(value: String) = phoneNumberTextInputLayout.editText?.setText(value)
+    override fun setPhoneNumberValue(value: String?) = phoneNumberTextInputLayout.editText?.setText(value)
 
     override fun getFullNameValue(): String = fullnameTextInputLayout.editText?.text.toString()
 
-    override fun setFullNameValue(value: String) = fullnameTextInputLayout.editText?.setText(value)
+    override fun setFullNameValue(value: String?) = fullnameTextInputLayout.editText?.setText(value)
 
     override fun getDietaryRequirementsValue(): Boolean = checkbox.isChecked
 
@@ -93,11 +91,11 @@ class ReservationViewImpl(context: Context) : ReservationView, ConstraintLayout(
 
     override fun getBookingDatesValue(): String = bookingArrivalTimeTextInputLayout.editText?.text.toString()
 
-    override fun setBookingDatesValue(value: String) = bookingDatesTextInputLayout.editText?.setText(value)
+    override fun setBookingDatesValue(value: String?) = bookingDatesTextInputLayout.editText?.setText(value)
 
     override fun getArrivalTimeValue(): String = bookingArrivalTimeTextInputLayout.editText?.text.toString()
 
-    override fun setArrivalTimeValue(value: String) = bookingArrivalTimeTextInputLayout.editText?.setText(value)
+    override fun setArrivalTimeValue(value: String?) = bookingArrivalTimeTextInputLayout.editText?.setText(value)
 
     override fun getPrefixValue(): String = phonePrefixTextInputLayout.editText?.text.toString()
 
@@ -252,11 +250,15 @@ class ReservationViewImpl(context: Context) : ReservationView, ConstraintLayout(
     }
 
     override fun showLoading() {
-
+        bookingsLoadingView.visibility = View.VISIBLE
     }
 
-    override fun showErrorDialog() {
+    override fun hideLoading() {
+        bookingsLoadingView.visibility = View.GONE
+    }
 
+    override fun showErrorMessage() {
+        bookingsErrorState.visibility = View.VISIBLE
     }
 
     override fun onPrefixClickListener(clickListener: () -> Unit) {

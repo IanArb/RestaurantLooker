@@ -64,6 +64,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(path:  ':core')
+    implementation project(path : ':models')
+    implementation project(path: ':database')
 
     api Deps.kotlin_extensions_library
 

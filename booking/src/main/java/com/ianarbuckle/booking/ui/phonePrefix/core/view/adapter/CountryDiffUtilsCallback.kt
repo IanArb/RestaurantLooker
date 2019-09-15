@@ -1,7 +1,7 @@
 package com.ianarbuckle.booking.ui.phonePrefix.core.view.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ianarbuckle.models.Country
+import com.ianarbuckle.models.booking.Country
 
 /**
  * Created by Ian Arbuckle on 2019-09-05.

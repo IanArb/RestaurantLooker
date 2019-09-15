@@ -1,6 +1,7 @@
 package com.ianarbuckle.restaurants.builder
 
 
+import com.ianarbuckle.database.client.DatabaseClient
 import com.ianarbuckle.restaurants.ui.home.RestaurantsFragment
 import com.ianarbuckle.restaurants.ui.home.builder.DaggerHomeComponent
 import com.ianarbuckle.restaurants.ui.home.builder.HomeModule
@@ -16,12 +17,13 @@ import retrofit2.Converter
  * Created by Ian Arbuckle on 18/07/2018.
  *
  */
-class DefaultRestaurantsInjector(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory, private val navigator: RestaurantsNavigator) : RestaurantsInjector {
+class DefaultRestaurantsInjector(private val okHttpClient: OkHttpClient, private val baseUrl: String, private val converterFactory: Converter.Factory, private val navigator: RestaurantsNavigator,
+                                 private val databaseClient: DatabaseClient) : RestaurantsInjector {
 
     override fun inject(fragment: RestaurantsFragment) {
         DaggerHomeComponent.builder()
                 .homeModule(HomeModule(fragment, navigator))
-                .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory))
+                .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory, databaseClient))
                 .build()
                 .inject(fragment)
     }

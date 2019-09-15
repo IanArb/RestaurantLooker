@@ -11,6 +11,9 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ianarbuckle.core.R
+import org.threeten.bp.*
+import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
 /**
  * Created by Ian Arbuckle on 2019-07-07.
@@ -55,4 +58,11 @@ fun Context.getColorFromAttr(
 ): Int {
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return typedValue.data
+}
+
+fun Date.parseDate(): String {
+    val instant = DateTimeUtils.toInstant(this)
+    val localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate()
+    val localDateFormat = LocalDate.from(localDate).format(DateTimeFormatter.ofPattern("EEE, MMM d, yyyy"))
+    return localDateFormat.toString()
 }
