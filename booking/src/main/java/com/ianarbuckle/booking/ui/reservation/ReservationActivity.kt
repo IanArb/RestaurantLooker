@@ -28,8 +28,8 @@ class ReservationActivity : AppCompatActivity() {
         presenter.onCreate()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
         presenter.onSavedInstanceState(outState)
     }
 

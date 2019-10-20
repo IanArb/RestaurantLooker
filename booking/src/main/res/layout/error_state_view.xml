@@ -8,7 +8,7 @@
     android:background="?colorBackground">
 
     <Button
-        android:id="@+id/tryAgainButton"
+        android:id="@+id/bookingTryAgainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
@@ -33,7 +33,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:text="Oops! Something went wrong."
         android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/tryAgainButton"
+        app:layout_constraintBottom_toTopOf="@+id/bookingTryAgainButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

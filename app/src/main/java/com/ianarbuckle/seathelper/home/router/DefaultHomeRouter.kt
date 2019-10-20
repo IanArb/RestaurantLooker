@@ -16,11 +16,14 @@ class DefaultHomeRouter(private val supportFragmentManager: FragmentManager) : H
 
     override fun switchFragment(navigationPosition: BottomNavigationPosition): Boolean {
         val fragment = supportFragmentManager.findFragment(navigationPosition)
-        if (fragment.isAdded) return false
-        detachFragment()
-        attachFragment(fragment, navigationPosition.getTag())
-        supportFragmentManager.executePendingTransactions()
-        return true
+        return if (fragment.isAdded) {
+            false
+        } else {
+            detachFragment()
+            attachFragment(fragment, navigationPosition.getTag())
+            supportFragmentManager.executePendingTransactions()
+            true
+        }
     }
 
     private fun FragmentManager.findFragment(position: BottomNavigationPosition): Fragment {
@@ -29,7 +32,7 @@ class DefaultHomeRouter(private val supportFragmentManager: FragmentManager) : H
 
     private fun detachFragment() {
         supportFragmentManager.findFragmentById(R.id.container)?.also {
-            supportFragmentManager.beginTransaction().detach(it).commit()
+            supportFragmentManager.beginTransaction().detach(it).commitNow()
         }
     }
 
@@ -37,12 +40,12 @@ class DefaultHomeRouter(private val supportFragmentManager: FragmentManager) : H
         if (fragment.isDetached) {
             supportFragmentManager.beginTransaction().attach(fragment).commit()
         } else {
-            supportFragmentManager.beginTransaction().add(R.id.container, fragment, tag).commit()
+            supportFragmentManager.beginTransaction().add(R.id.container, fragment, tag).commitNow()
         }
 
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit()
+                .commitNow()
     }
 
 }

@@ -65,7 +65,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':restaurants')
     implementation project(path: ':tablemap')
-    implementation project(path: ':booking')
+    implementation project([path: ':booking'])
     implementation project(path: ':navigation')
     implementation project(path: ':database')
     implementation project([path: ':core'])

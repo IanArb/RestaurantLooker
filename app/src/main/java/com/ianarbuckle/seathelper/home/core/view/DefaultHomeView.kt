@@ -17,13 +17,19 @@ import kotlinx.android.synthetic.main.home_view.view.*
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-class DefaultHomeView(context: Context?) : HomeView, ConstraintLayout(context) {
+class DefaultHomeView(context: Context) : HomeView, ConstraintLayout(context) {
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 
     init {
         inflate(context, R.layout.home_view, this)
         initBottomNavigation()
+        when(navPosition) {
+            BottomNavigationPosition.HOME -> toolbar.title = context.getString(R.string.restaurants_menu_title)
+            BottomNavigationPosition.BOOKINGS -> toolbar.title = context.getString(R.string.bookings_menu_title)
+            BottomNavigationPosition.MESSAGES -> toolbar.title = context.getString(R.string.messages_menu_title)
+            BottomNavigationPosition.PROFILE -> toolbar.title = context.getString(R.string.profile_menu_title)
+        }
     }
 
     private fun initBottomNavigation() {

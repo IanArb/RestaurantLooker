@@ -56,19 +56,19 @@ class ReservationViewImpl(context: Context) : ReservationView, ConstraintLayout(
 
     init {
         inflate(context, R.layout.reservation_view, this)
-        toolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
+        bookingToolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
     }
 
     override fun getView(): View = this
 
     override fun onToolbarBackClickListener(clickListener: () -> Unit) {
-        toolbar.setNavigationOnClickListener {
+        bookingToolbar.setNavigationOnClickListener {
             clickListener()
         }
     }
 
     override fun showRestaurantName(name: String?) {
-        toolbar.title = context.getString(R.string.toolbar_name_format, name)
+        bookingToolbar.title = context.getString(R.string.toolbar_name_format, name)
     }
 
     override fun getEmailValue(): String = emailTextInputLayout.editText?.text.toString()

@@ -1,6 +1,5 @@
 package com.ianarbuckle.booking.ui.bookings.core.presenter
 
-import android.widget.Toast
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractor
 import com.ianarbuckle.booking.ui.bookings.core.view.BookingsView
 import kotlinx.coroutines.*
@@ -42,10 +41,9 @@ class BookingsPresenterImpl(private val view: BookingsView, private val interact
             } catch (exception: Exception) {
                 withContext(Dispatchers.Main) {
                     view.showErrorMessage()
-                    Toast.makeText(view.getView().context, "Message - ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             } finally {
-
+                view.hideLoading()
             }
         }
     }

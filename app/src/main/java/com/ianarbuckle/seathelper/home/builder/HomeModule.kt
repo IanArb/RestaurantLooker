@@ -1,11 +1,9 @@
 package com.ianarbuckle.seathelper.home.builder
 
-import androidx.lifecycle.LifecycleOwner
 import android.content.Context
 import com.ianarbuckle.seathelper.home.HomeActivity
 import com.ianarbuckle.seathelper.home.core.HomeInteractor
 import com.ianarbuckle.seathelper.home.core.HomeInteractorImpl
-import com.ianarbuckle.seathelper.home.core.view.adapter.ViewPagerAdapter
 import com.ianarbuckle.seathelper.home.core.presenter.DefaultHomePresenter
 import com.ianarbuckle.seathelper.home.core.presenter.HomePresenter
 import com.ianarbuckle.seathelper.home.core.view.DefaultHomeView
@@ -42,9 +40,5 @@ class HomeModule(private val activity: HomeActivity) {
     @HomeScope
     @Provides
     fun provideRouter(): HomeRouter = DefaultHomeRouter(activity.supportFragmentManager)
-
-    @HomeScope
-    @Provides
-    fun provideAdapter(): ViewPagerAdapter = ViewPagerAdapter(activity.supportFragmentManager)
 
 }

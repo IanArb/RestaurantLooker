@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.ianarbuckle.booking.BookingProvider
 import com.ianarbuckle.booking.ui.bookings.core.presenter.BookingsPresenter
 import com.ianarbuckle.booking.ui.bookings.core.view.BookingsView
+import com.ianarbuckle.booking.ui.bookings.core.view.BookingsViewImpl
 import javax.inject.Inject
 
 /**
@@ -36,6 +37,7 @@ class BookingsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         presenter.onCreate()
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

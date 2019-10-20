@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
  * Created by Ian Arbuckle on 28/06/2018.
  *
  */
-class ViewPagerAdapter(fragmentManager: FragmentManager?) : FragmentStatePagerAdapter(fragmentManager) {
+class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private var fragments: MutableList<Fragment> = ArrayList()
 

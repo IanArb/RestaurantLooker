@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ianarbuckle.booking.R
 import com.ianarbuckle.booking.ui.bookings.core.view.adapter.BookingsAdapter
+import com.ianarbuckle.core.extensions.getColorFromAttr
 import com.ianarbuckle.models.booking.Booking
 import kotlinx.android.synthetic.main.bookings_view.view.*
 
@@ -25,28 +25,29 @@ interface BookingsView {
 
 class BookingsViewImpl(context: Context) : BookingsView, ConstraintLayout(context) {
 
-    private lateinit var adapter: BookingsAdapter
-
     init {
         inflate(context, R.layout.bookings_view, this)
     }
 
-    override fun getView(): View = this
+    override fun getView(): View {
+        return this
+    }
 
     override fun showBookings(bookings: MutableList<Booking>) {
-        recyclerViewBookings.visibility = View.VISIBLE
-        recyclerViewBookings.setHasFixedSize(true)
-        recyclerViewBookings.layoutManager = LinearLayoutManager(context)
-        adapter = BookingsAdapter(bookings)
-        recyclerViewBookings.adapter = adapter
+        recyclerViewBookings.apply {
+            visibility = View.VISIBLE
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = BookingsAdapter(bookings)
+        }
     }
 
     override fun showLoading() {
-        progress.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        progress.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     override fun showErrorMessage() {

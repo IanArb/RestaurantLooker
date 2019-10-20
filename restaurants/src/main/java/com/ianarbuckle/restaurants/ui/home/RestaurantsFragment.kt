@@ -16,9 +16,11 @@ import javax.inject.Inject
  */
 class RestaurantsFragment : Fragment() {
 
-    @Inject lateinit var view: RestaurantsView
+    @Inject
+    lateinit var view: RestaurantsView
 
-    @Inject lateinit var presenter: RestaurantsPresenter
+    @Inject
+    lateinit var presenter: RestaurantsPresenter
 
     companion object {
         val TAG: String = RestaurantsFragment::class.java.simpleName
