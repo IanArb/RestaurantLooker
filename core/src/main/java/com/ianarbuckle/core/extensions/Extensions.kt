@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ianarbuckle.core.R
@@ -66,3 +67,6 @@ fun Date.parseDate(): String {
     val localDateFormat = LocalDate.from(localDate).format(DateTimeFormatter.ofPattern("EEE, MMM d, yyyy"))
     return localDateFormat.toString()
 }
+
+@BindingAdapter("imageUrl")
+fun ImageView.setImageUrl(imageUrl: String) = provideImage(context, imageUrl)

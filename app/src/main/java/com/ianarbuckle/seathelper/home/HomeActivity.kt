@@ -32,7 +32,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         component.inject(this)
 
         setContentView(view.getView())

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ianarbuckle.booking.BookingProvider
 import com.ianarbuckle.booking.ui.bookings.core.presenter.BookingsPresenter
@@ -14,7 +15,7 @@ import javax.inject.Inject
  * Created by Ian Arbuckle on 2019-07-07.
  *
  */
-class BookingsFragment: Fragment() {
+class BookingsActivity: AppCompatActivity() {
 
     @Inject
     lateinit var view: BookingsView
@@ -22,23 +23,15 @@ class BookingsFragment: Fragment() {
     @Inject
     lateinit var presenter: BookingsPresenter
 
-    companion object {
-        val TAG: String = BookingsFragment::class.java.simpleName
-        fun newInstance() = BookingsFragment()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         BookingProvider.get().inject(this)
-        return view.getView()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        setContentView(view.getView())
         presenter.onCreate()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         presenter.onDestroy()
     }
 }

@@ -1,7 +1,8 @@
 package com.ianarbuckle.seathelper.utils
 
 import androidx.fragment.app.Fragment
-import com.ianarbuckle.booking.ui.bookings.BookingsFragment
+import com.ianarbuckle.booking.ui.booking.BookingFragment
+import com.ianarbuckle.booking.ui.bookings.BookingsActivity
 import com.ianarbuckle.restaurants.ui.home.RestaurantsFragment
 import com.ianarbuckle.seathelper.R
 import com.ianarbuckle.seathelper.home.fragment.MessagesFragment
@@ -28,14 +29,14 @@ enum class BottomNavigationPosition(val position: Int, val id: Int) {
 
  fun BottomNavigationPosition.createFragment(): Fragment = when(this) {
      BottomNavigationPosition.HOME -> RestaurantsFragment.newInstance()
+     BottomNavigationPosition.BOOKINGS -> BookingFragment.newInstance()
      BottomNavigationPosition.PROFILE -> ProfileFragment.newInstance()
      BottomNavigationPosition.MESSAGES -> MessagesFragment.newInstance()
-     BottomNavigationPosition.BOOKINGS -> BookingsFragment.newInstance()
  }
 
  fun BottomNavigationPosition.getTag(): String = when(this) {
      BottomNavigationPosition.HOME -> RestaurantsFragment.TAG
+     BottomNavigationPosition.BOOKINGS -> BookingFragment.TAG
      BottomNavigationPosition.PROFILE -> ProfileFragment.TAG
      BottomNavigationPosition.MESSAGES -> MessagesFragment.TAG
-     BottomNavigationPosition.BOOKINGS -> BookingsFragment.TAG
  }

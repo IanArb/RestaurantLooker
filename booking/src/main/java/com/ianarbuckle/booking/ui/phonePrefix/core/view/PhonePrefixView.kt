@@ -31,7 +31,7 @@ class PhonePrefixViewImpl(context: Context) : PhonePrefixView, ConstraintLayout(
 
     init {
         inflate(context, R.layout.phone_prefix_view, this)
-        toolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowBlackDrawable))
+        bookingToolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowBlackDrawable))
     }
 
     override fun getView(): View = this
@@ -77,7 +77,7 @@ class PhonePrefixViewImpl(context: Context) : PhonePrefixView, ConstraintLayout(
     }
 
     override fun toolbarBackClickListener(clickListener: () -> Unit) {
-        toolbar.setNavigationOnClickListener {
+        bookingToolbar.setNavigationOnClickListener {
             clickListener()
         }
     }

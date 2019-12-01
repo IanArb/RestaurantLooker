@@ -7,6 +7,7 @@ import androidx.annotation.RequiresPermission
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ianarbuckle.booking.R
+import com.ianarbuckle.booking.network.repository.BookingsRepository
 import com.ianarbuckle.booking.ui.reservation.constants.Constants.ARRIVAL_TIME_KEY
 import com.ianarbuckle.booking.ui.reservation.constants.Constants.BOOKING_DATE_KEY
 import com.ianarbuckle.booking.ui.reservation.constants.Constants.CALENDAR_KEY
@@ -22,6 +23,7 @@ import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.core.utils.FormFieldValidator.notBlank
 import com.ianarbuckle.core.utils.FormFieldValidator.validEmailAddress
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Restaurant
 
 /**
  * Created by Ian Arbuckle on 2019-08-31.
@@ -40,7 +42,7 @@ interface ReservationInteractor {
     fun getDataFromActivityResult(requestCode: Int, resultCode: Int, data: Intent?): String?
 }
 
-class ReservationInteractorImpl(private val activity: Activity, private val repository: ReservationRepository, private val countryName: String,
+class ReservationInteractorImpl(private val activity: Activity, private val repository: BookingsRepository, private val countryName: String,
                                 private val uuidFactory: DeviceUuidFactory) : ReservationInteractor {
 
     override fun getRestaurantsName(): String? = activity.intent.getStringExtra("NAME")
@@ -59,6 +61,8 @@ class ReservationInteractorImpl(private val activity: Activity, private val repo
     override fun createBookingRequest(properties: Map<String, String>): Booking {
         val owner: Owner
         val uuid = uuidFactory.getUUID()
+        val restaurant = activity.intent.getParcelableExtra<Restaurant>("RESTAURANT")
+        val details = RestaurantDetails(restaurant?.restaurantName, restaurant?.imageUrl, restaurant?.address, restaurant?.location)
         properties.let {
             val email = it[EMAIL_KEY]
             val number = it[PHONE_KEY]
@@ -67,11 +71,11 @@ class ReservationInteractorImpl(private val activity: Activity, private val repo
             val dietaryRequirements = it[DIET_KEY]
             val arrivalTime = it[ARRIVAL_TIME_KEY]
             val bookingDate = it[BOOKING_DATE_KEY]
-            val phoneNumber = PhoneNumber(code!!.toInt(), number!!.toInt())
+            val phoneNumber = code?.toInt()?.let { it1 -> number?.toInt()?.let { it2 -> PhoneNumber(it1, it2) } }
             owner = Owner(uuid, fullname, email, phoneNumber, dietaryRequirements?.toBoolean(), bookingDate, arrivalTime)
         }
 
-        return Booking(owner, getRestaurantsName(), Table("1", "RESERVED", TableCharacteristics("COUPLE", 2, false)))
+        return Booking(owner, details, Table("1", "RESERVED", TableCharacteristics("COUPLE", 2, false)))
     }
 
     override suspend fun saveBooking(booking: Booking) {

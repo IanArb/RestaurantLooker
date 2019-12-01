@@ -1,36 +1,40 @@
 package utils
 
-import com.ianarbuckle.restaurants.data.*
-import org.joda.time.DateTime
+import com.ianarbuckle.models.restaurant.Dish
+import com.ianarbuckle.models.restaurant.Location
+import com.ianarbuckle.models.restaurant.Price
+import com.ianarbuckle.models.restaurant.Restaurant
 
 /**
  * Created by Ian Arbuckle on 19/08/2018.
  *
  */
-fun buildRestaurantMock() : MutableList<Restaurant> {
-    val restaurants = mutableListOf<Restaurant>()
 
-    val restaurantData = createRestaurant()
+object ModelData {
 
-    restaurants.add(restaurantData)
+    fun buildRestaurantsModel(): MutableList<Restaurant> {
+        val restaurants = mutableListOf<Restaurant>()
 
-    return restaurants
-}
+        val restaurantData = createRestaurant()
 
-fun createRestaurant(): Restaurant {
-    return Restaurant("1","Cirillo's", "Description", "Dublin", "Dublin", "Dublin",
-            Location(0.5f, 0.10f), "OPEN", createLunchMenu(), "https://media-cdn.tripadvisor.com/media/photo-s/03/c8/00/12/paulie-s-pizza.jpg")
-}
+        restaurants.add(restaurantData)
 
-
-fun createLunchMenu(): MutableList<Dish> {
-    val lunch = mutableListOf<Dish>()
-
-    lunch.apply {
-        add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
-        add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
-        add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+        return restaurants
     }
 
-    return lunch
+    fun createRestaurant(): Restaurant {
+        return Restaurant("1", "Buckle's",  "Cirillo's", "Dublin", "Dublin", "Dublin", Location(0.5f, 0.5f),
+                "OPEN", createMenu(), "imageUrl")
+    }
+
+    private fun createMenu(): MutableList<Dish> {
+        val lunch = mutableListOf<Dish>()
+
+        lunch.add(Dish("STARTER", "Soup of the day", "Fresh soup of the day", Price("EUR", 5.5f)))
+        lunch.add(Dish("PIZZA", "MARGHERITA", "Tomato Sauce, Mozzarella, Parmesan & Fresh Basil", Price("EUR", 9f)))
+        lunch.add(Dish("DESERT", "Cheese cake", "Strawberry cheese cake", Price("EUR", 6.5f)))
+
+        return lunch
+    }
+
 }

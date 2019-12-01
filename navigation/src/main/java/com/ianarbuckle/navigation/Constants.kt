@@ -5,5 +5,5 @@ package com.ianarbuckle.navigation
  *
  */
 object Constants {
-    const val RESTAURANTS_NAME_KEY = "NAME"
+    const val RESTAURANT = "RESTAURANT"
 }

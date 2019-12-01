@@ -9,8 +9,6 @@ import com.ianarbuckle.core.extensions.parseDate
 import com.squareup.timessquare.CalendarPickerView
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import kotlinx.android.synthetic.main.calendar_view.view.*
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 /**
@@ -44,7 +42,7 @@ class CalendarViewImpl(context: Context) : CalendarView, ConstraintLayout(contex
         calendarPickerView.init(today, nextYear.time)
                 .inMode(CalendarPickerView.SelectionMode.SINGLE)
                 .withSelectedDate(today)
-        toolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
+        bookingToolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
         calendarPickerView.setOnDateSelectedListener(object : CalendarPickerView.OnDateSelectedListener {
             override fun onDateSelected(date: Date?) {
                 bottomSheet.visibility = View.VISIBLE
@@ -67,7 +65,7 @@ class CalendarViewImpl(context: Context) : CalendarView, ConstraintLayout(contex
     }
 
     override fun toolbarClickListener(clickListener: () -> Unit) {
-        toolbar.setOnClickListener {
+        bookingToolbar.setOnClickListener {
             clickListener()
         }
     }

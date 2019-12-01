@@ -16,15 +16,10 @@ import kotlinx.android.synthetic.main.home_restaurants_view.view.*
  */
 class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayout(context) {
 
-    lateinit var restaurantsAdapter: RestaurantsAdapter
+    private lateinit var restaurantsAdapter: RestaurantsAdapter
 
     init {
         inflate(context, R.layout.home_restaurants_view, this)
-        toolbar.apply {
-            title = resources.getString(R.string.title_restaurants)
-            val toolbarAttributeColor = context.getColorFromAttr(R.attr.titleTextColor)
-            setTitleTextColor(toolbarAttributeColor)
-        }
     }
 
     override fun getView(): View {
@@ -54,11 +49,9 @@ class DefaultRestaurantsView(context: Context) : RestaurantsView, ConstraintLayo
         errorMessage.visibility = View.VISIBLE
         errorImageView.visibility = View.VISIBLE
         tryAgainButton.visibility = View.VISIBLE
-        progressBar.visibility = View.GONE
     }
 
     override fun showLoading() {
-        errorImageView.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
     }
 

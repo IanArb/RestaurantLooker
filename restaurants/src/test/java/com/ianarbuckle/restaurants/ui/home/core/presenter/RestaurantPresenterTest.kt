@@ -5,23 +5,17 @@ import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.restaurants.ui.home.core.interactor.RestaurantsInteractor
 import com.ianarbuckle.restaurants.ui.home.core.view.RestaurantsView
 import com.ianarbuckle.restaurants.ui.home.router.RestaurantsRouter
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations.initMocks
 import org.mockito.junit.MockitoJUnitRunner
-import utils.buildRestaurantMock
-import utils.createRestaurant
+import utils.ModelData
 import org.mockito.Mockito.`when` as given
 
 /**
@@ -42,14 +36,11 @@ class RestaurantPresenterTest {
     @Mock
     private lateinit var router: RestaurantsRouter
 
-    @Mock
-    private lateinit var lifecycleOwner: LifecycleOwner
-
     @Before
     fun setup() {
         Dispatchers.setMain(Dispatchers.IO)
         initMocks(this)
-        presenter = DefaultRestaurantsPresenter(view, interactor, router, lifecycleOwner)
+        presenter = DefaultRestaurantsPresenter(view, interactor, router)
     }
 
     @After
@@ -61,11 +52,11 @@ class RestaurantPresenterTest {
     fun `verify that onCreate it should populate restaurants and that results are not empty`() {
         runBlocking {
             launch {
-                given(interactor.fetchRestaurants()).thenReturn(buildRestaurantMock())
+                given(interactor.fetchRestaurants()).thenReturn(ModelData.buildRestaurantsModel())
                 presenter.onCreate()
 
                 withContext(Dispatchers.Main) {
-                    verify(view, times(1)).showRestaurants(buildRestaurantMock())
+                    verify(view, times(1)).showRestaurants(ModelData.buildRestaurantsModel())
                 }
                 verify(view, times(1)).showLoading()
                 verify(view, times(1)).hideLoading()

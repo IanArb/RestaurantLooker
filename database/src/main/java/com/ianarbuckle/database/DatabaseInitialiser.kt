@@ -27,3 +27,7 @@ data class DatabaseInitialiser(private val context: Context) {
         }
     }
 }
+
+fun databaseInitializer(initializer: DatabaseInitialiser.Builder.() -> Unit): DatabaseClient {
+    return DatabaseInitialiser.Builder().apply(initializer).build()
+}

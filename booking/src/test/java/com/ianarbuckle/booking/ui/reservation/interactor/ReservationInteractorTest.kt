@@ -3,12 +3,16 @@ package com.ianarbuckle.booking.ui.reservation.interactor
 import android.app.Activity
 import android.content.Intent
 import com.google.common.truth.Truth.assertThat
+import com.ianarbuckle.booking.network.repository.BookingsRepository
 import com.ianarbuckle.booking.ui.reservation.core.interactor.ReservationInteractor
 import com.ianarbuckle.booking.ui.reservation.core.interactor.ReservationInteractorImpl
 import com.ianarbuckle.booking.ui.reservation.core.repository.ReservationRepository
+import com.ianarbuckle.booking.utils.TestData
 import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.core.utils.FormFieldValidator
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Location
+import com.ianarbuckle.models.restaurant.Restaurant
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -29,7 +33,7 @@ import kotlin.collections.HashMap
 class ReservationInteractorTest {
 
     @Mock
-    lateinit var repository: ReservationRepository
+    lateinit var repository: BookingsRepository
 
     @Mock
     lateinit var activity: Activity
@@ -39,9 +43,6 @@ class ReservationInteractorTest {
 
     @Mock
     lateinit var deviceUuidFactory: DeviceUuidFactory
-
-    @Mock
-    lateinit var uuid: UUID
 
     lateinit var interactor: ReservationInteractor
 
@@ -114,21 +115,23 @@ class ReservationInteractorTest {
     @Test
     fun `verify booking properties are populated and are not empty nor null`() {
         whenever(activity.intent).thenReturn(intent)
-        whenever(intent.getStringExtra("NAME")).thenReturn("Buckle's")
+        whenever(intent.getParcelableExtra<Restaurant>("RESTAURANT")).thenReturn(TestData.createRestaurant())
         whenever(deviceUuidFactory.getUUID()).thenReturn("1234-1234-1234")
         val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
         val characteristics = TableCharacteristics("COUPLE", 2, false)
         val table = Table("1", "RESERVED", characteristics)
-        val booking = Booking(owner, "Buckle's", table)
+        val details = RestaurantDetails("Buckle's", "imageUrl", "Dublin", Location(0.5f, 0.5f))
+        val booking = Booking(owner, details, table)
 
         val properties = HashMap<String, String>()
         properties.apply {
-            put("email", "ian@mail.com")
-            put("surname", "Ian Arbuckle")
-            put("phoneNumber", "90909090")
-            put("bookingDate", "10/20/2020")
-            put("arrivalTime", "10:00")
-            put("dietaryRequirements", "false")
+            put("EMAIL_KEY", "ian@mail.com")
+            put("NAME_KEY", "Ian Arbuckle")
+            put("PHONE_CODE_KEY", "353")
+            put("PHONE_KEY", "123456789")
+            put("BOOKING_DATE_KEY", "10/20/2020")
+            put("ARRIVAL_TIME_KEY", "10:00")
+            put("DIET_KEY", "false")
         }
 
         assertThat(interactor.createBookingRequest(properties)).isEqualTo(booking)
@@ -140,7 +143,8 @@ class ReservationInteractorTest {
         val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
         val characteristics = TableCharacteristics("COUPLE", 2, false)
         val table = Table("1", "RESERVED", characteristics)
-        val booking = Booking(owner, "Buckle's", table)
+        val details = RestaurantDetails("Buckle's", "image", "Buckle Town", Location(0.5f, 0.5f))
+        val booking = Booking(owner, details, table)
 
         runBlocking {
             interactor.saveBooking(booking)

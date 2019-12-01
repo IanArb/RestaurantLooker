@@ -1,11 +1,11 @@
-package com.ianarbuckle.booking.ui.bookings.repository
+package com.ianarbuckle.booking.network.repository
 
 import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.booking.network.BookingService
 import com.ianarbuckle.booking.network.manager.BookingServiceManager
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepository
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepositoryImpl
+import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Location
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -27,13 +27,16 @@ class BookingsRepositoryTest {
     @Mock
     lateinit var bookingService: BookingService
 
+    @Mock
+    lateinit var uuidFactory: DeviceUuidFactory
+
     lateinit var repository: BookingsRepository
 
     @Before
     fun setup() {
         initMocks(this)
 
-        repository = BookingsRepositoryImpl(serviceManager)
+        repository = BookingsRepositoryImpl(serviceManager, uuidFactory)
     }
 
     @Test
@@ -43,12 +46,14 @@ class BookingsRepositoryTest {
             val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
             val characteristics = TableCharacteristics("COUPLE", 2, false)
             val table = Table("1", "RESERVED", characteristics)
-            val booking = Booking(owner, "Buckle's", table)
+            val details = RestaurantDetails("Buckle's", "image", "Buckle Town", Location(0.5f, 0.5f))
+            val booking = Booking(owner, details, table)
             bookings.add(booking)
+            whenever(uuidFactory.getUUID()).thenReturn("1234-1234-1234")
             whenever(serviceManager.getBookingService()).thenReturn(bookingService)
             whenever(bookingService.retrieveBookingsByUUID("1234-1234-1234")).thenReturn(bookings)
 
-            assertThat(repository.retrieveBookingsByUuid("1234-1234-1234")).isNotEmpty()
+            assertThat(repository.retrieveBookingsByUuid()).isNotEmpty()
             verify(serviceManager, times(1)).getBookingService()
         }
     }

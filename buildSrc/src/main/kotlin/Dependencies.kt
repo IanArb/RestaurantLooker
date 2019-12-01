@@ -37,9 +37,9 @@ import Versions.workManagerVersion
 
 object Versions {
     //SDK
-    val compileSDKVersion = 28
+    val compileSDKVersion = 29
     val minSDKVersion = 21
-    val targetSDKVersion = 28
+    val targetSDKVersion = 29
     val versionCode = 1
     val versionName = "1.0"
 
@@ -50,11 +50,11 @@ object Versions {
     const val kotlinMockito = "2.1.0"
 
     //Android
-    const val appCompatVersion = "1.0.0"
+    const val appCompatVersion = "1.1.0"
     const val materialComponentsVersion = "1.0.0"
-    const val constraintLayoutVersion = "2.0.0-beta2"
+    const val constraintLayoutVersion = "2.0.0-beta3"
     const val cardviewVersion = "1.0.0"
-    const val recyclerviewVersion = "1.0.0"
+    const val recyclerviewVersion = "1.1.0-beta05"
 
     //Dagger
     const val daggerVersion = "2.23"

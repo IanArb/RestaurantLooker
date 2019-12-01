@@ -3,6 +3,7 @@ package com.ianarbuckle.seathelper.app.builder
 import android.content.Context
 import com.ianarbuckle.database.DatabaseInitialiser
 import com.ianarbuckle.database.client.DatabaseClient
+import com.ianarbuckle.database.databaseInitializer
 import dagger.Module
 import dagger.Provides
 
@@ -15,7 +16,7 @@ class DatabaseModule(private val context: Context) {
 
     @AppScope
     @Provides
-    fun provideDatabaseClient(): DatabaseClient = DatabaseInitialiser.Builder()
-            .withContext(context)
-            .build()
+    fun provideDatabaseClient(): DatabaseClient = databaseInitializer {
+        withContext(context)
+    }
 }

@@ -1,6 +1,6 @@
 package com.ianarbuckle.booking.ui.bookings.core.interactor
 
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepository
+import com.ianarbuckle.booking.network.repository.BookingsRepository
 import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.models.booking.Booking
 
@@ -9,12 +9,11 @@ import com.ianarbuckle.models.booking.Booking
  *
  */
 interface BookingsInteractor {
-
-    suspend fun getBookings(): MutableList<Booking>
+    suspend fun getBookings(): MutableList<Booking>?
 }
 
 class BookingsInteractorImpl(private val repository: BookingsRepository, private val uuidFactory: DeviceUuidFactory) : BookingsInteractor {
 
-    override suspend fun getBookings(): MutableList<Booking> = uuidFactory.getUUID()?.let { repository.retrieveBookingsByUuid(it) }!!
+    override suspend fun getBookings(): MutableList<Booking>? = repository.retrieveBookingsByUuid()
 
 }

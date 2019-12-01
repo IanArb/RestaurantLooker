@@ -1,11 +1,6 @@
 package com.ianarbuckle.restaurants.ui.home.core.interactor
 
-import android.content.Context
-import android.content.res.Resources
-import com.ianarbuckle.restaurants.data.Restaurant
 import com.ianarbuckle.restaurants.ui.home.core.repository.RestaurantsRepository
-import com.nhaarman.mockitokotlin2.mock
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -16,11 +11,7 @@ import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as given
 import org.mockito.MockitoAnnotations.initMocks
 import org.mockito.junit.MockitoJUnitRunner
-import utils.buildRestaurantMock
-import net.danlew.android.joda.JodaTimeAndroid
-import org.mockito.Mockito.`when`
-import org.mockito.ArgumentMatchers.anyInt
-import java.io.InputStream
+import utils.ModelData
 
 
 /**
@@ -44,7 +35,7 @@ class RestaurantInteractorTest {
     @Test
     fun `test that repository with restaurants gets called`() {
         runBlocking {
-            given(repository.fetchRestaurants()).thenReturn(buildRestaurantMock())
+            given(repository.fetchRestaurants()).thenReturn(ModelData.buildRestaurantsModel())
 
             interactor.fetchRestaurants()
 

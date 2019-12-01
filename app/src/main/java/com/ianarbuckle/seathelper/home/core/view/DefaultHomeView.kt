@@ -8,7 +8,6 @@ import com.ianarbuckle.seathelper.R
 import com.ianarbuckle.seathelper.extensions.active
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
-import com.jakewharton.rxbinding2.support.design.widget.itemSelections
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.home_view.view.*
 
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.home_view.view.*
  * Created by Ian Arbuckle on 18/05/2018.
  *
  */
-class DefaultHomeView(context: Context?) : HomeView, ConstraintLayout(context) {
+class DefaultHomeView(context: Context) : HomeView, ConstraintLayout(context) {
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 

@@ -1,57 +1,60 @@
 package com.ianarbuckle.booking.ui.bookings.builder
 
 import android.content.Context
-import com.ianarbuckle.booking.network.builder.NetworkModule
-import com.ianarbuckle.booking.network.manager.BookingServiceManager
-import com.ianarbuckle.booking.ui.bookings.BookingsFragment
+import com.ianarbuckle.booking.network.builder.NetworkComponent
+import com.ianarbuckle.booking.ui.bookings.BookingsActivity
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractor
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractorImpl
 import com.ianarbuckle.booking.ui.bookings.core.presenter.BookingsPresenter
 import com.ianarbuckle.booking.ui.bookings.core.presenter.BookingsPresenterImpl
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepository
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepositoryImpl
+import com.ianarbuckle.booking.network.repository.BookingsRepository
+import com.ianarbuckle.booking.ui.bookings.core.router.BookingsRouter
+import com.ianarbuckle.booking.ui.bookings.core.router.BookingsRouterImpl
 import com.ianarbuckle.booking.ui.bookings.core.view.BookingsView
 import com.ianarbuckle.booking.ui.bookings.core.view.BookingsViewImpl
 import com.ianarbuckle.core.utils.DeviceUuidFactory
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import javax.inject.Scope
 
 /**
  * Created by Ian Arbuckle on 2019-07-07.
  *
  */
-annotation class BookingScope
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class BookingsScope
 
 @Module
-class BookingModule(private val fragment: BookingsFragment, private val uuidFactory: DeviceUuidFactory) {
+class BookingsModule(private val activity: BookingsActivity, private val uuidFactory: DeviceUuidFactory) {
 
-    @BookingScope
+    @BookingsScope
     @Provides
-    fun provideContext(): Context = fragment.requireContext()
+    fun provideContext(): Context = activity
 
-    @BookingScope
+    @BookingsScope
     @Provides
     fun provideView(context: Context): BookingsView = BookingsViewImpl(context)
 
-    @BookingScope
+    @BookingsScope
     @Provides
     fun provideInteractor(repository: BookingsRepository): BookingsInteractor
             = BookingsInteractorImpl(repository, uuidFactory)
 
-    @BookingScope
+    @BookingsScope
     @Provides
-    fun providePresenter(view: BookingsView, interactor: BookingsInteractor): BookingsPresenter =
-            BookingsPresenterImpl(view, interactor)
+    fun providePresenter(view: BookingsView, interactor: BookingsInteractor, router: BookingsRouter): BookingsPresenter =
+            BookingsPresenterImpl(view, interactor, router)
 
-    @BookingScope
+    @BookingsScope
     @Provides
-    fun provideRepository(serviceManager: BookingServiceManager): BookingsRepository = BookingsRepositoryImpl(serviceManager)
+    fun provideRouter(): BookingsRouter = BookingsRouterImpl(activity)
 
 }
 
-@BookingScope
-@Component(modules = [BookingModule::class, NetworkModule::class])
-interface BookingComponent {
-    fun inject(fragment: BookingsFragment)
+@BookingsScope
+@Component(modules = [BookingsModule::class], dependencies = [NetworkComponent::class])
+interface BookingsComponent {
+    fun inject(activity: BookingsActivity)
 }

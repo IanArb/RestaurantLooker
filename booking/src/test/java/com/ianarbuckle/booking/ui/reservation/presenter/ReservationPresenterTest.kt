@@ -9,6 +9,7 @@ import com.ianarbuckle.booking.ui.reservation.core.presenter.ReservationPresente
 import com.ianarbuckle.booking.ui.reservation.core.router.ReservationRouter
 import com.ianarbuckle.booking.ui.reservation.core.view.ReservationView
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Location
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -246,42 +247,6 @@ class ReservationPresenterTest {
             fullnameTextWatcher()
             bookingDateTextWatcher()
             arrivalTimeDateTextWatcher()
-        }
-    }
-
-    @Ignore
-    @Test
-    fun `verify that onCreate it should create booking when fields are valid`() {
-        runBlocking {
-            launch {
-                whenever(interactor.isArrivalTimeValid("17:00")).thenReturn(true)
-                whenever(interactor.isBookingDateValid("10/10/2019")).thenReturn(true)
-                whenever(interactor.isEmailValid("ian@mail.com")).thenReturn(true)
-                whenever(interactor.isPhoneNumberValid("23423423")).thenReturn(true)
-                whenever(interactor.isFullnameValid("Buckle")).thenReturn(true)
-
-                val properties = HashMap<String, String>()
-                properties.apply {
-                    put("email", "ian@mail.com")
-                    put("surname", "Buckle")
-                    put("phoneNumber", "23423423")
-                    put("bookingDate", "10/10/2019")
-                    put("arrivalTime", "17:00")
-                    put("dietaryRequirements", "false")
-                }
-
-                val owner = Owner("1234-1234-1234", "Buckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/10/2019", "17:00")
-                val characteristics = TableCharacteristics("COUPLE", 2, false)
-                val table = Table("1", "RESERVED", characteristics)
-                val booking = Booking(owner, "Buckle's", table)
-
-                whenever(interactor.createBookingRequest(properties)).thenReturn(booking)
-
-                presenter.onCreate()
-
-                verify(router, times(1)).navigateToConfirmation(booking)
-//                verify(interactor, times(1)).saveBooking(booking)
-            }
         }
     }
 

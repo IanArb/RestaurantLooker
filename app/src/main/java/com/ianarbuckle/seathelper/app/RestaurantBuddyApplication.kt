@@ -8,7 +8,6 @@ import com.ianarbuckle.restaurants.RestaurantsNavigator
 import com.ianarbuckle.seathelper.app.builder.*
 import com.ianarbuckle.seathelper.components.BookingInitialiser
 import com.ianarbuckle.seathelper.components.RestaurantsInitialiser
-import com.ianarbuckle.seathelper.components.TablesMapInitializer
 import com.ianarbuckle.seathelper.network.NetworkModule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.danlew.android.joda.JodaTimeAndroid
@@ -66,6 +65,5 @@ class RestaurantBuddyApplication : Application() {
 
         RestaurantsInitialiser(baseUrl, okHttpClient, restaurantsNavigator, databaseClient).init()
         BookingInitialiser(baseUrl, okHttpClient, bookingNavigator, country, databaseClient, uuidFactory).init()
-        TablesMapInitializer(baseUrl, okHttpClient).init()
     }
 }

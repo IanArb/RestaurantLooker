@@ -26,7 +26,7 @@ import javax.inject.Scope
 annotation class ConfirmationScope
 
 @Module
-class ConfirmationModule(private val activity: ConfirmationActivity, private val bookingsCallback: (ConfirmationActivity) -> Unit) {
+class ConfirmationModule(private val activity: ConfirmationActivity, private val bookingsCallback: ((ConfirmationActivity) -> Unit)? = null) {
 
     @ConfirmationScope
     @Provides

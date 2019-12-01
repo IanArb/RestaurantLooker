@@ -3,9 +3,10 @@ package com.ianarbuckle.booking.ui.bookings.interactor
 import com.google.common.truth.Truth.assertThat
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractor
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractorImpl
-import com.ianarbuckle.booking.ui.bookings.core.repository.BookingsRepository
+import com.ianarbuckle.booking.network.repository.BookingsRepository
 import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Location
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -41,11 +42,12 @@ class BookingsInteractorTest {
             val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
             val characteristics = TableCharacteristics("COUPLE", 2, false)
             val table = Table("1", "RESERVED", characteristics)
-            val booking = Booking(owner, "Buckle's", table)
+            val details = RestaurantDetails("Buckle's", "image", "Buckle Town", Location(0.5f, 0.5f))
+            val booking = Booking(owner, details, table)
             bookings.add(booking)
 
             whenever(uuidFactory.getUUID()).thenReturn("1234-1234-1234")
-            whenever(repository.retrieveBookingsByUuid("1234-1234-1234")).thenReturn(bookings)
+            whenever(repository.retrieveBookingsByUuid()).thenReturn(bookings)
 
             assertThat(interactor.getBookings()).isNotEmpty()
         }
@@ -58,8 +60,9 @@ class BookingsInteractorTest {
             val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
             val characteristics = TableCharacteristics("COUPLE", 2, false)
             val table = Table("1", "RESERVED", characteristics)
-            val booking = Booking(owner, "Buckle's", table)
-            val booking2 = Booking(owner, "Buckle's", table)
+            val details = RestaurantDetails("Buckle's", "image", "Buckle Town", Location(0.5f, 0.5f))
+            val booking = Booking(owner, details, table)
+            val booking2 = Booking(owner, details, table)
 
             bookings.apply {
                 add(booking)
@@ -67,7 +70,7 @@ class BookingsInteractorTest {
             }
 
             whenever(uuidFactory.getUUID()).thenReturn("1234-1234-1234")
-            whenever(repository.retrieveBookingsByUuid("1234-1234-1234")).thenReturn(bookings)
+            whenever(repository.retrieveBookingsByUuid()).thenReturn(bookings)
 
             assertThat(interactor.getBookings()).hasSize(2)
         }
