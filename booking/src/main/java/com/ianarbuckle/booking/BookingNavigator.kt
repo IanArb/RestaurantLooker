@@ -9,4 +9,5 @@ import android.app.Activity
 interface BookingNavigator {
     fun navigateToBookings(activity: Activity)
     fun navigateBackToRestaurants(activity: Activity)
+    fun navigateToBookingWithReservation(activity: Activity, destination: Class<out Activity>)
 }

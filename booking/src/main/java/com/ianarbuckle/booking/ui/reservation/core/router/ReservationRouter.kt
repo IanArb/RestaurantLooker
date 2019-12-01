@@ -1,11 +1,7 @@
 package com.ianarbuckle.booking.ui.reservation.core.router
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.ianarbuckle.booking.BookingNavigator
-import com.ianarbuckle.booking.R
 import com.ianarbuckle.booking.ui.calendar.CalendarActivity
 import com.ianarbuckle.booking.ui.confirmation.ConfirmationActivity
 import com.ianarbuckle.booking.ui.phonePrefix.PhonePrefixActivity

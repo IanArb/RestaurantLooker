@@ -69,36 +69,36 @@ dependencies {
     implementation project(':core')
     implementation project(':models')
 
-    api Deps.kotlin_extensions_library
+    implementation Deps.kotlin_extensions_library
 
     //Dagger
-    api Deps.dagger_library
-    api Deps.dagger_support_library
+    implementation Deps.dagger_library
+    implementation Deps.dagger_support_library
     kapt Deps.dagger_compiler_library
 
     //Network
-    api Deps.okHttp3_logging_interceptor_library
-    api Deps.retrofit2_library
-    api Deps.okHttp3_library
+    implementation Deps.okHttp3_logging_interceptor_library
+    implementation Deps.retrofit2_library
+    implementation Deps.okHttp3_library
 
     //Json converter
-    api Deps.moshi_kotlin_library
-    api Deps.retrofit2_moshi_converter_library
-    api Deps.retrofit2_gson_converter
+    implementation Deps.moshi_kotlin_library
+    implementation Deps.retrofit2_moshi_converter_library
+    implementation Deps.retrofit2_gson_converter
 
     //Timber
-    api Deps.timber_library
+    implementation Deps.timber_library
 
 
     //Room
-    api Deps.room_library
+    implementation Deps.room_library
     kapt Deps.room_compiler_library
-    api Deps.room_kotlin_library
+    implementation Deps.room_kotlin_library
 
     //Gson
-    api Deps.gson_library
+    implementation Deps.gson_library
 
-    api Deps.androidThreeTenbp
+    implementation Deps.androidThreeTenbp
 
     //Test
     testImplementation Deps.junit_library

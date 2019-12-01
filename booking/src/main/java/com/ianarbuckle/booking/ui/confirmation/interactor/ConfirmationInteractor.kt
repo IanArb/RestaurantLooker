@@ -9,11 +9,11 @@ import com.ianarbuckle.models.booking.Booking
  *
  */
 interface ConfirmationInteractor {
-    fun getBooking(): Booking
+    fun getBooking(): Booking?
 }
 
 class ConfirmationInteractorImpl(private val activity: Activity) : ConfirmationInteractor {
 
-    override fun getBooking(): Booking = activity.intent.getParcelableExtra(BOOKING_KEY)
+    override fun getBooking(): Booking? = activity.intent.getParcelableExtra(BOOKING_KEY)
 
 }

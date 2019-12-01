@@ -1,5 +1,6 @@
 package com.ianarbuckle.restaurants
 
+import com.ianarbuckle.database.DatabaseInitialiser
 import com.ianarbuckle.database.client.DatabaseClient
 import com.ianarbuckle.restaurants.builder.DefaultRestaurantsInjector
 import com.ianarbuckle.restaurants.builder.RestaurantsInjector
@@ -37,7 +38,7 @@ data class RestaurantsInitializer(val baseUrl: String, val okHttpClient: OkHttpC
         fun withNavigator(navigator: RestaurantsNavigator) = apply { this.navigator = navigator }
         fun withDatabaseClient(databaseClient: DatabaseClient) = apply { this.databaseClient = databaseClient }
 
-        fun build() {
+        fun build(): RestaurantsInitializer {
             val initializer =
                     RestaurantsInitializer(
                     baseUrl,
@@ -46,7 +47,12 @@ data class RestaurantsInitializer(val baseUrl: String, val okHttpClient: OkHttpC
                     navigator,
                     databaseClient)
             initializer.init()
+            return initializer
         }
     }
 
+}
+
+fun restaurantsInitializer(initializer: RestaurantsInitializer.Builder.() -> Unit): RestaurantsInitializer {
+    return RestaurantsInitializer.Builder().apply(initializer).build()
 }

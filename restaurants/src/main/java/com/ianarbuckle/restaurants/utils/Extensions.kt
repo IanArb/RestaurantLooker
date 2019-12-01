@@ -12,9 +12,6 @@ import com.ianarbuckle.restaurant.R
  *
  */
 
-@BindingAdapter("imageUrl")
-fun ImageView.setImageUrl(imageUrl: String) = provideImage(context, imageUrl)
-
 @BindingAdapter("statusColor")
 fun TextView.setStatusColor(status: String) {
     val errorColor = context.getColorFromAttr(R.attr.colorError)

@@ -12,9 +12,9 @@ import retrofit2.Converter
  * Created by Ian Arbuckle on 2019-07-07.
  *
  */
-data class BookingInitializer(private val baseUrl: String, private val okHttpClient: OkHttpClient, private val converterFactory: Converter.Factory,
-                              private val navigator: BookingNavigator, private val country: String, private val databaseClient: DatabaseClient,
-                              private val bookingsCallback: (ConfirmationActivity) -> Unit, private val uuidFactory: DeviceUuidFactory) {
+data class BookingInitializer(private var baseUrl: String, private var okHttpClient: OkHttpClient, private var converterFactory: Converter.Factory,
+                              private var navigator: BookingNavigator, private var country: String, private var databaseClient: DatabaseClient,
+                              private var bookingsCallback: ((ConfirmationActivity) -> Unit)? = null, private var uuidFactory: DeviceUuidFactory) {
 
     fun init() {
         val injector: BookingInjector =
@@ -27,6 +27,7 @@ data class BookingInitializer(private val baseUrl: String, private val okHttpCli
                         bookingsCallback,
                         uuidFactory)
         BookingProvider.init(injector)
+        injector.inject()
     }
 
     class Builder {
@@ -36,7 +37,7 @@ data class BookingInitializer(private val baseUrl: String, private val okHttpCli
         private lateinit var navigator: BookingNavigator
         private lateinit var country: String
         private lateinit var databaseClient: DatabaseClient
-        private lateinit var bookingsCallback: (ConfirmationActivity) -> Unit
+        private var bookingsCallback: ((ConfirmationActivity) -> Unit)? = null
         private lateinit var uuidFactory: DeviceUuidFactory
 
         fun withBaseUrl(baseUrl: String) = apply { this.baseUrl = baseUrl }
@@ -48,9 +49,8 @@ data class BookingInitializer(private val baseUrl: String, private val okHttpCli
         fun withCallback(bookingsCallback: (ConfirmationActivity) -> Unit) = apply { this.bookingsCallback = bookingsCallback }
         fun withDeviceUuidFactory(uuidFactory: DeviceUuidFactory) = apply { this.uuidFactory = uuidFactory }
 
-        fun build() {
-            val initializer =
-                    BookingInitializer(
+        fun build() : BookingInitializer {
+            val bookingInitializer = BookingInitializer(
                     baseUrl,
                     okHttpClient,
                     converterFactory,
@@ -59,7 +59,12 @@ data class BookingInitializer(private val baseUrl: String, private val okHttpCli
                     databaseClient,
                     bookingsCallback,
                     uuidFactory)
-            initializer.init()
+            bookingInitializer.init()
+            return bookingInitializer
         }
     }
+}
+
+fun bookingInitializer(initializer: BookingInitializer.Builder.() -> Unit): BookingInitializer {
+    return BookingInitializer.Builder().apply(initializer).build()
 }

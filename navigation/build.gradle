@@ -64,10 +64,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':restaurants')
     implementation project(path: ':booking')
+    implementation project(path: ':models')
 
-    api Deps.kotlin_extensions_library
+    implementation Deps.kotlin_extensions_library
 
-    api Deps.appCompat_library
+    implementation Deps.appCompat_library
 
 
     //Test

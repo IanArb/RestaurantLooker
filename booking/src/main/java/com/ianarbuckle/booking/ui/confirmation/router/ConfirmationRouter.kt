@@ -12,9 +12,9 @@ interface ConfirmationRouter {
     fun navigateToBookings()
 }
 
-class ConfirmationRouterImpl(private val activity: ConfirmationActivity, private val bookingsCallback: (ConfirmationActivity) -> Unit) : ConfirmationRouter {
+class ConfirmationRouterImpl(private val activity: ConfirmationActivity, private val bookingsCallback: ((ConfirmationActivity) -> Unit)? = null) : ConfirmationRouter {
 
     override fun navigateToBookings() {
-        bookingsCallback.invoke(activity)
+        bookingsCallback?.invoke(activity)
     }
 }

@@ -3,7 +3,8 @@ package com.ianarbuckle.navigation.restaurants
 import android.content.Context
 import android.content.Intent
 import com.ianarbuckle.booking.ui.reservation.ReservationActivity
-import com.ianarbuckle.navigation.Constants.RESTAURANTS_NAME_KEY
+import com.ianarbuckle.models.restaurant.Restaurant
+import com.ianarbuckle.navigation.Constants.RESTAURANT
 import com.ianarbuckle.restaurants.RestaurantsNavigator
 
 /**
@@ -12,9 +13,9 @@ import com.ianarbuckle.restaurants.RestaurantsNavigator
  */
 class RestaurantsCoordinator : RestaurantsNavigator {
 
-    override fun navigateToBookingReservation(context: Context, restaurantName: String) {
+    override fun navigateToBookingReservation(context: Context, restaurant: Restaurant) {
         val intent = Intent(context, ReservationActivity::class.java)
-        intent.putExtra(RESTAURANTS_NAME_KEY, restaurantName)
+        intent.putExtra(RESTAURANT, restaurant)
         context.startActivity(intent)
     }
 }

@@ -52,14 +52,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':core')
 
-    api Deps.appCompat_library
+    implementation Deps.appCompat_library
 
     //Gson
-    api Deps.gson_library
+    implementation Deps.gson_library
 
     //Room
-    api Deps.room_library
+    implementation Deps.room_library
     kapt Deps.room_compiler_library
-    api Deps.room_kotlin_library
+    implementation Deps.room_kotlin_library
 
 }

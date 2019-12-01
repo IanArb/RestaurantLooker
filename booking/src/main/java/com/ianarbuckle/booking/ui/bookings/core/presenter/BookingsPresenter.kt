@@ -1,6 +1,7 @@
 package com.ianarbuckle.booking.ui.bookings.core.presenter
 
 import com.ianarbuckle.booking.ui.bookings.core.interactor.BookingsInteractor
+import com.ianarbuckle.booking.ui.bookings.core.router.BookingsRouter
 import com.ianarbuckle.booking.ui.bookings.core.view.BookingsView
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -15,7 +16,7 @@ interface BookingsPresenter {
     fun onDestroy()
 }
 
-class BookingsPresenterImpl(private val view: BookingsView, private val interactor: BookingsInteractor) : BookingsPresenter, CoroutineScope {
+class BookingsPresenterImpl(private val view: BookingsView, private val interactor: BookingsInteractor, private val router: BookingsRouter) : BookingsPresenter, CoroutineScope {
 
     private lateinit var job: Job
 
@@ -25,25 +26,37 @@ class BookingsPresenterImpl(private val view: BookingsView, private val interact
     override fun onCreate() {
         job = Job()
         fetchBookings()
+        view.apply {
+            tryAgainClickListener {
+                fetchBookings()
+            }
+            toolbarClickListener {
+                router.navigateBack()
+            }
+        }
         view.tryAgainClickListener {
             fetchBookings()
         }
     }
 
     private fun fetchBookings() {
-        view.showLoading()
         job = launch {
             try {
+                withContext(Dispatchers.Main) {
+                    view.showLoading()
+                }
                 val bookings = interactor.getBookings()
                 withContext(Dispatchers.Main) {
-                    view.showBookings(bookings)
+                    bookings?.let { view.showBookings(it) }
                 }
             } catch (exception: Exception) {
                 withContext(Dispatchers.Main) {
                     view.showErrorMessage()
                 }
             } finally {
-                view.hideLoading()
+                withContext(Dispatchers.Main) {
+                    view.hideLoading()
+                }
             }
         }
     }

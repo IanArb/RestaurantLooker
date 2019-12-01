@@ -73,9 +73,6 @@ dependencies {
     //Kotlin
     implementation Deps.kotlin_extensions_library
 
-    //Coroutines
-    implementation Deps.couroutines_library
-
     //Android support
     implementation Deps.appCompat_library
 
@@ -89,15 +86,14 @@ dependencies {
     //RxJava
     implementation Deps.rxAndroid_library
     implementation Deps.rxJava_library
+    implementation Deps.rxBinding2_support_library
+    implementation Deps.rxBinding2_design_library
+    implementation Deps.rxBinding2_library
 
     //Test
     testImplementation Deps.junit_library
     testImplementation Deps.google_truth_library
     testImplementation Deps.mockito_library
-
-    // ViewModel and LiveData
-    implementation Deps.lifecycle_library
-    kapt Deps.lifecycle_compiler_library
 
     //Room
     implementation Deps.room_library
@@ -114,15 +110,11 @@ dependencies {
     implementation Deps.paging_library
     testImplementation Deps.paging_test_library
 
-    //Rx Paging support
-    implementation Deps.rxPaging_library
-
-    //WorkManager
-    implementation Deps.work_manager_kts_library
-    androidTestImplementation Deps.work_manager_test_library
-
     //Network
     implementation Deps.okHttp3_logging_interceptor_library
+    implementation Deps.retrofit2_library
+    implementation Deps.retrofit2_moshi_converter_library
+    implementation Deps.retrofit2_gson_converter
 
     //Json converter
     implementation Deps.moshi_kotlin_library
@@ -135,11 +127,6 @@ dependencies {
 
     //Joda
     implementation Deps.joda_time_android_library
-
-    //RxBinding
-    implementation Deps.rxBinding2_library
-    implementation Deps.rxBinding2_design_library
-    implementation Deps.rxBinding2_support_library
 
     implementation Deps.androidThreeTenbp
 

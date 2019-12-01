@@ -33,7 +33,7 @@ class ReservationActivity : AppCompatActivity() {
         presenter.onSavedInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         presenter.onRestoreInstanceState(savedInstanceState)
     }

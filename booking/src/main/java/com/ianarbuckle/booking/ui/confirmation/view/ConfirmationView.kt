@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ianarbuckle.booking.R
+import com.ianarbuckle.core.extensions.provideImage
 import com.ianarbuckle.models.booking.Booking
 import kotlinx.android.synthetic.main.confirmation_view.view.*
 
@@ -28,11 +29,12 @@ class ConfirmationViewImpl(context: Context) : ConfirmationView, ConstraintLayou
 
     override fun showBooking(booking: Booking) {
         booking.apply {
-            customerNameText.text = owner?.name
-            restaurantNameText.text = restaurantName
-            bookingDateText.text = owner?.bookingDate
-            arrivalTimeText.text = owner?.arrivalTime
-            tableNumberText.text = table?.tableNumber
+            title.text = context.getString(R.string.reservation_placeholder, owner?.name)
+            bookingImage.provideImage(context, restaurantDetails?.imageUrl!! )
+            bookingRestaurantName.text = booking.restaurantDetails?.name
+            bookingAddress.text = booking.restaurantDetails?.address
+            bookingArrivalTime.text = owner?.arrivalTime
+            bookingDate.text = owner?.bookingDate
         }
     }
 

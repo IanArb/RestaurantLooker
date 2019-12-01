@@ -4,14 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Parcelable
 import com.google.common.truth.Truth.assertThat
-import com.ianarbuckle.restaurants.data.Dish
-import com.ianarbuckle.restaurants.data.Price
+import com.ianarbuckle.models.restaurant.Dish
+import com.ianarbuckle.models.restaurant.Price
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations.initMocks
-import utils.createRestaurant
+import utils.ModelData.createRestaurant
 
 /**
  * Created by Ian Arbuckle on 2019-05-11.

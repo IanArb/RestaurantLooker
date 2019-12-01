@@ -137,7 +137,6 @@ class ReservationPresenterImpl(private val view: ReservationView, private val in
                 withContext(Dispatchers.Main) {
                     view.hideLoading()
                     view.showErrorMessage()
-                    Toast.makeText(view.getView().context, "${exception.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             } finally {
                 withContext(Dispatchers.Main) {

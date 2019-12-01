@@ -10,13 +10,20 @@
         android:allowBackup="true"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.ianarbuckle.booking.ui.reservation.ReservationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.calendar.CalendarActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.phonePrefix.PhonePrefixActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.confirmation.ConfirmationActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.ianarbuckle.booking.ui.reservation.ReservationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.calendar.CalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.phonePrefix.PhonePrefixActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.confirmation.ConfirmationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.bookings.BookingsActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

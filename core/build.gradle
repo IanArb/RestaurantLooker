@@ -27,6 +27,10 @@ android {
         freeCompilerArgs = ["-Xallow-result-return-type"]
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -36,16 +40,16 @@ dependencies {
     testImplementation Deps.junit_library
 
     //Network
-    api Deps.okHttp3_library
-    api Deps.retrofit2_library
-    api Deps.okHttp3_logging_interceptor_library
+    implementation Deps.okHttp3_library
+    implementation Deps.retrofit2_library
+    implementation Deps.okHttp3_logging_interceptor_library
 
     //Json converter
-    api Deps.moshi_kotlin_library
+    implementation Deps.moshi_kotlin_library
 
-    api Deps.androidThreeTenbp
+    implementation Deps.androidThreeTenbp
 
     //glide
-    api Deps.glide_library
+    implementation Deps.glide_library
     kapt Deps.glide_compiler_library
 }

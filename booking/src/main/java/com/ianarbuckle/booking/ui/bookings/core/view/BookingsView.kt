@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ianarbuckle.booking.R
 import com.ianarbuckle.booking.ui.bookings.core.view.adapter.BookingsAdapter
-import com.ianarbuckle.core.extensions.getColorFromAttr
+import com.ianarbuckle.core.extensions.getDrawableFromAttr
 import com.ianarbuckle.models.booking.Booking
 import kotlinx.android.synthetic.main.bookings_view.view.*
 
@@ -21,12 +21,14 @@ interface BookingsView {
     fun hideLoading()
     fun showErrorMessage()
     fun tryAgainClickListener(clickListener: () -> Unit)
+    fun toolbarClickListener(clickListener: () -> Unit)
 }
 
 class BookingsViewImpl(context: Context) : BookingsView, ConstraintLayout(context) {
 
     init {
         inflate(context, R.layout.bookings_view, this)
+        toolbar.setNavigationIcon(context.getDrawableFromAttr(R.attr.backArrowDrawable))
     }
 
     override fun getView(): View {
@@ -34,10 +36,9 @@ class BookingsViewImpl(context: Context) : BookingsView, ConstraintLayout(contex
     }
 
     override fun showBookings(bookings: MutableList<Booking>) {
-        recyclerViewBookings.apply {
-            visibility = View.VISIBLE
-            layoutManager = LinearLayoutManager(context)
+        recyclerView.apply {
             setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
             adapter = BookingsAdapter(bookings)
         }
     }
@@ -52,12 +53,17 @@ class BookingsViewImpl(context: Context) : BookingsView, ConstraintLayout(contex
 
     override fun showErrorMessage() {
         errorMessage.visibility = View.VISIBLE
-        errorImageView.visibility = View.VISIBLE
-        recyclerViewBookings.visibility = View.GONE
+
     }
 
     override fun tryAgainClickListener(clickListener: () -> Unit) {
         tryAgainButton.setOnClickListener {
+            clickListener()
+        }
+    }
+
+    override fun toolbarClickListener(clickListener: () -> Unit) {
+        toolbar.setNavigationOnClickListener {
             clickListener()
         }
     }

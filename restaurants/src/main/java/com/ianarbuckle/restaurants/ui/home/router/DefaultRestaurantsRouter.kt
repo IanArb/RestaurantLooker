@@ -28,7 +28,7 @@ class DefaultRestaurantsRouter(private val context: Context, private val navigat
     }
 
     override fun navigateToBookingReservation(restaurant: Restaurant) {
-        navigator.navigateToBookingReservation(context, restaurant.restaurantName)
+        navigator.navigateToBookingReservation(context, restaurant)
     }
 
 }

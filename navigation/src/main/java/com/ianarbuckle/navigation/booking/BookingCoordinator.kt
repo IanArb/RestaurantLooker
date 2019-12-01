@@ -17,4 +17,12 @@ class BookingCoordinator : BookingNavigator {
     override fun navigateBackToRestaurants(activity: Activity) {
         activity.finish()
     }
+
+    override fun navigateToBookingWithReservation(activity: Activity, destination: Class<out Activity>) {
+        val intent = Intent(activity, destination)
+        intent.putExtra("bookingPosition", 1)
+        activity.startActivity(intent)
+    }
+
+
 }

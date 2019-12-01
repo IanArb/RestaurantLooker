@@ -1,10 +1,16 @@
 package com.ianarbuckle.booking.builder
 
 import com.ianarbuckle.booking.BookingNavigator
+import com.ianarbuckle.booking.network.builder.DaggerNetworkComponent
+import com.ianarbuckle.booking.network.builder.NetworkComponent
 import com.ianarbuckle.booking.network.builder.NetworkModule
-import com.ianarbuckle.booking.ui.bookings.BookingsFragment
-import com.ianarbuckle.booking.ui.bookings.builder.BookingModule
-import com.ianarbuckle.booking.ui.bookings.builder.DaggerBookingComponent
+import com.ianarbuckle.booking.network.repository.BookingsRepository
+import com.ianarbuckle.booking.ui.booking.BookingFragment
+import com.ianarbuckle.booking.ui.booking.builder.BookingModule
+import com.ianarbuckle.booking.ui.booking.builder.DaggerBookingComponent
+import com.ianarbuckle.booking.ui.bookings.BookingsActivity
+import com.ianarbuckle.booking.ui.bookings.builder.BookingsModule
+import com.ianarbuckle.booking.ui.bookings.builder.DaggerBookingsComponent
 import com.ianarbuckle.booking.ui.calendar.CalendarActivity
 import com.ianarbuckle.booking.ui.calendar.builder.CalendarModule
 import com.ianarbuckle.booking.ui.calendar.builder.DaggerCalendarComponent
@@ -26,21 +32,25 @@ import retrofit2.Converter
  *
  */
 interface BookingInjector {
-    fun inject(fragment: BookingsFragment)
+    fun inject(fragment: BookingFragment)
     fun inject(activity: ReservationActivity)
     fun inject(activity: CalendarActivity)
     fun inject(activity: PhonePrefixActivity)
     fun inject(activity: ConfirmationActivity)
+    fun inject(activity: BookingsActivity)
+    fun inject(): BookingsRepository
 }
 
 class BookingInjectorImpl(private val baseUrl: String, private val okHttpClient: OkHttpClient, private val converterFactory: Converter.Factory,
-                          private val navigator: BookingNavigator, private val country: String, private val bookingsCallback: (ConfirmationActivity) -> Unit,
+                          private val navigator: BookingNavigator, private val country: String, private val bookingsCallback: ((ConfirmationActivity) -> Unit)? = null,
                           private val uuidFactory: DeviceUuidFactory): BookingInjector {
 
-    override fun inject(fragment: BookingsFragment) {
+    private lateinit var networkComponent: NetworkComponent
+
+    override fun inject(fragment: BookingFragment) {
         DaggerBookingComponent.builder()
-                .bookingModule(BookingModule(fragment, uuidFactory))
-                .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory))
+                .bookingModule(BookingModule(fragment))
+                .networkComponent(networkComponent)
                 .build()
                 .inject(fragment)
     }
@@ -48,7 +58,7 @@ class BookingInjectorImpl(private val baseUrl: String, private val okHttpClient:
     override fun inject(activity: ReservationActivity) {
         DaggerReservationComponent.builder()
                 .reservationModule(ReservationModule(activity, navigator, country, uuidFactory))
-                .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory))
+                .networkComponent(networkComponent)
                 .build()
                 .inject(activity)
     }
@@ -72,5 +82,20 @@ class BookingInjectorImpl(private val baseUrl: String, private val okHttpClient:
                 .confirmationModule(ConfirmationModule(activity, bookingsCallback))
                 .build()
                 .inject(activity)
+    }
+
+    override fun inject(activity: BookingsActivity) {
+        DaggerBookingsComponent.builder()
+                .bookingsModule(BookingsModule(activity, uuidFactory))
+                .networkComponent(networkComponent)
+                .build()
+                .inject(activity)
+    }
+
+    override fun inject(): BookingsRepository {
+        networkComponent = DaggerNetworkComponent.builder()
+                .networkModule(NetworkModule(okHttpClient, baseUrl, converterFactory, uuidFactory))
+                .build()
+        return networkComponent.repository()
     }
 }

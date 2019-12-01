@@ -8,7 +8,6 @@ import com.ianarbuckle.seathelper.R
 import com.ianarbuckle.seathelper.extensions.active
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
-import com.jakewharton.rxbinding2.support.design.widget.itemSelections
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.home_view.view.*
 
@@ -24,12 +23,6 @@ class DefaultHomeView(context: Context) : HomeView, ConstraintLayout(context) {
     init {
         inflate(context, R.layout.home_view, this)
         initBottomNavigation()
-        when(navPosition) {
-            BottomNavigationPosition.HOME -> toolbar.title = context.getString(R.string.restaurants_menu_title)
-            BottomNavigationPosition.BOOKINGS -> toolbar.title = context.getString(R.string.bookings_menu_title)
-            BottomNavigationPosition.MESSAGES -> toolbar.title = context.getString(R.string.messages_menu_title)
-            BottomNavigationPosition.PROFILE -> toolbar.title = context.getString(R.string.profile_menu_title)
-        }
     }
 
     private fun initBottomNavigation() {

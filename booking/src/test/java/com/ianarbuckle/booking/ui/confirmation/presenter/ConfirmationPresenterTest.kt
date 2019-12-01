@@ -4,6 +4,7 @@ import com.ianarbuckle.booking.ui.confirmation.interactor.ConfirmationInteractor
 import com.ianarbuckle.booking.ui.confirmation.router.ConfirmationRouter
 import com.ianarbuckle.booking.ui.confirmation.view.ConfirmationView
 import com.ianarbuckle.models.booking.*
+import com.ianarbuckle.models.restaurant.Location
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +39,8 @@ class ConfirmationPresenterTest {
         val owner = Owner("1234-1234-1234", "Ian Arbuckle", "ian@mail.com", PhoneNumber(353, 123456789), false, "10/20/2020", "10:00")
         val characteristics = TableCharacteristics("COUPLE", 2, false)
         val table = Table("1", "RESERVED", characteristics)
-        val booking = Booking(owner, "Buckle's", table)
+        val details = RestaurantDetails("Buckle's", "image", "Buckle Town", Location(0.5f, 0.5f))
+        val booking = Booking(owner, details, table)
         whenever(interactor.getBooking()).thenReturn(booking)
 
         presenter.onCreate()

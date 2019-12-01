@@ -2,8 +2,10 @@ package com.ianarbuckle.booking.ui.reservation.builder
 
 import android.content.Context
 import com.ianarbuckle.booking.BookingNavigator
+import com.ianarbuckle.booking.network.builder.NetworkComponent
 import com.ianarbuckle.booking.network.builder.NetworkModule
 import com.ianarbuckle.booking.network.manager.BookingServiceManager
+import com.ianarbuckle.booking.network.repository.BookingsRepository
 import com.ianarbuckle.booking.ui.reservation.ReservationActivity
 import com.ianarbuckle.booking.ui.reservation.core.interactor.ReservationInteractor
 import com.ianarbuckle.booking.ui.reservation.core.interactor.ReservationInteractorImpl
@@ -43,7 +45,7 @@ class ReservationModule(private val activity: ReservationActivity, private val n
 
     @ReservationScope
     @Provides
-    fun provideInteractor(repository: ReservationRepository): ReservationInteractor
+    fun provideInteractor(repository: BookingsRepository): ReservationInteractor
             = ReservationInteractorImpl(activity, repository, country, uuidFactory)
 
     @ReservationScope
@@ -54,14 +56,10 @@ class ReservationModule(private val activity: ReservationActivity, private val n
     @ReservationScope
     @Provides
     fun provideRouter(): ReservationRouter = ReservationRouterImpl(activity, navigator)
-
-    @ReservationScope
-    @Provides
-    fun provideRepository(serviceManager: BookingServiceManager): ReservationRepository = ReservationRepositoryImpl(serviceManager)
 }
 
 @ReservationScope
-@Component(modules = [NetworkModule::class, ReservationModule::class])
+@Component(modules =  [ReservationModule::class], dependencies = [NetworkComponent::class])
 interface ReservationComponent {
     fun inject(activity: ReservationActivity)
 }

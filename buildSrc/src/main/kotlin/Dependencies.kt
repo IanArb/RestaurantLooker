@@ -52,7 +52,7 @@ object Versions {
     //Android
     const val appCompatVersion = "1.1.0"
     const val materialComponentsVersion = "1.0.0"
-    const val constraintLayoutVersion = "2.0.0-beta2"
+    const val constraintLayoutVersion = "2.0.0-beta3"
     const val cardviewVersion = "1.0.0"
     const val recyclerviewVersion = "1.1.0-beta05"
 

@@ -16,7 +16,9 @@ class ConfirmationPresenterImpl(private val view: ConfirmationView, private val 
 
     override fun onCreate() {
         view.apply {
-            showBooking(interactor.getBooking())
+            interactor.getBooking()?.let {
+                showBooking(it)
+            }
             onBookingsClickListener {
                 router.navigateToBookings()
             }
