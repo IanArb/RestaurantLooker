@@ -5,10 +5,7 @@ import com.ianarbuckle.seathelper.app.builder.AppScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 /**
@@ -25,19 +22,13 @@ class NetworkModule constructor(private val context: Context) {
 
     @AppScope
     @Provides
-    fun provideOkHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient =
+    fun provideOkHttpClient(cache: Cache): OkHttpClient =
             OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
                     .cache(cache)
                     .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                     .build()
-
-    @AppScope
-    @Provides
-    fun provideInterceptor(): Interceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Timber.d(it) })
-            .apply { level = HttpLoggingInterceptor.Level.BASIC }
 
     @AppScope
     @Provides

@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compileSDKVersion
+
+    defaultConfig {
+        minSdkVersion Versions.minSDKVersion
+        targetSdkVersion Versions.targetSDKVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type"]
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation AndroidDeps.appCompat_library
+    testImplementation TestDeps.junit_library
+
+    //Network
+    implementation NetworkDeps.okHttp3_library
+    implementation NetworkDeps.retrofit2_library
+    implementation NetworkDeps.okHttp3_logging_interceptor_library
+
+    //Json converter
+    implementation NetworkDeps.moshi_kotlin_library
+
+    implementation UtilityDeps.androidThreeTenbp
+
+    //glide
+    implementation UtilityDeps.glide_library
+    kapt UtilityDeps.glide_compiler_library
+
+    //Coroutines
+    implementation KotlinDeps.coroutines_test_library
+    implementation KotlinDeps.coroutines_android_library
+    implementation KotlinDeps.coroutines_core_library
+}

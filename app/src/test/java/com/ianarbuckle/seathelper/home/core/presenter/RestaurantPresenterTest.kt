@@ -3,6 +3,7 @@ package com.ianarbuckle.seathelper.home.core.presenter
 import androidx.lifecycle.LifecycleOwner
 import android.view.MenuItem
 import com.google.common.truth.Truth.assertThat
+import com.ianarbuckle.seathelper.home.core.HomeInteractor
 import com.ianarbuckle.seathelper.utils.BottomNavigationPosition
 import com.ianarbuckle.seathelper.home.core.view.HomeView
 import com.ianarbuckle.seathelper.home.router.HomeRouter
@@ -35,12 +36,12 @@ class RestaurantPresenterTest {
     private lateinit var router: HomeRouter
 
     @Mock
-    private lateinit var lifecycleOwner: LifecycleOwner
+    private lateinit var interactor: HomeInteractor
 
     @Before
     fun setup() {
         initMocks(this)
-        presenter = DefaultHomePresenter(view, router)
+        presenter = DefaultHomePresenter(view, interactor, router)
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { _ -> Schedulers.trampoline() }
     }
 

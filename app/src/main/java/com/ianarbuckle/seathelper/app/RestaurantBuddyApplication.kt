@@ -2,6 +2,7 @@ package com.ianarbuckle.seathelper.app
 
 import android.app.Application
 import com.ianarbuckle.booking.BookingNavigator
+import com.ianarbuckle.client.AuthenticationClient
 import com.ianarbuckle.core.utils.DeviceUuidFactory
 import com.ianarbuckle.database.client.DatabaseClient
 import com.ianarbuckle.restaurants.RestaurantsNavigator
@@ -44,7 +45,7 @@ class RestaurantBuddyApplication : Application() {
         lateinit var component: AppComponent
     }
 
-    lateinit var country: String
+    private lateinit var country: String
 
     override fun onCreate() {
         super.onCreate()
@@ -54,14 +55,13 @@ class RestaurantBuddyApplication : Application() {
                 .networkModule(NetworkModule(this))
                 .navigationModule(NavigationModule())
                 .databaseModule(DatabaseModule(this))
+                .authenticationModule(AuthenticationModule())
                 .build()
         component.inject(this)
 
         country = Locale.getDefault().country
 
         AndroidThreeTen.init(this)
-        //TODO Remove joda time
-        JodaTimeAndroid.init(this)
 
         RestaurantsInitialiser(baseUrl, okHttpClient, restaurantsNavigator, databaseClient).init()
         BookingInitialiser(baseUrl, okHttpClient, bookingNavigator, country, databaseClient, uuidFactory).init()

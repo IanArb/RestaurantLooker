@@ -27,10 +27,6 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -42,10 +38,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    dataBinding {
-        enabled = true
     }
 
 
@@ -66,47 +58,43 @@ sourceSets {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':core')
-    implementation project(':models')
+    implementation project(':common')
+    implementation project(':data')
 
-    implementation Deps.kotlin_extensions_library
+    implementation KotlinDeps.kotlin_extensions_library
 
     //Dagger
-    implementation Deps.dagger_library
-    implementation Deps.dagger_support_library
-    kapt Deps.dagger_compiler_library
+    implementation DaggerDeps.dagger_library
+    kapt DaggerDeps.dagger_compiler_library
 
     //Network
-    implementation Deps.okHttp3_logging_interceptor_library
-    implementation Deps.retrofit2_library
-    implementation Deps.okHttp3_library
+    implementation NetworkDeps.okHttp3_logging_interceptor_library
+    implementation NetworkDeps.retrofit2_library
+    implementation NetworkDeps.okHttp3_library
 
     //Json converter
-    implementation Deps.moshi_kotlin_library
-    implementation Deps.retrofit2_moshi_converter_library
-    implementation Deps.retrofit2_gson_converter
+    implementation NetworkDeps.moshi_kotlin_library
+    implementation NetworkDeps.retrofit2_moshi_converter_library
+    implementation NetworkDeps.retrofit2_gson_converter
 
     //Timber
-    implementation Deps.timber_library
-
+    implementation UtilityDeps.timber_library
 
     //Room
-    implementation Deps.room_library
-    kapt Deps.room_compiler_library
-    implementation Deps.room_kotlin_library
+    implementation JetpackDeps.room_library
+    kapt JetpackDeps.room_compiler_library
+    implementation JetpackDeps.room_kotlin_library
 
     //Gson
-    implementation Deps.gson_library
+    implementation UtilityDeps.gson_library
 
-    implementation Deps.androidThreeTenbp
+    implementation UtilityDeps.androidThreeTenbp
 
     //Test
-    testImplementation Deps.junit_library
-    testImplementation Deps.google_truth_library
-    testImplementation Deps.mockito_library
-    testImplementation Deps.coroutines_test_library
-    testImplementation Deps.room_test_library
-    testImplementation Deps.mockito_kotlin_library
-    testImplementation Deps.joda_time_library
-    testImplementation Deps.mock_kotlin_library
+    testImplementation TestDeps.junit_library
+    testImplementation TestDeps.google_truth_library
+    testImplementation TestDeps.mockito_library
+    testImplementation KotlinDeps.coroutines_test_library
+    testImplementation TestDeps.mockito_kotlin_library
+    testImplementation TestDeps.mock_kotlin_library
 }

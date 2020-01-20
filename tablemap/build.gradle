@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -63,74 +63,63 @@ sourceSets {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.12'
+    implementation project(path: ':common')
+    implementation project(path: ':data')
+    implementation project(path: ':database')
 
-    implementation project(':core')
-    implementation project(path: ':navigation')
+    implementation KotlinDeps.kotlin_extensions_library
 
-    implementation Deps.kotlin_extensions_library
+    implementation AndroidDeps.appCompat_library
 
-    implementation Deps.appCompat_library
+    implementation AndroidDeps.cardView_library
+    implementation AndroidDeps.recyclerView_library
 
-    implementation Deps.cardView_library
-    implementation Deps.recyclerView_library
-
-    implementation Deps.material_components_library
+    implementation AndroidDeps.material_components_library
 
     //Dagger
-    implementation Deps.dagger_library
-    implementation Deps.dagger_support_library
-    kapt Deps.dagger_compiler_library
-
-    //Paging
-    implementation Deps.paging_library
-    testImplementation Deps.paging_test_library
+    implementation DaggerDeps.dagger_library
+    kapt DaggerDeps.dagger_compiler_library
 
     //Network
-    implementation Deps.okHttp3_logging_interceptor_library
-    implementation Deps.retrofit2_library
-    implementation Deps.okHttp3_library
+    implementation NetworkDeps.okHttp3_logging_interceptor_library
+    implementation NetworkDeps.retrofit2_library
+    implementation NetworkDeps.okHttp3_library
 
     //Json converter
-    implementation Deps.moshi_kotlin_library
-    implementation Deps.retrofit2_moshi_converter_library
-    implementation Deps.retrofit2_gson_converter
+    implementation NetworkDeps.moshi_kotlin_library
+    implementation NetworkDeps.retrofit2_moshi_converter_library
+    implementation NetworkDeps.retrofit2_gson_converter
 
     //Coroutines
-    implementation Deps.retrofit2_coroutines_adapter_library
-    implementation Deps.coroutines_android_library
-    implementation Deps.coroutines_core_library
+    implementation NetworkDeps.retrofit2_coroutines_adapter_library
+    implementation KotlinDeps.coroutines_android_library
+    implementation KotlinDeps.coroutines_core_library
 
     //Timber
-    implementation Deps.timber_library
+    implementation UtilityDeps.timber_library
 
     //Constraint layout
-    implementation Deps.constraint_layout_library
-    implementation Deps.mockito_kotlin_library
+    implementation AndroidDeps.constraint_layout_library
 
     //glide
-    implementation Deps.glide_library
-    kapt Deps.glide_compiler_library
+    implementation UtilityDeps.glide_library
+    kapt UtilityDeps.glide_compiler_library
 
     //RxBinding
-    implementation Deps.rxBinding2_kotlin_library
-    implementation Deps.rxBinding2_kotlin_design_library
-    implementation Deps.rxBinding2_kotlin_support_library
+    implementation RxDeps.rxBinding2_kotlin_library
+    implementation RxDeps.rxBinding2_kotlin_design_library
+    implementation RxDeps.rxBinding2_kotlin_support_library
 
     //Room
-    implementation Deps.room_library
-    kapt Deps.room_compiler_library
-    implementation Deps.room_kotlin_library
-
-    //Joda
-    implementation Deps.joda_time_android_library
+    implementation JetpackDeps.room_library
+    kapt JetpackDeps.room_compiler_library
+    implementation JetpackDeps.room_kotlin_library
 
     //Test
-    testImplementation Deps.junit_library
-    testImplementation Deps.google_truth_library
-    testImplementation Deps.mockito_library
-    testImplementation Deps.coroutines_test_library
-    testImplementation Deps.room_test_library
-    testImplementation Deps.mockito_kotlin_library
-    testImplementation Deps.joda_time_library
+    testImplementation TestDeps.junit_library
+    testImplementation TestDeps.google_truth_library
+    testImplementation TestDeps.mockito_library
+    testImplementation KotlinDeps.coroutines_test_library
+    testImplementation JetpackDeps.room_test_library
+    testImplementation TestDeps.mockito_kotlin_library
 }
