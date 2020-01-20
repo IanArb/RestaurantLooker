@@ -1,16 +1,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        kotlin_version = '1.3.60-eap-25'
+    }
     repositories {
+        maven { url "https://maven.google.com" }
         mavenCentral()
         google()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath Deps.gradle_tools_library
-        classpath Deps.gradle_kotlin_library
-        classpath Deps.gradle_navigation_architecture_library
-        classpath Deps.gradle_jacoco_library
+        classpath GradleDeps.gradle_tools_library
+        classpath GradleDeps.gradle_kotlin_library
+        classpath GradleDeps.gradle_navigation_architecture_library
+        classpath KotlinDeps.kotlin_gradle_plugin
     }
 }
 
@@ -25,3 +32,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

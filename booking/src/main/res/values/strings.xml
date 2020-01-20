@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Booking</string>
     <string name="toolbar_name_format" translatable="false">%1$s Reservation</string>

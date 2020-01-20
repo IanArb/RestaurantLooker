@@ -1,5 +1,6 @@
 package com.ianarbuckle.seathelper.app.builder
 
+import com.ianarbuckle.client.AuthenticationClient
 import com.ianarbuckle.database.client.DatabaseClient
 import com.ianarbuckle.seathelper.app.RestaurantBuddyApplication
 import com.ianarbuckle.seathelper.network.NetworkModule
@@ -13,11 +14,14 @@ import okhttp3.OkHttpClient
  *
  */
 @AppScope
-@Component(modules = [AppModule::class, NetworkModule::class, NavigationModule::class, DatabaseModule::class])
+@Component(modules = [
+    AppModule::class,
+    NetworkModule::class,
+    NavigationModule::class,
+    DatabaseModule::class,
+    AuthenticationModule::class
+])
 interface AppComponent {
     fun inject(restaurantBuddyApplication: RestaurantBuddyApplication)
-    fun okHttpClient(): OkHttpClient
-    fun interceptor(): Interceptor
-    fun cache(): Cache
-    fun databaseClient(): DatabaseClient
+    fun authenticationClient(): AuthenticationClient
 }

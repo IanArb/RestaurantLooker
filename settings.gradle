@@ -1,1 +1,2 @@
-include ':app', ':restaurants', ':restaurants', ':core', ':booking', ':tablemap', ':navigation', ':data', ':models', ':database'
+include ':app', ':restaurants', ':restaurants', ':common', ':booking', ':tablemap', ':navigation', ':data', ':database'
+include ':authentication'

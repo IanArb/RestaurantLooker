@@ -27,10 +27,6 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -64,19 +60,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':restaurants')
     implementation project(path: ':booking')
-    implementation project(path: ':models')
+    implementation project(path: ':data')
 
-    implementation Deps.kotlin_extensions_library
+    implementation KotlinDeps.kotlin_extensions_library
 
-    implementation Deps.appCompat_library
-
+    implementation AndroidDeps.appCompat_library
 
     //Test
-    testImplementation Deps.junit_library
-    testImplementation Deps.google_truth_library
-    testImplementation Deps.mockito_library
-    testImplementation Deps.coroutines_test_library
-    testImplementation Deps.room_test_library
-    testImplementation Deps.mockito_kotlin_library
-    testImplementation Deps.joda_time_library
+    testImplementation TestDeps.junit_library
+    testImplementation TestDeps.google_truth_library
+    testImplementation TestDeps.mockito_library
+    testImplementation KotlinDeps.coroutines_test_library
+    testImplementation JetpackDeps.room_test_library
+    testImplementation TestDeps.mockito_kotlin_library
 }
